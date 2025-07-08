@@ -1,0 +1,64 @@
+sahil@sahilHP-dv:~$ ls
+both_screens.sh  Documents  gitmain    LinuxPractice    Music     Public     Videos
+Desktop          Downloads  gitrebase  monitor_only.sh  Pictures  Templates  vmware
+sahil@sahilHP-dv:~$ cat monitor_only.sh 
+#!/bin/bash
+xrandr --output eDP-1 --off --output HDMI-1 --auto
+sahil@sahilHP-dv:~$ cd Downloads/
+sahil@sahilHP-dv:~/Downloads$ ls
+ 1531X03FWO.pdf   ielts     'Redhat Linux Training & Certification Course Content.pdf'   test1.jpg
+ Books            Notes      rhel10.iso
+ CourseraCerts    PostsImg   rhel-9.6-x86_64-boot.iso
+sahil@sahilHP-dv:~/Downloads$ cd ..
+sahil@sahilHP-dv:~$ pwd
+/home/sahil
+sahil@sahilHP-dv:~$ ls -la
+total 1164
+drwxr-x--- 31 sahil sahil   4096 Jul  8 15:56 .
+drwxr-xr-x  3 root  root    4096 May 26 11:31 ..
+-rw-------  1 sahil sahil  19810 Jul  7 19:49 .bash_history
+-rw-r--r--  1 sahil sahil    220 May 26 11:31 .bash_logout
+-rw-r--r--  1 sahil sahil   3814 Jul  3 13:33 .bashrc
+-rwxrwxr-x  1 sahil sahil     64 Jun 30 17:17 both_screens.sh
+drwx------ 29 sahil sahil   4096 Jul  4 17:34 .cache
+drwxr-xr-x 24 sahil sahil   4096 Jul  8 10:31 .config
+drwxrwxr-x  2 sahil sahil   4096 Jun 30 19:11 .dart-tool
+drwxr-xr-x  2 sahil sahil   4096 Jun 30 17:18 Desktop
+-rw-r--r--  1 sahil sahil     27 May 26 11:35 .dmrc
+drwxr-xr-x  3 sahil sahil   4096 Jul  6 20:28 Documents
+drwxrwxr-x  3 sahil sahil   4096 Jun 28 12:56 .dotnet
+drwxr-xr-x  7 sahil sahil   4096 Jul  7 16:02 Downloads
+-rw-rw-r--  1 sahil sahil     77 Jun 28 11:29 .gitconfig
+drwxrwxr-x  4 sahil sahil   4096 Jun 28 12:27 gitmain
+drwxrwxr-x  3 sahil sahil   4096 Jul  4 14:38 gitrebase
+drwx------  2 sahil sahil   4096 May 26 14:47 .gnupg
+-rw-r--r--  1 sahil sahil    245 Jun  5 17:31 .gtkrc-2.0
+-rw-r--r--  1 sahil sahil    516 May 26 11:31 .gtkrc-xfce
+drwxrwxr-x  2 sahil sahil   4096 May 26 11:38 .icons
+drwxrwxr-x  4 sahil sahil   4096 Jun 30 19:02 .java
+-rw-------  1 sahil sahil     20 Jul  4 14:38 .lesshst
+drwxrwxrwx  5 sahil sahil   4096 Jun 30 17:28 .linuxmint
+drwxrwxr-x  3 sahil sahil   4096 Jul  8 15:56 LinuxPractice
+drwxr-xr-x  4 sahil sahil   4096 May 26 11:35 .local
+-rwxrwxr-x  1 sahil sahil     63 Jul  3 21:27 monitor_only.sh
+drwx------  4 sahil sahil   4096 May 26 11:40 .mozilla
+drwxr-xr-x  2 sahil sahil   4096 May 26 11:35 Music
+drwxr-xr-x  4 sahil sahil   4096 Jul  4 17:59 Pictures
+drwx------  3 sahil sahil   4096 May 26 11:45 .pki
+-rw-r--r--  1 sahil sahil    807 May 26 11:31 .profile
+drwxr-xr-x  2 sahil sahil   4096 May 26 11:35 Public
+drwx------  2 sahil sahil   4096 Jul  8 14:27 .ssh
+-rw-r--r--  1 sahil sahil      0 May 26 11:44 .sudo_as_admin_successful
+drwxr-xr-x  2 sahil sahil   4096 May 26 11:35 Templates
+drwxrwxr-x  2 sahil sahil   4096 May 26 11:38 .themes
+drwx------  6 sahil sahil   4096 Jun 17 18:11 .thunderbird
+drwxr-xr-x  3 sahil sahil   4096 Jul  4 17:33 Videos
+-rw-------  1 sahil sahil  10014 Jul  8 15:56 .viminfo
+drwxr-xr-x  2 sahil sahil   4096 Jul  8 10:26 .vmware
+drwxrwxr-x  4 sahil sahil   4096 Jun 11 11:58 vmware
+drwxrwxr-x  4 sahil sahil   4096 Jun 28 12:55 .vscode
+-rw-------  1 sahil sahil     55 Jul  7 19:54 .Xauthority
+-rw-------  1 sahil sahil 957792 Jul  8 15:57 .xsession-errors
+-rw-------  1 sahil sahil  18781 Jul  7 19:50 .xsession-errors.old
+drwx------  9 sahil sahil   4096 Jul  8 10:31 .zoom
+
