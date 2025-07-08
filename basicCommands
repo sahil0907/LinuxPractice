@@ -61,4 +61,59 @@ drwxrwxr-x  4 sahil sahil   4096 Jun 28 12:55 .vscode
 -rw-------  1 sahil sahil 957792 Jul  8 15:57 .xsession-errors
 -rw-------  1 sahil sahil  18781 Jul  7 19:50 .xsession-errors.old
 drwx------  9 sahil sahil   4096 Jul  8 10:31 .zoom
+sahil@sahilHP-dv:~$ ls | grep -i d*
+both_screens.sh
+Desktop
+Documents
+Downloads
+gitmain
+gitrebase
+LinuxPractice
+monitor_only.sh
+Music
+Pictures
+Public
+Templates
+Videos
+vmware
+sahil@sahilHP-dv:~$ ls | grep -i d
+Desktop
+Documents
+Downloads
+Videos
+sahil@sahilHP-dv:~$ ls | grep -i d^
+sahil@sahilHP-dv:~$ ls | grep -i d*
+both_screens.sh
+Desktop
+Documents
+Downloads
+gitmain
+gitrebase
+LinuxPractice
+monitor_only.sh
+Music
+Pictures
+Public
+Templates
+Videos
+vmware
+sahil@sahilHP-dv:~$ 
+sahil@sahilHP-dv:~$ ls | grep  d*
+both_screens.sh
+Desktop
+Documents
+Downloads
+gitmain
+gitrebase
+LinuxPractice
+monitor_only.sh
+Music
+Pictures
+Public
+Templates
+Videos
+vmware
+sahil@sahilHP-dv:~$ 
+
+
 
