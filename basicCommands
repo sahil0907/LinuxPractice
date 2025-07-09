@@ -114,6 +114,52 @@ Templates
 Videos
 vmware
 sahil@sahilHP-dv:~$ 
+[root@192 ~]# cat file.txt
+ID: 101 | Name: Alice Johnson | Email: alice.johnson@example.com | Role: Developer
+ID: 102 | Name: Bob Singh | Email: bob.singh@example.org | Role: Tester
+ID: 103 | Name: Charlie Zhang | Email: charlie.z@example.net | Role: Developer
+ID: 104 | Name: Dinesh Kumar | Email: dinesh.kumar@example.com | Role: Manager
+ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
+ID: 106 | Name: Farhan Ali | Email: farhan.ali@example.net | Role: Tester
+ID: 107 | Name: Gauri Das | Email: gauri.das@example.com | Role: Developer
+ID: 108 | Name: Hardeep Singh | Email: hardeep.singh@example.com | Role: Manager
+ID: 109 | Name: Irene Adler | Email: irene.adler@example.org | Role: QA
+ID: 110 | Name: John Abraham | Email: john.abraham@example.net | Role: Developer
+
+[root@192 ~]# grep -w "eva" ./file.txt
+ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
+[root@192 ~]#   210  grep -v "eva" ./file.txt
+bash: 210: command not found...
+[root@192 ~]#   209  grep -wic "eva" ./file.txt
+bash: 209: command not found...
+[root@192 ~]# grep -wicv "eva" ./file.txt
+10
+[root@192 ~]# grep -wi "eva" ./file.txt
+ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
+[root@192 ~]# grep -wic "eva" ./file.txt
+1
+[root@192 ~]# grep -i ^ID ./file.txt
+ID: 101 | Name: Alice Johnson | Email: alice.johnson@example.com | Role: Developer
+ID: 102 | Name: Bob Singh | Email: bob.singh@example.org | Role: Tester
+ID: 103 | Name: Charlie Zhang | Email: charlie.z@example.net | Role: Developer
+ID: 104 | Name: Dinesh Kumar | Email: dinesh.kumar@example.com | Role: Manager
+ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
+ID: 106 | Name: Farhan Ali | Email: farhan.ali@example.net | Role: Tester
+ID: 107 | Name: Gauri Das | Email: gauri.das@example.com | Role: Developer
+ID: 108 | Name: Hardeep Singh | Email: hardeep.singh@example.com | Role: Manager
+ID: 109 | Name: Irene Adler | Email: irene.adler@example.org | Role: QA
+ID: 110 | Name: John Abraham | Email: john.abraham@example.net | Role: Developer
+[root@192 ~]# grep -i developer& ./file.txt
+[1] 3155
+bash: ./file.txt: Permission denied
+
+[1]+  Stopped                 grep --color=auto -i developer
+[root@192 ~]# grep -i developer$ ./file.txt
+ID: 101 | Name: Alice Johnson | Email: alice.johnson@example.com | Role: Developer
+ID: 103 | Name: Charlie Zhang | Email: charlie.z@example.net | Role: Developer
+ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
+ID: 107 | Name: Gauri Das | Email: gauri.das@example.com | Role: Developer
+ID: 110 | Name: John Abraham | Email: john.abraham@example.net | Role: Developer
 
 
 
