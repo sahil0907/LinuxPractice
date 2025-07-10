@@ -281,6 +281,46 @@ games:x:5:60:games:/usr/games:/usr/sbin/HEHE
 man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
 lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
 mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ cat sahil.txt
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ sed '1,3s/:/>>/g' ./sahil.txt
+root>>x>>0>>0>>root>>/root>>/bin/bash
+daemon>>x>>1>>1>>daemon>>/usr/sbin>>/usr/sbin/HEHE
+bin>>x>>2>>2>>bin>>/bin>>/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ sed '1,3s/>>/:/g' ./sahil.txt
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ sed '1,3s/>>/:/g; 4,5s/usr/MYUSR/g' ./sahil.txt
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/MYUSR/sbin/HEHE
+games:x:5:60:games:/MYUSR/games:/MYUSR/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
 
 
 
