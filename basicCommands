@@ -160,6 +160,127 @@ ID: 103 | Name: Charlie Zhang | Email: charlie.z@example.net | Role: Developer
 ID: 105 | Name: Eva Paul | Email: eva.paul@example.org | Role: Developer
 ID: 107 | Name: Gauri Das | Email: gauri.das@example.com | Role: Developer
 ID: 110 | Name: John Abraham | Email: john.abraham@example.net | Role: Developer
+sahil@sahilHP-dv:~$ cat -n /etc/passwd | sed -n '4p'
+     4	sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ cat -n /etc/passwd | sed -n '$p'
+    48	sssd:x:121:126:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ cat -n /etc/passwd | sed -n '/system/' 
+sed: -e expression #1, char 8: missing command
+sahil@sahilHP-dv:~$ cat -n /etc/passwd | sed -n '/system/p' 
+    19	systemd-network:x:998:998:systemd Network Management:/:/usr/sbin/nologin
+    20	systemd-timesync:x:996:996:systemd Time Synchronization:/:/usr/sbin/nologin
+    24	systemd-resolve:x:991:991:systemd Resolver:/:/usr/sbin/nologin
+    29	systemd-coredump:x:989:989:systemd Core Dumper:/:/usr/sbin/nologin
+    36	_flatpak:x:111:115:Flatpak system-wide installation helper,,,:/nonexistent:/usr/sbin/nologin
+    45	hplip:x:119:7:HPLIP system user,,,:/run/hplip:/bin/false
+    48	sssd:x:121:126:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ sed -n '34p' /etc/passwd
+avahi:x:110:112:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ cat -n /etc/passwd | sed -n '/avahi/p'
+    32	avahi-autoipd:x:108:111:Avahi autoip daemon,,,:/var/lib/avahi-autoipd:/usr/sbin/nologin
+    34	avahi:x:110:112:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ 
+
+sahil@sahilHP-dv:~$ cat -n sahil.txt | sed  '5d'
+     1	root:x:0:0:root:/root:/bin/bash
+     2	daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+     3	bin:x:2:2:bin:/bin:/usr/sbin/nologin
+     4	sys:x:3:3:sys:/dev:/usr/sbin/nologin
+     6	games:x:5:60:games:/usr/games:/usr/sbin/nologin
+     7	man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+     8	lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+     9	mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+    10	news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ cat -n sahil.txt | sed -i  '5d'
+sed: no input files
+sahil@sahilHP-dv:~$  sed -i  '5d' ./sahil.txt
+sahil@sahilHP-dv:~$ cat -n sahil.txt 
+     1	root:x:0:0:root:/root:/bin/bash
+     2	daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+     3	bin:x:2:2:bin:/bin:/usr/sbin/nologin
+     4	sys:x:3:3:sys:/dev:/usr/sbin/nologin
+     5	games:x:5:60:games:/usr/games:/usr/sbin/nologin
+     6	man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+     7	lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+     8	mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+     9	news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ grep -n "nologin" ./sahil.txt 
+2:daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+3:bin:x:2:2:bin:/bin:/usr/sbin/nologin
+4:sys:x:3:3:sys:/dev:/usr/sbin/nologin
+5:games:x:5:60:games:/usr/games:/usr/sbin/nologin
+6:man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+7:lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+8:mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+9:news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ grep -n "nologin" ./sahil.txt |sed 's/nologin/HEHE'
+sed: -e expression #1, char 14: unterminated `s' command
+sahil@sahilHP-dv:~$ grep -n "nologin" ./sahil.txt |sed 's/nologin/HEHE/'
+2:daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+3:bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+4:sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+5:games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+6:man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+7:lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+8:mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+9:news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ cat sahil.txt 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+sahil@sahilHP-dv:~$ grep -n "nologin" ./sahil.txt |sed -i 's/nologin/HEHE/'
+sed: no input files
+sahil@sahilHP-dv:~$ sed -i 's/nologin/HEHE/' ./sahil.txt 
+sahil@sahilHP-dv:~$ cat sahil.txt 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ sed '2a HEHEHHHE' ./sahil.txt 
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+HEHEHHHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ sed '2i HEHEHHHE' ./sahil.txt 
+root:x:0:0:root:/root:/bin/bash
+HEHEHHHE
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
+news:x:9:9:news:/var/spool/news:/usr/sbin/HEHE
+sahil@sahilHP-dv:~$ grep -n "nologin" ./sahil.txt |sed -ig 's/nologin/HEHE/'
+sed: no input files
+sahil@sahilHP-dv:~$ sed -ig 's/nologin/HEHE/' ./sahil.txt 
+sahil@sahilHP-dv:~$ cat ./sahil.txt
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/HEHE
+bin:x:2:2:bin:/bin:/usr/sbin/HEHE
+sys:x:3:3:sys:/dev:/usr/sbin/HEHE
+games:x:5:60:games:/usr/games:/usr/sbin/HEHE
+man:x:6:12:man:/var/cache/man:/usr/sbin/HEHE
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/HEHE
+mail:x:8:8:mail:/var/mail:/usr/sbin/HEHE
 
 
 
