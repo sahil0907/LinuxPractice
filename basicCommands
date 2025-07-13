@@ -390,6 +390,130 @@ sahil@sahilHP-dv:~$ ls
 both_screens.sh  Documents  gitrebase        Music     sahil.txt   Videos
 Desktop          Downloads  LinuxPractice    Pictures  sahil.txtg  vmware
 docs_link        gitmain    monitor_only.sh  Public    Templates
+[root@192 ~]# cat date.txt 
+Sun Jul 13 03:24:01 PM IST 2025
+Sun Jul 13 03:25:01 PM IST 2025
+[root@192 ~]# systemctl is-active crond
+active
+[root@192 ~]# systemctl is-enabled crond
+enabled
+[root@192 ~]# cat /var/log/cron
+Jul  8 10:01:01 192 CROND[3073]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 10:01:01 192 run-parts[3076]: (/etc/cron.hourly) starting 0anacron
+Jul  8 10:01:01 192 anacron[3086]: Anacron started on 2025-07-08
+Jul  8 10:01:01 192 anacron[3086]: Will run job `cron.daily' in 35 min.
+Jul  8 10:01:01 192 anacron[3086]: Jobs will be executed sequentially
+Jul  8 10:01:01 192 run-parts[3088]: (/etc/cron.hourly) finished 0anacron
+Jul  8 10:01:01 192 CROND[3072]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 10:36:01 192 anacron[3086]: Job `cron.daily' started
+Jul  8 10:36:01 192 anacron[3086]: Job `cron.daily' terminated
+Jul  8 10:36:01 192 anacron[3086]: Normal exit (1 job run)
+Jul  8 11:01:01 192 CROND[3774]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 11:01:01 192 run-parts[3777]: (/etc/cron.hourly) starting 0anacron
+Jul  8 11:01:01 192 run-parts[3783]: (/etc/cron.hourly) finished 0anacron
+Jul  8 11:01:01 192 CROND[3773]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 12:01:01 192 CROND[3862]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 12:01:01 192 run-parts[3865]: (/etc/cron.hourly) starting 0anacron
+Jul  8 12:01:01 192 run-parts[3871]: (/etc/cron.hourly) finished 0anacron
+Jul  8 12:01:01 192 CROND[3861]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 13:01:01 192 CROND[4188]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 13:01:01 192 run-parts[4191]: (/etc/cron.hourly) starting 0anacron
+Jul  8 13:01:01 192 run-parts[4197]: (/etc/cron.hourly) finished 0anacron
+Jul  8 13:01:01 192 CROND[4187]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 14:01:01 192 CROND[4273]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 14:01:01 192 run-parts[4276]: (/etc/cron.hourly) starting 0anacron
+Jul  8 14:01:01 192 run-parts[4282]: (/etc/cron.hourly) finished 0anacron
+Jul  8 14:01:01 192 CROND[4272]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 15:01:01 192 CROND[4353]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 15:01:02 192 run-parts[4356]: (/etc/cron.hourly) starting 0anacron
+Jul  8 15:01:02 192 run-parts[4362]: (/etc/cron.hourly) finished 0anacron
+Jul  8 15:01:02 192 CROND[4352]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 16:01:01 192 CROND[4430]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 16:01:01 192 run-parts[4433]: (/etc/cron.hourly) starting 0anacron
+Jul  8 16:01:01 192 run-parts[4439]: (/etc/cron.hourly) finished 0anacron
+Jul  8 16:01:01 192 CROND[4429]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  8 17:01:01 192 CROND[4958]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  8 17:01:01 192 run-parts[4961]: (/etc/cron.hourly) starting 0anacron
+Jul  8 17:01:01 192 run-parts[4967]: (/etc/cron.hourly) finished 0anacron
+Jul  8 17:01:01 192 CROND[4957]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul  9 17:00:23 192 crond[1113]: (CRON) STARTUP (1.5.7)
+Jul  9 17:00:23 192 crond[1113]: (CRON) INFO (Syslog will be used instead of sendmail.)
+Jul  9 17:00:23 192 crond[1113]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 33% if used.)
+Jul  9 17:00:23 192 crond[1113]: (CRON) INFO (running with inotify support)
+Jul  9 17:01:01 192 CROND[2813]: (root) CMD (run-parts /etc/cron.hourly)
+Jul  9 17:01:01 192 run-parts[2816]: (/etc/cron.hourly) starting 0anacron
+Jul  9 17:01:01 192 anacron[2826]: Anacron started on 2025-07-09
+Jul  9 17:01:01 192 anacron[2826]: Will run job `cron.daily' in 18 min.
+Jul  9 17:01:01 192 anacron[2826]: Jobs will be executed sequentially
+Jul  9 17:01:01 192 run-parts[2828]: (/etc/cron.hourly) finished 0anacron
+Jul  9 17:01:01 192 CROND[2812]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul 11 21:59:13 localhost crond[1108]: (CRON) STARTUP (1.5.7)
+Jul 11 21:59:13 localhost crond[1108]: (CRON) INFO (Syslog will be used instead of sendmail.)
+Jul 11 21:59:13 localhost crond[1108]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 45% if used.)
+Jul 11 21:59:13 localhost crond[1108]: (CRON) INFO (running with inotify support)
+Jul 11 22:00:37 localhost crontab[2877]: (root) BEGIN EDIT (root)
+Jul 11 22:01:01 localhost CROND[2954]: (root) CMD (run-parts /etc/cron.hourly)
+Jul 11 22:01:01 localhost run-parts[2957]: (/etc/cron.hourly) starting 0anacron
+Jul 11 22:01:01 localhost anacron[2967]: Anacron started on 2025-07-11
+Jul 11 22:01:01 localhost anacron[2967]: Normal exit (0 jobs run)
+Jul 11 22:01:01 localhost run-parts[2969]: (/etc/cron.hourly) finished 0anacron
+Jul 11 22:01:01 localhost CROND[2953]: (root) CMDEND (run-parts /etc/cron.hourly)
+Jul 11 22:01:14 localhost crontab[2877]: (root) REPLACE (root)
+Jul 11 22:01:14 localhost crontab[2877]: (root) END EDIT (root)
+Jul 11 22:01:21 localhost crontab[2975]: (root) LIST (root)
+Jul 11 22:01:42 localhost crontab[2990]: (root) LIST (root)
+Jul 11 22:01:46 localhost crontab[2995]: (root) BEGIN EDIT (root)
+Jul 11 22:02:01 localhost CROND[3000]: (root) CMD (date)
+Jul 11 22:02:01 localhost CROND[2998]: (root) CMDOUT (Fri Jul 11 10:02:01 PM IST 2025)
+Jul 11 22:02:01 localhost CROND[2998]: (root) CMDEND (date)
+Jul 13 15:17:01 192 crond[1115]: (CRON) STARTUP (1.5.7)
+Jul 13 15:17:01 192 crond[1115]: (CRON) INFO (Syslog will be used instead of sendmail.)
+Jul 13 15:17:01 192 crond[1115]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 7% if used.)
+Jul 13 15:17:01 192 crond[1115]: (CRON) INFO (running with inotify support)
+Jul 13 15:18:02 192 CROND[2808]: (root) CMD (date)
+Jul 13 15:18:02 192 CROND[2806]: (root) CMDOUT (Sun Jul 13 03:18:02 PM IST 2025)
+Jul 13 15:18:02 192 CROND[2806]: (root) CMDEND (date)
+Jul 13 15:18:15 192 crontab[2816]: (root) LIST (root)
+Jul 13 15:18:21 192 crontab[2821]: (root) BEGIN EDIT (root)
+Jul 13 15:19:01 192 CROND[2901]: (root) CMD (date)
+Jul 13 15:19:01 192 CROND[2899]: (root) CMDOUT (Sun Jul 13 03:19:01 PM IST 2025)
+Jul 13 15:19:01 192 CROND[2899]: (root) CMDEND (date)
+Jul 13 15:20:01 192 CROND[2904]: (root) CMD (date)
+Jul 13 15:20:01 192 CROND[2902]: (root) CMDOUT (Sun Jul 13 03:20:01 PM IST 2025)
+Jul 13 15:20:01 192 CROND[2902]: (root) CMDEND (date)
+Jul 13 15:20:06 192 crontab[2821]: (root) REPLACE (root)
+Jul 13 15:20:06 192 crontab[2821]: (root) END EDIT (root)
+Jul 13 15:21:01 192 crond[1115]: (root) RELOAD (/var/spool/cron/root)
+Jul 13 15:21:01 192 CROND[2933]: (root) CMD (echo" $(date) " >> /root/date.txt)
+Jul 13 15:21:01 192 CROND[2931]: (root) CMDOUT (/bin/sh: line 1: echo Sun Jul 13 03:21:01 PM IST 2025 : command not found)
+Jul 13 15:21:01 192 CROND[2931]: (root) CMDEND (echo" $(date) " >> /root/date.txt)
+Jul 13 15:22:00 192 crontab[2956]: (root) BEGIN EDIT (root)
+Jul 13 15:22:01 192 CROND[2960]: (root) CMD (echo" $(date) " >> /root/date.txt)
+Jul 13 15:22:01 192 CROND[2958]: (root) CMDOUT (/bin/sh: line 1: echo Sun Jul 13 03:22:01 PM IST 2025 : command not found)
+Jul 13 15:22:01 192 CROND[2958]: (root) CMDEND (echo" $(date) " >> /root/date.txt)
+Jul 13 15:23:01 192 CROND[2967]: (root) CMD (echo" $(date) " >> /root/date.txt)
+Jul 13 15:23:01 192 CROND[2965]: (root) CMDOUT (/bin/sh: line 1: echo Sun Jul 13 03:23:01 PM IST 2025 : command not found)
+Jul 13 15:23:01 192 CROND[2965]: (root) CMDEND (echo" $(date) " >> /root/date.txt)
+Jul 13 15:23:27 192 crontab[2956]: (root) REPLACE (root)
+Jul 13 15:23:27 192 crontab[2956]: (root) END EDIT (root)
+Jul 13 15:23:54 192 crontab[2988]: (root) BEGIN EDIT (root)
+Jul 13 15:24:01 192 crond[1115]: (root) RELOAD (/var/spool/cron/root)
+Jul 13 15:24:01 192 CROND[2992]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:24:01 192 CROND[2990]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+Jul 13 15:24:05 192 crontab[2988]: (root) REPLACE (root)
+Jul 13 15:24:05 192 crontab[2988]: (root) END EDIT (root)
+Jul 13 15:25:01 192 crond[1115]: (root) RELOAD (/var/spool/cron/root)
+Jul 13 15:25:01 192 CROND[3010]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:25:01 192 CROND[3008]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+Jul 13 15:26:01 192 CROND[3021]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:26:01 192 CROND[3019]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+Jul 13 15:27:01 192 CROND[3037]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:27:01 192 CROND[3035]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+Jul 13 15:28:01 192 CROND[3058]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:28:01 192 CROND[3056]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+Jul 13 15:29:01 192 CROND[3070]: (root) CMD (echo "$(date)" >> /root/date.txt)
+Jul 13 15:29:01 192 CROND[3068]: (root) CMDEND (echo "$(date)" >> /root/date.txt)
+[root@192 ~]# /etc/crontab
 
 
 
