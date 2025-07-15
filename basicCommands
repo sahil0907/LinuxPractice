@@ -579,6 +579,282 @@ hyperv-daemons-license-0-0.43.20190303git.el9.noarch
 abattis-cantarell-fonts-0.301-4.el9.noarch
 yelp-xsl-40.2-1.el9_6.1.noarch
 google-noto-fonts-common-20201206-5.el9.noarch
+[root@localhost ~]# rm -rf  /redhatisodata
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls /
+afs  boot  etc   lib    media  opt   root  sbin  sys  usr
+bin  dev   home  lib64  mnt    proc  run   srv   tmp  var
+[root@localhost ~]# 
+[root@localhost ~]# lsblk 
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0   30G  0 disk 
+├─sda1   8:1    0    1G  0 part /boot
+├─sda2   8:2    0 14.6G  0 part /
+└─sda3   8:3    0    2G  0 part [SWAP]
+sr0     11:0    1    8G  0 rom  /run/media/root/RHEL-9-0-0-BaseOS-x86_64
 
+[root@localhost ~]# 
+[root@localhost ~]# mount /dev/sr0   /mnt 
+mount: /mnt: WARNING: source write-protected, mounted read-only.
+[root@localhost ~]# 
+[root@localhost ~]# lsblk 
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0   30G  0 disk 
+├─sda1   8:1    0    1G  0 part /boot
+├─sda2   8:2    0 14.6G  0 part /
+└─sda3   8:3    0    2G  0 part [SWAP]
+sr0     11:0    1    8G  0 rom  /mnt
+                                /run/media/root/RHEL-9-0-0-BaseOS-x86_64
+[root@localhost ~]# 
+[root@localhost ~]# ls /mnt 
+AppStream  EFI   extra_files.json  images    media.repo               RPM-GPG-KEY-redhat-release
+BaseOS     EULA  GPL               isolinux  RPM-GPG-KEY-redhat-beta
+[root@localhost ~]# 
+[root@localhost ~]# mkdir /redhatisodata
+[root@localhost ~]# 
+[root@localhost ~]# cd  /mnt
+[root@localhost mnt]# ls
+AppStream  EFI   extra_files.json  images    media.repo               RPM-GPG-KEY-redhat-release
+BaseOS     EULA  GPL               isolinux  RPM-GPG-KEY-redhat-beta
+[root@localhost mnt]# 
+[root@localhost mnt]# cp -rf  *    /redhatisodata 
+
+[root@localhost mnt]# 
+[root@localhost mnt]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# umount  /mnt  
+[root@localhost ~]# eject 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls /redhatisodata
+AppStream  EFI   extra_files.json  images    media.repo               RPM-GPG-KEY-redhat-release
+BaseOS     EULA  GPL               isolinux  RPM-GPG-KEY-redhat-beta
+[root@localhost ~]# 
+
+[root@localhost ~]# cd /redhatisodata/BaseOS/Packages
+[root@localhost Packages]# pwd
+/redhatisodata/BaseOS/Packages
+[root@localhost Packages]# 
+[root@localhost Packages]# 
+[root@localhost Packages]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cd /redhatisodata/AppStream/Packages
+[root@localhost Packages]# 
+[root@localhost Packages]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+==================================================================================
+Choice-1  RPM Installation using rpm command 
+Choice-2  RPM Installation using YUM command  ===> repo file ===> create  ===> URL ===> save
+
+==================================================================================
+IN this class we are going to install rpms usign rpm command only 
+
+Choice-1  RPM Installation using rpm command 
+
+[root@localhost ~]# rpm -qa | wc -l
+1165
+[root@localhost ~]# 
+[root@localhost ~]# ls /redhatisodata
+AppStream  EFI   extra_files.json  images    media.repo               RPM-GPG-KEY-redhat-release
+BaseOS     EULA  GPL               isolinux  RPM-GPG-KEY-redhat-beta
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+[root@localhost ~]# ls /redhatisodata
+AppStream  EFI   extra_files.json  images    media.repo               RPM-GPG-KEY-redhat-release
+BaseOS     EULA  GPL               isolinux  RPM-GPG-KEY-redhat-beta
+[root@localhost ~]# 
+[root@localhost ~]# find /redhatisodata  -name   "tree*"
+/redhatisodata/BaseOS/Packages/tree-1.8.0-10.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# find /redhatisodata  -name   "vsftpd*"
+/redhatisodata/AppStream/Packages/vsftpd-3.0.3-49.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# rpm  -ivh /redhatisodata/BaseOS/Packages/tree-1.8.0-10.el9.x86_64.rpm
+warning: /redhatisodata/BaseOS/Packages/tree-1.8.0-10.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:tree-1.8.0-10.el9                ################################# [100%]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# which tree 
+/usr/bin/tree
+[root@localhost ~]# 
+[root@localhost ~]# mkdir -p  /kr/network/cloud  
+[root@localhost ~]# 
+[root@localhost ~]# tree    /kr/network/cloud  
+/kr/network/cloud
+
+0 directories, 0 files
+[root@localhost ~]# 
+[root@localhost ~]# vim  xyz  
+bash: vim: command not found...
+
+[root@localhost ~]# rpm -ivh  /redhatisodata/AppStream/Packages/vsftpd-3.0.3-49.el9.x86_64.rpm
+warning: /redhatisodata/AppStream/Packages/vsftpd-3.0.3-49.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:vsftpd-3.0.3-49.el9              ################################# [100%]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# systemctl start  vsftpd  
+[root@localhost ~]# systemctl enable   vsftpd  
+Created symlink /etc/systemd/system/multi-user.target.wants/vsftpd.service → /usr/lib/systemd/system/vsftpd.service.
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# find /redhatisodata  -name   "vim*"
+/redhatisodata/AppStream/Packages/vim-X11-8.2.2637-15.el9.x86_64.rpm
+/redhatisodata/AppStream/Packages/vim-common-8.2.2637-15.el9.x86_64.rpm
+/redhatisodata/AppStream/Packages/vim-enhanced-8.2.2637-15.el9.x86_64.rpm
+/redhatisodata/BaseOS/Packages/vim-filesystem-8.2.2637-15.el9.noarch.rpm
+/redhatisodata/BaseOS/Packages/vim-minimal-8.2.2637-15.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm  -iv  /redhatisodata/AppStream/Packages/vim-enhanced-8.2.2637-15.el9.x86_64.rpm
+warning: /redhatisodata/AppStream/Packages/vim-enhanced-8.2.2637-15.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying packages...
+Preparing packages...
+vim-enhanced-2:8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+
+[root@localhost ~]# rpm -qa tree 
+tree-1.8.0-10.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vsftpd  
+vsftpd-3.0.3-49.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vim-enhanced
+vim-enhanced-8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+[root@localhost ~]# rpm -ql vim-enhanced
+/usr/bin/rvim
+/usr/bin/vim
+/usr/bin/vimdiff
+/usr/bin/vimtutor
+/usr/lib/.build-id
+/usr/lib/.build-id/76
+/usr/lib/.build-id/76/1014238cc7094b6a7920968ae9de32a03cb262
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -ql vim-enhanced |  grep bin  
+/usr/bin/rvim
+/usr/bin/vim
+/usr/bin/vimdiff
+/usr/bin/vimtutor
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# find /redhatisodata  -name   "ftp*"
+/redhatisodata/AppStream/Packages/ftp-0.17-89.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# find /redhatisodata  -name   "gzip*"
+/redhatisodata/BaseOS/Packages/gzip-1.10-8.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# find /redhatisodata  -name   "bzip2*"
+/redhatisodata/AppStream/Packages/bzip2-devel-1.0.8-8.el9.i686.rpm
+/redhatisodata/AppStream/Packages/bzip2-devel-1.0.8-8.el9.x86_64.rpm
+/redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm
+/redhatisodata/BaseOS/Packages/bzip2-libs-1.0.8-8.el9.i686.rpm
+/redhatisodata/BaseOS/Packages/bzip2-libs-1.0.8-8.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# cd  /redhatisodata/AppStream/Packages
+[root@localhost Packages]# 
+[root@localhost Packages]# rpm -ivh  ftp-0.17-89.el9.x86_64.rpm
+warning: ftp-0.17-89.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:ftp-0.17-89.el9                  ################################# [100%]
+[root@localhost Packages]# 
+[root@localhost Packages]# cd
+[root@localhost ~]# 
+[root@localhost ~]# rpm  -ivh  /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm
+warning: /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:bzip2-1.0.8-8.el9                ################################# [100%]
+[root@localhost ~]# 
+[root@localhost ~]# find /redhatisodata  -name   "tar*"
+/redhatisodata/AppStream/Packages/target-restore-2.1.74-7.el9.noarch.rpm
+/redhatisodata/AppStream/Packages/targetcli-2.1.53-7.el9.noarch.rpm
+/redhatisodata/BaseOS/Packages/tar-1.34-3.el9.x86_64.rpm
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -ivh  /redhatisodata/BaseOS/Packages/tar-1.34-3.el9.x86_64.rpm
+warning: /redhatisodata/BaseOS/Packages/tar-1.34-3.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:tar-2:1.34-3.el9                 ################################# [100%]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa  | wc -l  
+
+
+[root@localhost ~]# rpm  -ivh  /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm
+warning: /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+	package bzip2-1.0.8-8.el9.x86_64 is already installed
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm  -ivh  /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm   --force  
+warning: /redhatisodata/BaseOS/Packages/bzip2-1.0.8-8.el9.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID fd431d51: NOKEY
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:bzip2-1.0.8-8.el9                ################################# [100%]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls  /usr/bin
+
+[root@localhost ~]# ls  /usr/sbin
+
+[root@localhost ~]# rpm -qa 
+
+  
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa tree 
+
+tree-1.8.0-10.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vsftpd 
+vsftpd-3.0.3-49.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -ql tree 
+/usr/bin/tree
+/usr/lib/.build-id
+/usr/lib/.build-id/74
+/usr/lib/.build-id/74/6ceaa06df0d9c3eaa593f25d10b56a34acc603
+/usr/share/doc/tree
+/usr/share/doc/tree/README
+/usr/share/licenses/tree
+/usr/share/licenses/tree/LICENSE
+/usr/share/man/man1/tree.1.gz
+[root@localhost ~]# 
+[root@localhost ~]# rpm -ql vsftpd 
 
 
