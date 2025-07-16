@@ -855,6 +855,311 @@ vsftpd-3.0.3-49.el9.x86_64
 /usr/share/licenses/tree/LICENSE
 /usr/share/man/man1/tree.1.gz
 [root@localhost ~]# 
-[root@localhost ~]# rpm -ql vsftpd 
+[root@localhost ~]# rpm -ql vsftpd
+  6307	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6308	sslverifystatus = 1
+  6309	metadata_expire = 86400
+  6310	enabled_metadata = 0
+  6311	
+  6312	[pipelines-1.19-for-rhel-9-x86_64-rpms]
+  6313	name = Red Hat OpenShift Pipelines 1.19 (for RHEL 9 x86_64) (RPMs)
+  6314	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/pipelines/1.19/os
+  6315	enabled = 0
+  6316	gpgcheck = 1
+  6317	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6318	sslverify = 1
+  6319	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6320	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6321	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6322	sslverifystatus = 1
+  6323	metadata_expire = 86400
+  6324	enabled_metadata = 0
+  6325	
+  6326	[rhocp-4.13-for-rhel-9-x86_64-debug-rpms]
+  6327	name = Red Hat OpenShift Container Platform 4.13 for RHEL 9 x86_64 (Debug RPMs)
+  6328	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/rhocp/4.13/debug
+  6329	enabled = 0
+  6330	gpgcheck = 1
+  6331	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6332	sslverify = 1
+  6333	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6334	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6335	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6336	sslverifystatus = 1
+  6337	metadata_expire = 86400
+  6338	enabled_metadata = 0
+  6339	
+  6340	[lvms-4.17-for-rhel-9-x86_64-source-rpms]
+  6341	name = Logical Volume Manager Storage 4.17 for RHEL 9 x86_64 (Source RPMs)
+  6342	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/lvms/4.17/source/SRPMS
+  6343	enabled = 0
+  6344	gpgcheck = 1
+  6345	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6346	sslverify = 1
+  6347	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6348	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6349	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6350	sslverifystatus = 1
+  6351	metadata_expire = 86400
+  6352	enabled_metadata = 0
+  6353	
+  6354	[lvms-4.18-for-rhel-9-x86_64-debug-rpms]
+  6355	name = Logical Volume Manager Storage 4.18 for RHEL 9 x86_64 (Debug RPMs)
+  6356	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/lvms/4.18/debug
+  6357	enabled = 0
+  6358	gpgcheck = 1
+  6359	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6360	sslverify = 1
+  6361	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6362	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6363	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6364	sslverifystatus = 1
+  6365	metadata_expire = 86400
+  6366	enabled_metadata = 0
+  6367	
+  6368	[satellite-client-6-for-rhel-9-x86_64-source-rpms]
+  6369	name = Red Hat Satellite Client 6 for RHEL 9 x86_64 (Source RPMs)
+  6370	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/sat-client/6/source/SRPMS
+  6371	enabled = 0
+  6372	gpgcheck = 1
+  6373	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6374	sslverify = 1
+  6375	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6376	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6377	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6378	sslverifystatus = 1
+  6379	metadata_expire = 86400
+  6380	enabled_metadata = 0
+  6381	
+  6382	[rodoo-1-for-rhel-9-x86_64-rpms]
+  6383	name = Run Once Duration Override Operator (RODOO) 1 for RHEL 9 x86_64 (RPMs)
+  6384	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/rodoo/1/os
+  6385	enabled = 0
+  6386	gpgcheck = 1
+  6387	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6388	sslverify = 1
+  6389	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6390	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6391	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6392	sslverifystatus = 1
+  6393	metadata_expire = 86400
+  6394	enabled_metadata = 0
+  6395	
+  6396	[rhel-9-for-x86_64-highavailability-eus-rpms]
+  6397	name = Red Hat Enterprise Linux 9 for x86_64 - High Availability - Extended Update Support (RPMs)
+  6398	baseurl = https://cdn.redhat.com/content/eus/rhel9/$releasever/x86_64/highavailability/os
+  6399	enabled = 0
+  6400	gpgcheck = 1
+  6401	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6402	sslverify = 1
+  6403	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6404	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6405	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6406	sslverifystatus = 1
+  6407	metadata_expire = 86400
+  6408	enabled_metadata = 0
+  6409	
+  6410	[pipelines-1.19-for-rhel-9-x86_64-debug-rpms]
+  6411	name = Red Hat OpenShift Pipelines 1.19 (for RHEL 9 x86_64) (Debug RPMs)
+  6412	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/pipelines/1.19/debug
+  6413	enabled = 0
+  6414	gpgcheck = 1
+  6415	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6416	sslverify = 1
+  6417	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6418	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6419	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6420	sslverifystatus = 1
+  6421	metadata_expire = 86400
+  6422	enabled_metadata = 0
+  6423	
+  6424	[lvms-4.20-for-rhel-9-x86_64-debug-rpms]
+  6425	name = Logical Volume Manager Storage 4.20 for RHEL 9 x86_64 (Debug RPMs)
+  6426	baseurl = https://cdn.redhat.com/content/dist/layered/rhel9/x86_64/lvms/4.20/debug
+  6427	enabled = 0
+  6428	gpgcheck = 1
+  6429	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6430	sslverify = 1
+  6431	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  6432	sslclientkey = /etc/pki/entitlement/8040190128727745033-key.pem
+  6433	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  6434	sslverifystatus = 1
+  6435	metadata_expire = 86400
+  6436	enabled_metadata = 0
+[root@192 yum.repos.d]# cat -n redhat.repo | grep "337"
+   337	enabled = 1
+  1337	sslclientcert = /etc/pki/entitlement/8040190128727745033.pem
+  2337	name = Network Observability (NETOBSERV) 1 for RHEL 9 x86_64 (RPMs)
+  3337	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  3370	enabled_metadata = 0
+  3371	
+  3372	[rhel-9-for-x86_64-baseos-e4s-debug-rpms]
+  3373	name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS - Update Services for SAP Solutions (Debug RPMs)
+  3374	baseurl = https://cdn.redhat.com/content/e4s/rhel9/$releasever/x86_64/baseos/debug
+  3375	enabled = 0
+  3376	gpgcheck = 1
+  3377	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  3378	sslverify = 1
+  3379	sslcacert = /etc/rhsm/ca/redhat-uep.pem
+  4337	
+  5337	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+  6337	metadata_expire = 86400
+[root@192 yum.repos.d]# 
+[root@192 yum.repos.d]# yum
+Updating Subscription Management repositories.
+usage: yum [options] COMMAND
+
+List of Main Commands:
+
+alias                     List or create command aliases
+autoremove                remove all unneeded packages that were originally installed as dependencies
+check                     check for problems in the packagedb
+check-update              check for available package upgrades
+clean                     remove cached data
+deplist                   [deprecated, use repoquery --deplist] List package's dependencies and what packages provide them
+distro-sync               synchronize installed packages to the latest available versions
+downgrade                 Downgrade a package
+group                     display, or use, the groups information
+help                      display a helpful usage message
+history                   display, or use, the transaction history
+info                      display details about a package or group of packages
+install                   install a package or packages on your system
+list                      list a package or groups of packages
+makecache                 generate the metadata cache
+mark                      mark or unmark installed packages as installed by user.
+module                    Interact with Modules.
+provides                  find what package provides the given value
+reinstall                 reinstall a package
+remove                    remove a package or packages from your system
+repolist                  display the configured software repositories
+repoquery                 search for packages matching keyword
+repository-packages       run commands on top of all packages in given repository
+search                    search package details for the given string
+shell                     run an interactive YUM shell
+swap                      run an interactive YUM mod for remove and install one spec
+updateinfo                display advisories about packages
+upgrade                   upgrade a package or packages on your system
+upgrade-minimal           upgrade, but only 'newest' package match which fixes a problem that affects your system
+
+List of Plugin Commands:
+
+builddep                  Install build dependencies for package or spec file
+changelog                 Show changelog data of packages
+config-manager            manage yum configuration options and repositories
+copr                      Interact with Copr repositories.
+debug-dump                dump information about installed rpm packages to file
+debug-restore             restore packages recorded in debug-dump file
+debuginfo-install         install debuginfo packages
+download                  Download package to current directory
+groups-manager            create and edit groups metadata file
+kpatch                    Toggles automatic installation of kpatch-patch packages
+needs-restarting          determine updated binaries that need restarting
+offline-distrosync        Prepare offline distrosync of the system
+offline-upgrade           Prepare offline upgrade of the system
+playground                Interact with Playground repository.
+repoclosure               Display a list of unresolved dependencies for repositories
+repodiff                  List differences between two sets of repositories
+repograph                 Output a full package dependency graph in dot format
+repomanage                Manage a directory of rpm packages
+reposync                  download all packages from remote repo
+system-upgrade            Prepare system for upgrade to a new release
+uploadprofile             Upload combined profile to Satellite server (list of installed RPMs, enabled repositories and modules)
+
+General YUM options:
+  -c [config file], --config [config file]
+                        config file location
+  -q, --quiet           quiet operation
+  -v, --verbose         verbose operation
+  --version             show YUM version and exit
+  --installroot [path]  set install root
+  --nodocs              do not install documentations
+  --noplugins           disable all plugins
+  --enableplugin [plugin]
+                        enable plugins by name
+  --disableplugin [plugin]
+                        disable plugins by name
+  --releasever RELEASEVER
+                        override the value of $releasever in config and repo files
+  --setopt SETOPTS      set arbitrary config and repo options
+  --skip-broken         resolve depsolve problems by skipping packages
+  -h, --help, --help-cmd
+                        show command help
+  --allowerasing        allow erasing of installed packages to resolve dependencies
+  -b, --best            try the best available package versions in transactions.
+  --nobest              do not limit the transaction to the best candidate
+  -C, --cacheonly       run entirely from system cache, don't update cache
+  -R [minutes], --randomwait [minutes]
+                        maximum command wait time
+  -d [debug level], --debuglevel [debug level]
+                        debugging output level
+  --debugsolver         dumps detailed solving results into files
+  --showduplicates      show duplicates, in repos, in list/search commands
+  -e ERRORLEVEL, --errorlevel ERRORLEVEL
+                        error output level
+  --obsoletes           enables yum's obsoletes processing logic for upgrade or display capabilities that
+                        the package obsoletes for info, list and repoquery
+  --rpmverbosity [debug level name]
+                        debugging output level for rpm
+  -y, --assumeyes       automatically answer yes for all questions
+  --assumeno            automatically answer no for all questions
+  --enablerepo [repo]   Temporarily enable repositories for the purpose of the current dnf command. Accepts
+                        an id, a comma-separated list of ids, or a glob of ids. This option can be specified
+                        multiple times.
+  --disablerepo [repo]  Temporarily disable active repositories for the purpose of the current dnf command.
+                        Accepts an id, a comma-separated list of ids, or a glob of ids. This option can be
+                        specified multiple times, but is mutually exclusive with `--repo`.
+  --repo [repo], --repoid [repo]
+                        enable just specific repositories by an id or a glob, can be specified multiple
+                        times
+  --enable              enable repos with config-manager command (automatically saves)
+  --disable             disable repos with config-manager command (automatically saves)
+  -x [package], --exclude [package], --excludepkgs [package]
+                        exclude packages by name or glob
+  --disableexcludes [repo], --disableexcludepkgs [repo]
+                        disable excludepkgs
+  --repofrompath [repo,path]
+                        label and path to an additional repository to use (same path as in a baseurl), can
+                        be specified multiple times.
+  --noautoremove        disable removal of dependencies that are no longer used
+  --nogpgcheck          disable gpg signature checking (if RPM policy allows)
+  --color COLOR         control whether color is used
+  --refresh             set metadata as expired before running the command
+  -4                    resolve to IPv4 addresses only
+  -6                    resolve to IPv6 addresses only
+  --destdir DESTDIR, --downloaddir DESTDIR
+                        set directory to copy packages to
+  --downloadonly        only download packages
+  --transient           Use a transient overlay which will reset on reboot
+  --comment COMMENT     add a comment to transaction
+  --bugfix              Include bugfix relevant packages, in updates
+  --enhancement         Include enhancement relevant packages, in updates
+  --newpackage          Include newpackage relevant packages, in updates
+  --security            Include security relevant packages, in updates
+  --advisory ADVISORY, --advisories ADVISORY
+                        Include packages needed to fix the given advisory, in updates
+  --bz BUGZILLA, --bzs BUGZILLA
+                        Include packages needed to fix the given BZ, in updates
+  --cve CVES, --cves CVES
+                        Include packages needed to fix the given CVE, in updates
+  --sec-severity {Critical,Important,Moderate,Low}, --secseverity {Critical,Important,Moderate,Low}
+                        Include security relevant packages matching the severity, in updates
+  --forcearch ARCH      Force the use of an architecture
+[root@192 yum.repos.d]# 
+sudo subscription-manager status
++-------------------------------------------+
+   System Status Details
++-------------------------------------------+
+Overall Status: Disabled
+Content Access Mode is set to Simple Content Access. This host has access to content, regardless of subscription status.
+
+System Purpose Status: Disabled
+
+[root@192 yum.repos.d]# sudo subscription-manager config --rhsm.manage_repos=0
+[root@192 yum.repos.d]# sudo rm -f /etc/yum.repos.d/redhat.repo
+[root@192 yum.repos.d]# sudo rm -f /etc/yum.repos.d/redhat.repo
+[root@192 yum.repos.d]# yum repolist all
+Updating Subscription Management repositories.
+No repositories available
+ 
 
 
