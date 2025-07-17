@@ -1160,6 +1160,98 @@ System Purpose Status: Disabled
 [root@192 yum.repos.d]# yum repolist all
 Updating Subscription Management repositories.
 No repositories available
+[root@192 ~]# sed 's/Linux/Unix/' sed.txt
+Hello, my name is Alice.
+I love Unix and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Unix is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed 's/Linux/Unix/gi' sed.txt
+Hello, my name is Alice.
+I love Unix and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Unix is powerful.
+Unix is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed -n 'p/sed/g' sed.txt
+sed: -e expression #1, char 2: extra characters after command
+[root@192 ~]# sed -n '/sed/pg' sed.txt
+sed: -e expression #1, char 7: extra characters after command
+[root@192 ~]# sed  '/sed/p' sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed -n '/sed/p' sed.txt
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+[root@192 ~]# sed '3d' sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed '/Linux/di' sed.txt
+sed: -e expression #1, char 9: extra characters after command
+[root@192 ~]# sed '/Linux/d' sed.txt
+Hello, my name is Alice.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed -n '5,7p' sed.txt
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+[root@192 ~]# sed 's/the/THE/2' sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# sed '2a\--END OF LINE==' sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+--END OF LINE==
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
  
 
 
