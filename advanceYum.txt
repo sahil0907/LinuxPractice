@@ -1,0 +1,421 @@
+======================================================================================
+
+RPM Management using rpm Command ?
+
+RPM Management using yum or dnf Command ?
+
+======================================================================================
+
+[root@localhost ~]# cat /etc/redhat-release 
+Red Hat Enterprise Linux release 9.0 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa | wc -l  
+1170
+[root@localhost ~]# ls /bin  | wc -l
+1491
+[root@localhost ~]# ls /sbin  | wc -l
+534
+[root@localhost ~]# 
+
+======================================================================================
+
+Package Installation ?
+
+1- During the OS installation time using ISO image as per Group Selection ===> 1- Minimal   2- Server with GUI
+2- After the OS installation 
+
+
+Choice-1  using same ISO image we can install rpms using rpm or yum utility  ===> Around 6500 rpms default ===> image 
+
+       method:-1  We can connect ISO image with machine we can copy all the rpms related folders into any Director [ using rpm OR yum ]
+       method:-2  We can connect ISO image and we can use default mounting point concept to configure yum repo file.
+       method:-3  We can connect ISO image and we can mount this image manually on any directory.Ex:   /mnt OR any other directory
+
+======================================================================================
+
+Choice-2  We can register our machine with www.redhat.com to install any available package directly from
+          the redhat website using our redhat login ID and password  ==>  1- Personal   2- Corporate
+           
+
+         Method:-1    we can download the package manually using package search link and we can install this using rpm OR yum 
+         Method:-2    we can sync our machine with free online redhat repository.
+
+
+======================================================================================
+
+
+Choice-3  We can install other third party vendor application as well if it is required from the respective vendor websites.
+
+
+EX:  google chrome  + anydesk  + teamviwer + nagios + zabbix + znc + glances + htop other examples as well
+
+======================================================================================
+
+
+
+Choice-2  We can register our machine with www.redhat.com to install any available package directly from
+          the redhat website using our redhat login ID and password  ==>  1- Personal   2- Corporate
+           
+
+
+Conditions:-
+
+1- We have personal Active login ID and password 
+
+2  Enable internet settings in your VM machine 
+
+
+[root@localhost ~]# history 
+    1  ifconfig 
+    2  nmcli connection down ens160 
+    3  nmcli connection up  ens160 
+    4  ifconfig 
+
+======================================================================================
+
+
+[root@localhost ~]# cd /etc/yum.repos.d
+[root@localhost yum.repos.d]# ls
+redhat.repo
+[root@localhost yum.repos.d]# cat redhat.repo 
+#
+# Certificate-Based Repositories
+# Managed by (rhsm) subscription-manager
+#
+# *** This file is auto-generated.  Changes made here will be over-written. ***
+# *** Use "subscription-manager repo-override --help" if you wish to make changes. ***
+#
+# If this file is empty and this system is subscribed consider
+# a "yum repolist" to refresh available repos
+#
+[root@localhost yum.repos.d]# 
+[root@localhost yum.repos.d]# 
+[root@localhost yum.repos.d]# 
+[root@localhost yum.repos.d]# cd
+
+
+[root@localhost ~]#
+
+[root@localhost ~]# subscription-manager  register  --username    sdffdfdf   --password   sdfdffsdfsdf
+
+                             OR  
+
+[root@localhost ~]# subscription-manager  register
+
+======================================================================================
+
+
+[root@localhost ~]# subscription-manager  register
+Registering to: subscription.rhsm.redhat.com:443/subscription
+Username: sharmaakash1205@gmail.com
+Password: 
+The system has been registered with ID: 39222ba2-e37e-4f39-b835-ad15d7f25f09
+The registered system name is: localhost.localdomain
+
+======================================================================================
+[root@localhost ~]# ls /etc/yum.repos.d
+redhat.repo
+[root@localhost ~]# 
+[root@localhost ~]# cat   /etc/yum.repos.d/redhat.repo 
+
+[root@localhost ~]# yum clean all 
+Updating Subscription Management repositories.
+0 files removed
+[root@localhost ~]# 
+[root@localhost ~]# yum repolist all 
+
+[root@localhost ~]# yum repolist all | grep enabled
+rhel-9-for-x86_64-appstream-rpms                              Red Hat E enabled
+rhel-9-for-x86_64-baseos-rpms                                 Red Hat E enabled
+[root@localhost ~]# 
+[root@localhost ~]# yum list  | wc -l 
+7927
+[root@localhost ~]# 
+
+
+======================================================================================
+1- Installation 
+2- Configuration
+3- Service start
+======================================================================================
+4- Firewall Rules Configuration
+
+    Types of Services  ?
+
+   1- Internal Service       ==>  There is no need to configure firewalls rules for these types of services: EX: crontab ==> crond and atd 
+                                                                   
+   2- External OR Network based service  ===> We need to Configure firewall rules to operate the traffic request OR Allow OR deny Rule
+
+ ===> 1- SSH Server 
+      2- FTP Server  
+      3- NFS Server  
+      4- Samba Server 
+      5- DNS Server  
+      6- Apache  Server webserver  
+      7- email Server 
+======================================================================================
+
+
+
+
+Task-1 How we can install FTP Server in redhat linux and How we can start the FTP service ?
+
+   33  yum install vsftpd -y 
+   34  systemctl start vsftpd
+   35  systemctl enable  vsftpd
+   36  history 
+
+
+======================================================================================
+
+
+Task-2 How we can install Targetcli  in redhat linux and How we can start the targetcli service ?
+
+
+[root@localhost ~]# dnf install targetcli
+
+   37  dnf install targetcli
+   38  systemctl start target
+   39  systemctl enable target
+
+======================================================================================
+
+Task-3 How we can install NFS Server in redhat linux and How we can start the NFS service ?
+
+
+   41  dnf install nfs-utils -y
+   42  systemctl enable nfs-server
+   44   systemctl start nfs-server
+   45  systemctl start rpcbind
+   46  systemctl enable  rpcbind
+
+======================================================================================
+
+Task-4 How we can install Samba Server in redhat linux and How we can start the Samba service ?
+
+   48  dnf install samba samba-common samba-client 
+   49  systemctl start smb
+   50  systemctl enable  smb
+
+
+======================================================================================
+
+Task-5 How we can install Apache webserver in redhat linux and How we can start the Apache webserver service ?
+
+   52  dnf install httpd -y
+   53  systemctl start httpd
+   54  systemctl enable httpd
+   55  history 
+
+======================================================================================
+Task-6 How we can install mariadb database in redhat linux and How we can start the mariadb service  ?
+
+   56  dnf install mariadb-server -y
+   57  systemctl start mariadb
+   58  systemctl enable mariadb
+   59  history 
+======================================================================================
+
+   60  rpm -qa tree 
+   61  yum remove tree 
+   62  yum install tree 
+
+======================================================================================
+
+[root@localhost ~]# yum install zenity  -y 
+
+======================================================================================
+
+
+
+[root@localhost ~]# rpm -qa podman 
+podman-4.0.2-6.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vim-enhanced 
+vim-enhanced-8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# rpm -qa | wc -l 
+1222
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# yum check-update 
+
+[root@localhost ~]# cat /etc/redhat-release 
+Red Hat Enterprise Linux release 9.0 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum check-update |  grep vim-enhanced
+vim-enhanced.x86_64                              2:8.2.2637-22.el9_6            rhel-9-for-x86_64-appstream-rpms
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vim-enhanced
+vim-enhanced-8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum update vim-enhanced
+
+
+[root@localhost ~]# yum downgrade  vim-enhanced
+
+
+[root@localhost ~]# yum downgrade  vim-enhanced-8.2.2637-15.el9
+
+[root@localhost ~]# rpm -qa vim-enhanced
+vim-enhanced-8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum check-update | grep vim-enhanced
+vim-enhanced.x86_64                              2:8.2.2637-22.el9_6            rhel-9-for-x86_64-appstream-rpms
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum  update vim-enhanced
+
+root@localhost ~]# rpm -qa vim-enhanced
+vim-enhanced-8.2.2637-22.el9_6.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum check-update | grep vim-enhanced
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa podman 
+podman-4.0.2-6.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# yum check-update | grep podman 
+
+[root@localhost ~]# yum update podman  -y 
+
+[root@localhost ~]# yum update podman  -y 
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:29:10 ago on Fri 18 Jul 2025 10:18:59 AM IST.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@localhost ~]# 
+[root@localhost ~]# yum check-update | grep podman 
+cockpit-podman.noarch                            101-1.el9                      rhel-9-for-x86_64-appstream-rpms
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa podman 
+podman-5.4.0-12.el9_6.x86_64
+[root@localhost ~]# 
+
+[root@localhost ~]# cat /etc/redhat-release 
+Red Hat Enterprise Linux release 9.0 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa tree
+tree-1.8.0-10.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa bash
+bash-5.1.8-4.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa kernel
+kernel-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# ls /boot 
+config-5.14.0-70.13.1.el9_0.x86_64                       loader
+efi                                                      symvers-5.14.0-70.13.1.el9_0.x86_64.gz
+grub2                                                    System.map-5.14.0-70.13.1.el9_0.x86_64
+initramfs-0-rescue-654f8fe556a44a5696f21320e7ed2e7a.img  vmlinuz-0-rescue-654f8fe556a44a5696f21320e7ed2e7a
+initramfs-5.14.0-70.13.1.el9_0.x86_64.img                vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+initramfs-5.14.0-70.13.1.el9_0.x86_64kdump.img
+[root@localhost ~]# 
+[root@localhost ~]# yum update bash  -y 
+
+[root@localhost ~]# rpm -qa bash
+bash-5.1.8-9.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# yum update kernel  -y 
+
+
+[root@localhost ~]# rpm -qa  tree 
+tree-1.8.0-10.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls /boot  
+config-5.14.0-570.26.1.el9_6.x86_64                      symvers-5.14.0-570.26.1.el9_6.x86_64.gz
+config-5.14.0-70.13.1.el9_0.x86_64                       symvers-5.14.0-70.13.1.el9_0.x86_64.gz
+efi                                                      System.map-5.14.0-570.26.1.el9_6.x86_64
+grub2                                                    System.map-5.14.0-70.13.1.el9_0.x86_64
+initramfs-0-rescue-654f8fe556a44a5696f21320e7ed2e7a.img  vmlinuz-0-rescue-654f8fe556a44a5696f21320e7ed2e7a
+initramfs-5.14.0-70.13.1.el9_0.x86_64.img                vmlinuz-5.14.0-570.26.1.el9_6.x86_64
+initramfs-5.14.0-70.13.1.el9_0.x86_64kdump.img           vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+loader
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# yum update -y 
+
+======================================================================================
+[root@localhost ~]# 
+[root@localhost ~]# ls  
+anaconda-ks.cfg  Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+[root@localhost ~]# 
+[root@localhost ~]# ls /
+afs  boot  etc   lib    media  opt   root  sbin  sys  usr
+bin  dev   home  lib64  mnt    proc  run   srv   tmp  var
+[root@localhost ~]# 
+[root@localhost ~]# cat /etc/redhat-release 
+Red Hat Enterprise Linux release 9.6 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# uname -r 
+5.14.0-570.26.1.el9_6.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# yum update  -y 
+Updating Subscription Management repositories.
+Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)             4.5 kB/s | 4.5 kB     00:00    
+Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)                              12 kB/s | 4.1 kB     00:00    
+Last metadata expiration check: 0:00:08 ago on Fri 18 Jul 2025 10:18:59 AM IST.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@localhost ~]# 
+[root@localhost ~]# subscription-manager list --installed
++-------------------------------------------+
+    Installed Product Status
++-------------------------------------------+
+Product Name: Red Hat Enterprise Linux for x86_64
+Product ID:   479
+Version:      9.6
+Arch:         x86_64
+
+[root@localhost ~]# 
+
+
+======================================================================================
+HOMEWORK
+======================================================================================
+
+RHEL 8 iso downloa and rhel 8 OS installation  ?
+
+RHEL -8 to RHEL-9 Upgrade  
+
+
+https://www.tecmint.com/upgrade-rhel-8-to-rhel-9/
+
+======================================================================================
+======================================================================================
+
+
+
+
+
+
+
+
