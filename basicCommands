@@ -1252,6 +1252,21 @@ Linux is powerful.
 linux is everywhere.
 Welcome to the world of DevOps.
 
+[root@192 yum.repos.d]# cat -n redhat.repo |grep -wC "enabled = 1"
+grep: enabled = 1: invalid context length argument
+[root@192 yum.repos.d]# cat -n redhat.repo |grep -w -C2 "enabled = 1"
+   489	name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+   490	baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/baseos/os
+   491	enabled = 1
+   492	gpgcheck = 1
+   493	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+--
+   755	name = Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+   756	baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/appstream/os
+   757	enabled = 1
+   758	gpgcheck = 1
+   759	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+[root@192 yum.repos.d]# 
  
 
 
