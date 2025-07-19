@@ -1,0 +1,129 @@
+[root@192 yum.repos.d]# yum check-update | grep kernel
+kernel.x86_64                             5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+kernel-core.x86_64                        5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+kernel-modules.x86_64                     5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+kernel-modules-core.x86_64                5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+kernel-tools.x86_64                       5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+kernel-tools-libs.x86_64                  5.14.0-570.26.1.el9_6         rhel-9-for-x86_64-baseos-rpms   
+[root@192 yum.repos.d]# dnf info nano
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:02:55 ago on Sat 19 Jul 2025 06:15:19 PM IST.
+Installed Packages
+Name         : nano
+Version      : 5.6.1
+Release      : 7.el9
+Architecture : x86_64
+Size         : 2.7 M
+Source       : nano-5.6.1-7.el9.src.rpm
+Repository   : @System
+From repo    : rhel-9-for-x86_64-baseos-rpms
+Summary      : A small text editor
+URL          : https://www.nano-editor.org
+License      : GPLv3+
+Description  : GNU nano is a small and friendly text editor.
+
+[root@192 yum.repos.d]# dnf --showduplicates list nano
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:03:13 ago on Sat 19 Jul 2025 06:15:19 PM IST.
+Installed Packages
+nano.x86_64                                                         5.6.1-7.el9                                                         @rhel-9-for-x86_64-baseos-rpms
+Available Packages
+nano.x86_64                                                         5.6.1-5.el9                                                         rhel-9-for-x86_64-baseos-rpms 
+nano.x86_64                                                         5.6.1-6.el9                                                         rhel-9-for-x86_64-baseos-rpms 
+nano.x86_64                                                         5.6.1-7.el9                                                         rhel-9-for-x86_64-baseos-rpms 
+[root@192 yum.repos.d]# .el9                                                         rhel-9-for-x86_64-baseos-rpms 
+[root@192 yum.repos.d]# 
+^C
+[root@192 yum.repos.d]# sudo dnf downgrade nano
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:04:25 ago on Sat 19 Jul 2025 06:15:19 PM IST.
+Dependencies resolved.
+======================================================================================================================================================================
+ Package                        Architecture                     Version                                Repository                                               Size
+======================================================================================================================================================================
+Downgrading:
+ nano                           x86_64                           5.6.1-6.el9                            rhel-9-for-x86_64-baseos-rpms                           715 k
+
+Transaction Summary
+======================================================================================================================================================================
+Downgrade  1 Package
+
+Total download size: 715 k
+Is this ok [y/N]: y
+Downloading Packages:
+nano-5.6.1-6.el9.x86_64.rpm                                                                                                           569 kB/s | 715 kB     00:01    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                 568 kB/s | 715 kB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                              1/1 
+  Downgrading      : nano-5.6.1-6.el9.x86_64                                                                                                                      1/2 
+  Cleanup          : nano-5.6.1-7.el9.x86_64                                                                                                                      2/2 
+  Running scriptlet: nano-5.6.1-7.el9.x86_64                                                                                                                      2/2 
+  Verifying        : nano-5.6.1-6.el9.x86_64                                                                                                                      1/2 
+  Verifying        : nano-5.6.1-7.el9.x86_64                                                                                                                      2/2 
+Installed products updated.
+
+Downgraded:
+  nano-5.6.1-6.el9.x86_64                                                                                                                                             
+
+Complete!
+[root@192 yum.repos.d]# nano --version
+ GNU nano, version 5.6.1
+ (C) 1999-2011, 2013-2021 Free Software Foundation, Inc.
+ (C) 2014-2021 the contributors to nano
+ Compiled options: --enable-utf8
+[root@192 yum.repos.d]# sudo dnf upgrade nano
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:05:37 ago on Sat 19 Jul 2025 06:15:19 PM IST.
+Dependencies resolved.
+======================================================================================================================================================================
+ Package                        Architecture                     Version                                Repository                                               Size
+======================================================================================================================================================================
+Upgrading:
+ nano                           x86_64                           5.6.1-7.el9                            rhel-9-for-x86_64-baseos-rpms                           713 k
+
+Transaction Summary
+======================================================================================================================================================================
+Upgrade  1 Package
+
+Total download size: 713 k
+Is this ok [y/N]: y
+Downloading Packages:
+nano-5.6.1-7.el9.x86_64.rpm                                                                                                           823 kB/s | 713 kB     00:00    
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                 822 kB/s | 713 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                                              1/1 
+  Upgrading        : nano-5.6.1-7.el9.x86_64                                                                                                                      1/2 
+  Cleanup          : nano-5.6.1-6.el9.x86_64                                                                                                                      2/2 
+  Running scriptlet: nano-5.6.1-6.el9.x86_64                                                                                                                      2/2 
+  Verifying        : nano-5.6.1-7.el9.x86_64                                                                                                                      1/2 
+  Verifying        : nano-5.6.1-6.el9.x86_64                                                                                                                      2/2 
+Installed products updated.
+
+Upgraded:
+  nano-5.6.1-7.el9.x86_64                                                                                                                                             
+
+Complete!
+[root@192 yum.repos.d]# dnf history
+Updating Subscription Management repositories.
+ID     | Command line                                                                                                    | Date and time    | Action(s)      | Altered
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     8 | upgrade nano                                                                                                    | 2025-07-19 18:21 | Upgrade        |    1   
+     7 | downgrade nano                                                                                                  | 2025-07-19 18:19 | Downgrade      |    1   
+     6 | install createrepo                                                                                              | 2025-07-16 18:16 | Install        |    2   
+     5 | remove createrepo                                                                                               | 2025-07-16 18:15 | Removed        |    2   
+     4 | install createrepo                                                                                              | 2025-07-16 18:13 | Install        |    2   
+     3 | remove createrepo                                                                                               | 2025-07-16 18:13 | Removed        |    2   
+     2 | install createrepo                                                                                              | 2025-07-16 18:12 | Install        |    2  <
+     1 |                                                                                                                 | 2025-06-10 14:40 | Install        | 1213 >E
+[root@192 yum.repos.d]# 
+
