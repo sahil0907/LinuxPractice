@@ -1,0 +1,155 @@
+
+
+
+
+
+
+[root@192 ~]# sudo dnf install leapp-upgrade leapp-data
+Updating Subscription Management repositories.
+
+^[[ALast metadata expiration check: 0:02:07 ago on Mon 21 Jul 2025 07:40:38 AM PDT.
+No match for argument: leapp-data
+Error: Unable to find a match: leapp-data
+[root@192 ~]# 
+[root@192 ~]# sudo dnf install leapp-upgrade leapp-data
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:02:22 ago on Mon 21 Jul 2025 07:40:38 AM PDT.
+No match for argument: leapp-data
+Error: Unable to find a match: leapp-data
+[root@192 ~]# sudo dnf install leapp-upgrade
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:02:47 ago on Mon 21 Jul 2025 07:40:38 AM PDT.
+Dependencies resolved.
+========================================================================
+ Package  Arch   Version         Repository                        Size
+========================================================================
+Installing:
+ leapp-upgrade-el8toel9
+          noarch 0.22.0-1.el8_10 rhel-8-for-x86_64-appstream-rpms 1.3 M
+Installing dependencies:
+ leapp    noarch 0.19.0-1.el8_10 rhel-8-for-x86_64-appstream-rpms  35 k
+ leapp-deps
+          noarch 0.19.0-1.el8_10 rhel-8-for-x86_64-appstream-rpms  17 k
+ leapp-upgrade-el8toel9-deps
+          noarch 0.22.0-1.el8_10 rhel-8-for-x86_64-appstream-rpms  45 k
+ python3-leapp
+          noarch 0.19.0-1.el8_10 rhel-8-for-x86_64-appstream-rpms 202 k
+
+Transaction Summary
+========================================================================
+Install  5 Packages
+
+Total download size: 1.6 M
+Installed size: 12 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/5): leapp-deps-0.19.0-1.el8_10.noarc  37 kB/s |  17 kB     00:00    
+(2/5): leapp-0.19.0-1.el8_10.noarch.rpm  60 kB/s |  35 kB     00:00    
+(3/5): leapp-upgrade-el8toel9-0.22.0-1. 1.9 MB/s | 1.3 MB     00:00    
+(4/5): leapp-upgrade-el8toel9-deps-0.22 101 kB/s |  45 kB     00:00    
+(5/5): python3-leapp-0.19.0-1.el8_10.no 539 kB/s | 202 kB     00:00    
+------------------------------------------------------------------------
+Total                                   1.7 MB/s | 1.6 MB     00:00     
+Red Hat Enterprise Linux 8 for x86_64 - 1.3 MB/s | 5.0 kB     00:00    
+Importing GPG key 0xFD431D51:
+ Userid     : "Red Hat, Inc. (release key 2) <security@redhat.com>"
+ Fingerprint: 567E 347A D004 4ADE 55BA 8A5F 199E 2F91 FD43 1D51
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+Is this ok [y/N]: y
+Key imported successfully
+Importing GPG key 0xD4082792:
+ Userid     : "Red Hat, Inc. (auxiliary key) <security@redhat.com>"
+ Fingerprint: 6A6A A7C9 7C88 90AE C6AE BFE2 F76F 66C3 D408 2792
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+Is this ok [y/N]: y
+Key imported successfully
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                1/1 
+  Installing       : leapp-upgrade-el8toel9-deps-0.22.0-1.el8_10.   1/5 
+  Installing       : leapp-deps-0.19.0-1.el8_10.noarch              2/5 
+  Installing       : python3-leapp-0.19.0-1.el8_10.noarch           3/5 
+  Installing       : leapp-0.19.0-1.el8_10.noarch                   4/5 
+  Installing       : leapp-upgrade-el8toel9-0.22.0-1.el8_10.noarc   5/5 
+  Running scriptlet: leapp-upgrade-el8toel9-0.22.0-1.el8_10.noarc   5/5 
+  Verifying        : leapp-0.19.0-1.el8_10.noarch                   1/5 
+  Verifying        : leapp-deps-0.19.0-1.el8_10.noarch              2/5 
+  Verifying        : leapp-upgrade-el8toel9-0.22.0-1.el8_10.noarc   3/5 
+  Verifying        : leapp-upgrade-el8toel9-deps-0.22.0-1.el8_10.   4/5 
+  Verifying        : python3-leapp-0.19.0-1.el8_10.noarch           5/5 
+Installed products updated.
+
+Installed:
+  leapp-0.19.0-1.el8_10.noarch                                          
+  leapp-deps-0.19.0-1.el8_10.noarch                                     
+  leapp-upgrade-el8toel9-0.22.0-1.el8_10.noarch                         
+  leapp-upgrade-el8toel9-deps-0.22.0-1.el8_10.noarch                    
+  python3-leapp-0.19.0-1.el8_10.noarch                                  
+
+Complete!
+[root@192 ~]# which leapp
+/usr/bin/leapp
+[root@192 ~]# sudo leapp preupgrade
+
+
+Reports summary:
+    Errors:                      0
+    Inhibitors:                  3
+    HIGH severity reports:       4
+    MEDIUM severity reports:     0
+    LOW severity reports:        1
+    INFO severity reports:       3
+
+Before continuing, review the full report below for details about discovered problems and possible remediation instructions:
+    A report has been generated at /var/log/leapp/leapp-report.txt
+    A report has been generated at /var/log/leapp/leapp-report.json
+
+============================================================
+                   END OF REPORT OVERVIEW                   
+============================================================
+
+
+
+
+
+[root@192 ~]# sudo leapp upgrade
+
+
+============================================================
+                      REPORT OVERVIEW                       
+============================================================
+
+Upgrade has been inhibited due to the following problems:
+    1. The installed OS version is not supported for the in-place upgrade to the target RHEL version
+    2. Firewalld Configuration AllowZoneDrifting Is Unsupported
+    3. Possible problems with remote login using root account
+
+HIGH and MEDIUM severity reports:
+    1. Packages available in excluded repositories will not be installed
+    2. Leapp detected loaded kernel drivers which are no longer maintained in RHEL 9.
+    3. GRUB2 core will be automatically updated during the upgrade
+    4. Remote root logins globally allowed using password
+
+Reports summary:
+    Errors:                      0
+    Inhibitors:                  3
+    HIGH severity reports:       4
+    MEDIUM severity reports:     0
+    LOW severity reports:        1
+    INFO severity reports:       3
+
+Before continuing, review the full report below for details about discovered problems and possible remediation instructions:
+    A report has been generated at /var/log/leapp/leapp-report.txt
+    A report has been generated at /var/log/leapp/leapp-report.json
+
+============================================================
+                   END OF REPORT OVERVIEW                   
+============================================================
+
+Answerfile has been generated at /var/log/leapp/answerfile
+[root@192 ~]# cat /etc/redhat-release
+Red Hat Enterprise Linux release 8.6 (Ootpa)
+
