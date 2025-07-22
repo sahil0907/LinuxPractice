@@ -1,0 +1,854 @@
+[root@192 ~]# dnf check-update
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:24:46 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+
+NetworkManager.x86_64               1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-adsl.x86_64          1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-bluetooth.x86_64     1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-config-server.noarch 1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-libnm.x86_64         1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-team.x86_64          1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-tui.x86_64           1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-wifi.x86_64          1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+NetworkManager-wwan.x86_64          1:1.52.0-4.el9_6              rhel-9-for-x86_64-baseos-rpms
+avahi.x86_64                        0.8-22.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+avahi-glib.x86_64                   0.8-22.el9_6.1                rhel-9-for-x86_64-appstream-rpms
+avahi-libs.x86_64                   0.8-22.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+avahi-tools.x86_64                  0.8-22.el9_6.1                rhel-9-for-x86_64-appstream-rpms
+bind-libs.x86_64                    32:9.16.23-29.el9_6           rhel-9-for-x86_64-appstream-rpms
+bind-license.noarch                 32:9.16.23-29.el9_6           rhel-9-for-x86_64-appstream-rpms
+bind-utils.x86_64                   32:9.16.23-29.el9_6           rhel-9-for-x86_64-appstream-rpms
+buildah.x86_64                      2:1.39.4-2.el9_6              rhel-9-for-x86_64-appstream-rpms
+container-selinux.noarch            4:2.237.0-1.el9_6             rhel-9-for-x86_64-appstream-rpms
+containernetworking-plugins.x86_64  1:1.6.2-2.el9_6               rhel-9-for-x86_64-appstream-rpms
+device-mapper-multipath.x86_64      0.8.7-35.el9_6.1              rhel-9-for-x86_64-baseos-rpms
+device-mapper-multipath-libs.x86_64 0.8.7-35.el9_6.1              rhel-9-for-x86_64-baseos-rpms
+dracut.x86_64                       057-88.git20250311.el9_6      rhel-9-for-x86_64-baseos-rpms
+dracut-config-rescue.x86_64         057-88.git20250311.el9_6      rhel-9-for-x86_64-baseos-rpms
+dracut-network.x86_64               057-88.git20250311.el9_6      rhel-9-for-x86_64-baseos-rpms
+dracut-squash.x86_64                057-88.git20250311.el9_6      rhel-9-for-x86_64-baseos-rpms
+elfutils-debuginfod-client.x86_64   0.192-6.el9_6                 rhel-9-for-x86_64-baseos-rpms
+elfutils-default-yama-scope.noarch  0.192-6.el9_6                 rhel-9-for-x86_64-baseos-rpms
+elfutils-libelf.x86_64              0.192-6.el9_6                 rhel-9-for-x86_64-baseos-rpms
+elfutils-libs.x86_64                0.192-6.el9_6                 rhel-9-for-x86_64-baseos-rpms
+emacs-filesystem.noarch             1:27.2-14.el9_6.2             rhel-9-for-x86_64-appstream-rpms
+firefox.x86_64                      128.12.0-1.el9_6              rhel-9-for-x86_64-appstream-rpms
+glib2.x86_64                        2.68.4-16.el9_6.2             rhel-9-for-x86_64-baseos-rpms
+glibc.x86_64                        2.34-168.el9_6.20             rhel-9-for-x86_64-baseos-rpms
+glibc-all-langpacks.x86_64          2.34-168.el9_6.20             rhel-9-for-x86_64-baseos-rpms
+glibc-common.x86_64                 2.34-168.el9_6.20             rhel-9-for-x86_64-baseos-rpms
+glibc-gconv-extra.x86_64            2.34-168.el9_6.20             rhel-9-for-x86_64-baseos-rpms
+glibc-langpack-en.x86_64            2.34-168.el9_6.20             rhel-9-for-x86_64-baseos-rpms
+gnome-remote-desktop.x86_64         40.0-11.el9_6                 rhel-9-for-x86_64-appstream-rpms
+gnome-session.x86_64                40.1.1-10.el9_6               rhel-9-for-x86_64-appstream-rpms
+gnome-session-wayland-session.x86_64
+                                    40.1.1-10.el9_6               rhel-9-for-x86_64-appstream-rpms
+gnome-session-xsession.x86_64       40.1.1-10.el9_6               rhel-9-for-x86_64-appstream-rpms
+gnome-shell.x86_64                  40.10-25.el9_6                rhel-9-for-x86_64-appstream-rpms
+iputils.x86_64                      20210202-11.el9_6.1           rhel-9-for-x86_64-baseos-rpms
+iwl100-firmware.noarch              39.31.5.1-151.2.el9_6         rhel-9-for-x86_64-baseos-rpms
+iwl1000-firmware.noarch             1:39.31.5.1-151.2.el9_6       rhel-9-for-x86_64-baseos-rpms
+iwl105-firmware.noarch              18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl135-firmware.noarch              18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl2000-firmware.noarch             18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl2030-firmware.noarch             18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl3160-firmware.noarch             1:25.30.13.0-151.2.el9_6      rhel-9-for-x86_64-baseos-rpms
+iwl5000-firmware.noarch             8.83.5.1_1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl5150-firmware.noarch             8.24.2.2-151.2.el9_6          rhel-9-for-x86_64-baseos-rpms
+iwl6000g2a-firmware.noarch          18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl6000g2b-firmware.noarch          18.168.6.1-151.2.el9_6        rhel-9-for-x86_64-baseos-rpms
+iwl6050-firmware.noarch             41.28.5.1-151.2.el9_6         rhel-9-for-x86_64-baseos-rpms
+iwl7260-firmware.noarch             1:25.30.13.0-151.2.el9_6      rhel-9-for-x86_64-baseos-rpms
+jq.x86_64                           1.6-17.el9_6.2                rhel-9-for-x86_64-baseos-rpms
+kernel.x86_64                       5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kernel-core.x86_64                  5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kernel-modules.x86_64               5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kernel-modules-core.x86_64          5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kernel-tools.x86_64                 5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kernel-tools-libs.x86_64            5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-baseos-rpms
+kpartx.x86_64                       0.8.7-35.el9_6.1              rhel-9-for-x86_64-baseos-rpms
+krb5-libs.x86_64                    1.21.1-8.el9_6                rhel-9-for-x86_64-baseos-rpms
+libarchive.x86_64                   3.5.3-5.el9_6                 rhel-9-for-x86_64-baseos-rpms
+libblockdev.x86_64                  2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-crypto.x86_64           2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-fs.x86_64               2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-loop.x86_64             2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-lvm.x86_64              2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-mdraid.x86_64           2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-part.x86_64             2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-swap.x86_64             2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libblockdev-utils.x86_64            2.28-14.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libdb.x86_64                        5.3.28-57.el9_6               rhel-9-for-x86_64-baseos-rpms
+libdnf-plugin-subscription-manager.x86_64
+                                    1.29.45.1-1.el9_6             rhel-9-for-x86_64-baseos-rpms
+libertas-sd8787-firmware.noarch     20250604-151.2.el9_6          rhel-9-for-x86_64-baseos-rpms
+libldb.x86_64                       4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+libsmbclient.x86_64                 4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+libvpx.x86_64                       1.9.0-9.el9_6                 rhel-9-for-x86_64-appstream-rpms
+libwbclient.x86_64                  4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+libxml2.x86_64                      2.9.13-10.el9_6               rhel-9-for-x86_64-baseos-rpms
+linux-firmware.noarch               20250604-151.2.el9_6          rhel-9-for-x86_64-baseos-rpms
+linux-firmware-whence.noarch        20250604-151.2.el9_6          rhel-9-for-x86_64-baseos-rpms
+lockdev.x86_64                      1.0.4-0.38.20111007git.el9_6  rhel-9-for-x86_64-baseos-rpms
+microcode_ctl.noarch                4:20250211-1.20250512.1.el9_6 rhel-9-for-x86_64-baseos-rpms
+netronome-firmware.noarch           20250604-151.2.el9_6          rhel-9-for-x86_64-baseos-rpms
+osinfo-db.noarch                    20250124-2.el9_6              rhel-9-for-x86_64-appstream-rpms
+pam.x86_64                          1.5.1-25.el9_6                rhel-9-for-x86_64-baseos-rpms
+passt.x86_64                        0^20250217.ga1e48a0-9.el9_6   rhel-9-for-x86_64-appstream-rpms
+passt-selinux.noarch                0^20250217.ga1e48a0-9.el9_6   rhel-9-for-x86_64-appstream-rpms
+podman.x86_64                       5:5.4.0-12.el9_6              rhel-9-for-x86_64-appstream-rpms
+python-unversioned-command.noarch   3.9.21-2.el9_6.1              rhel-9-for-x86_64-appstream-rpms
+python3.x86_64                      3.9.21-2.el9_6.1              rhel-9-for-x86_64-baseos-rpms
+python3-cloud-what.x86_64           1.29.45.1-1.el9_6             rhel-9-for-x86_64-baseos-rpms
+python3-libs.x86_64                 3.9.21-2.el9_6.1              rhel-9-for-x86_64-baseos-rpms
+python3-libxml2.x86_64              2.9.13-10.el9_6               rhel-9-for-x86_64-baseos-rpms
+python3-perf.x86_64                 5.14.0-570.28.1.el9_6         rhel-9-for-x86_64-appstream-rpms
+python3-setuptools.noarch           53.0.0-13.el9_6.1             rhel-9-for-x86_64-baseos-rpms
+python3-setuptools-wheel.noarch     53.0.0-13.el9_6.1             rhel-9-for-x86_64-baseos-rpms
+python3-subscription-manager-rhsm.x86_64
+                                    1.29.45.1-1.el9_6             rhel-9-for-x86_64-baseos-rpms
+redhat-backgrounds.noarch           90.5-1.el9_6.1                rhel-9-for-x86_64-appstream-rpms
+redhat-logos.x86_64                 90.5-1.el9_6.1                rhel-9-for-x86_64-appstream-rpms
+rhc.x86_64                          1:0.2.7-1.el9_6               rhel-9-for-x86_64-appstream-rpms
+samba-client-libs.x86_64            4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+samba-common.noarch                 4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+samba-common-libs.x86_64            4.21.3-7.el9_6                rhel-9-for-x86_64-baseos-rpms
+sos.noarch                          4.9.1-2.el9_6                 rhel-9-for-x86_64-baseos-rpms
+subscription-manager.x86_64         1.29.45.1-1.el9_6             rhel-9-for-x86_64-baseos-rpms
+sudo.x86_64                         1.9.5p2-10.el9_6.1            rhel-9-for-x86_64-baseos-rpms
+systemd.x86_64                      252-51.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+systemd-libs.x86_64                 252-51.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+systemd-pam.x86_64                  252-51.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+systemd-rpm-macros.noarch           252-51.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+systemd-udev.x86_64                 252-51.el9_6.1                rhel-9-for-x86_64-baseos-rpms
+tuned.noarch                        2.25.1-2.el9_6                rhel-9-for-x86_64-baseos-rpms
+tuned-ppd.noarch                    2.25.1-2.el9_6                rhel-9-for-x86_64-appstream-rpms
+webkit2gtk3.x86_64                  2.48.3-1.el9_6                rhel-9-for-x86_64-appstream-rpms
+webkit2gtk3-jsc.x86_64              2.48.3-1.el9_6                rhel-9-for-x86_64-appstream-rpms
+xorg-x11-server-Xorg.x86_64         1.20.11-31.el9_6              rhel-9-for-x86_64-appstream-rpms
+xorg-x11-server-Xwayland.x86_64     23.2.7-4.el9_6                rhel-9-for-x86_64-appstream-rpms
+xorg-x11-server-common.x86_64       1.20.11-31.el9_6              rhel-9-for-x86_64-appstream-rpms
+[root@192 ~]# 
+[root@192 ~]# dnf install htop
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:27:37 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+No match for argument: htop
+Error: Unable to find a match: htop
+[root@192 ~]# dnf install htop
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:28:40 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+No match for argument: htop
+Error: Unable to find a match: htop
+[root@192 ~]# htop
+bash: htop: command not found...
+Similar command is: 'top'
+[root@192 ~]# dnf search nginx
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:29:16 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+========================== Name Exactly Matched: nginx ==========================
+nginx.x86_64 : A high performance web server and reverse proxy server
+========================= Name & Summary Matched: nginx =========================
+nginx-all-modules.noarch : A meta package that installs all available Nginx
+                         : modules
+nginx-core.x86_64 : nginx minimal core
+nginx-filesystem.noarch : The basic directory layout for the Nginx server
+nginx-mod-http-image-filter.x86_64 : Nginx HTTP image filter module
+nginx-mod-http-perl.x86_64 : Nginx HTTP perl module
+nginx-mod-http-xslt-filter.x86_64 : Nginx XSLT module
+nginx-mod-mail.x86_64 : Nginx mail modules
+nginx-mod-stream.x86_64 : Nginx stream modules
+pcp-pmda-nginx.x86_64 : Performance Co-Pilot (PCP) metrics for the Nginx
+                      : Webserver
+[root@192 ~]# dnf info nginx
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:29:31 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+Available Packages
+Name         : nginx
+Epoch        : 2
+Version      : 1.20.1
+Release      : 22.el9_6.3
+Architecture : x86_64
+Size         : 37 k
+Source       : nginx-1.20.1-22.el9_6.3.src.rpm
+Repository   : rhel-9-for-x86_64-appstream-rpms
+Summary      : A high performance web server and reverse proxy server
+URL          : https://nginx.org
+License      : BSD
+Description  : Nginx is a web server and a reverse proxy server for HTTP, SMTP,
+             : POP3 and IMAP protocols, with a strong focus on high concurrency,
+             : performance and low memory usage.
+
+[root@192 ~]# dnf remove nginx
+Updating Subscription Management repositories.
+No match for argument: nginx
+No packages marked for removal.
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@192 ~]# dnf repolist
+Updating Subscription Management repositories.
+repo id                          repo name
+rhel-9-for-x86_64-appstream-rpms Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms    Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+[root@192 ~]# dnf repolist all
+Updating Subscription Management repositories.
+repo id                                                       repo name  status
+amq-clients-3-for-rhel-9-x86_64-debug-rpms                    Red Hat AM disabled
+amq-clients-3-for-rhel-9-x86_64-rpms                          Red Hat AM disabled
+amq-clients-3-for-rhel-9-x86_64-source-rpms                   Red Hat AM disabled
+amq-interconnect-textonly-1-for-middleware-rpms               Red Hat AM disabled
+amq-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+ansible-automation-platform-2.2-for-rhel-9-x86_64-debug-rpms  Red Hat An disabled
+ansible-automation-platform-2.2-for-rhel-9-x86_64-rpms        Red Hat An disabled
+ansible-automation-platform-2.2-for-rhel-9-x86_64-source-rpms Red Hat An disabled
+ansible-automation-platform-2.3-for-rhel-9-x86_64-debug-rpms  Red Hat An disabled
+ansible-automation-platform-2.3-for-rhel-9-x86_64-rpms        Red Hat An disabled
+ansible-automation-platform-2.3-for-rhel-9-x86_64-source-rpms Red Hat An disabled
+ansible-automation-platform-2.4-for-rhel-9-x86_64-debug-rpms  Red Hat An disabled
+ansible-automation-platform-2.4-for-rhel-9-x86_64-rpms        Red Hat An disabled
+ansible-automation-platform-2.4-for-rhel-9-x86_64-source-rpms Red Hat An disabled
+ansible-automation-platform-2.5-for-rhel-9-x86_64-debug-rpms  Red Hat An disabled
+ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms        Red Hat An disabled
+ansible-automation-platform-2.5-for-rhel-9-x86_64-source-rpms Red Hat An disabled
+application-interconnect-1-for-rhel-9-x86_64-debug-rpms       Red Hat Ap disabled
+application-interconnect-1-for-rhel-9-x86_64-rpms             Red Hat Ap disabled
+application-interconnect-1-for-rhel-9-x86_64-source-rpms      Red Hat Ap disabled
+cert-manager-1.10-for-rhel-9-x86_64-debug-rpms                Cert Manag disabled
+cert-manager-1.10-for-rhel-9-x86_64-rpms                      Cert Manag disabled
+cert-manager-1.10-for-rhel-9-x86_64-source-rpms               Cert Manag disabled
+cert-manager-1.11-for-rhel-9-x86_64-debug-rpms                Cert Manag disabled
+cert-manager-1.11-for-rhel-9-x86_64-rpms                      Cert Manag disabled
+cert-manager-1.11-for-rhel-9-x86_64-source-rpms               Cert Manag disabled
+cert-manager-1.12-for-rhel-9-x86_64-debug-rpms                Cert Manag disabled
+cert-manager-1.12-for-rhel-9-x86_64-rpms                      Cert Manag disabled
+cert-manager-1.12-for-rhel-9-x86_64-source-rpms               Cert Manag disabled
+cert-manager-1.13-for-rhel-9-x86_64-debug-rpms                Cert Manag disabled
+cert-manager-1.13-for-rhel-9-x86_64-rpms                      Cert Manag disabled
+cert-manager-1.13-for-rhel-9-x86_64-source-rpms               Cert Manag disabled
+cert-manager-1.14-for-rhel-9-x86_64-debug-rpms                Cert Manag disabled
+cert-manager-1.14-for-rhel-9-x86_64-rpms                      Cert Manag disabled
+cert-manager-1.14-for-rhel-9-x86_64-source-rpms               Cert Manag disabled
+cnv-4.13-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.13-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.13-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.14-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.14-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.14-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.15-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.15-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.15-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.16-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.16-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.16-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.17-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.17-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.17-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.18-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.18-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.18-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+cnv-4.19-for-rhel-9-x86_64-debug-rpms                         Red Hat Co disabled
+cnv-4.19-for-rhel-9-x86_64-rpms                               Red Hat Co disabled
+cnv-4.19-for-rhel-9-x86_64-source-rpms                        Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-debug-rpms                Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-eus-debug-rpms            Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-eus-rpms                  Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-eus-source-rpms           Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-rpms                      Red Hat Co disabled
+codeready-builder-for-rhel-9-x86_64-source-rpms               Red Hat Co disabled
+discovery-1-for-rhel-9-x86_64-debug-rpms                      Red Hat Di disabled
+discovery-1-for-rhel-9-x86_64-rpms                            Red Hat Di disabled
+discovery-1-for-rhel-9-x86_64-source-rpms                     Red Hat Di disabled
+discovery-2-for-rhel-9-x86_64-debug-rpms                      Red Hat Di disabled
+discovery-2-for-rhel-9-x86_64-rpms                            Red Hat Di disabled
+discovery-2-for-rhel-9-x86_64-source-rpms                     Red Hat Di disabled
+fast-datapath-for-rhel-9-x86_64-debug-rpms                    Fast Datap disabled
+fast-datapath-for-rhel-9-x86_64-rpms                          Fast Datap disabled
+fast-datapath-for-rhel-9-x86_64-source-rpms                   Fast Datap disabled
+fsw-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+gitops-1.12-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.12-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.12-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+gitops-1.13-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.13-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.13-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+gitops-1.14-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.14-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.14-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+gitops-1.15-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.15-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.15-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+gitops-1.16-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.16-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.16-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+gitops-1.17-for-rhel-9-x86_64-debug-rpms                      Red Hat Op disabled
+gitops-1.17-for-rhel-9-x86_64-rpms                            Red Hat Op disabled
+gitops-1.17-for-rhel-9-x86_64-source-rpms                     Red Hat Op disabled
+insights-proxy-1-tech-preview-for-rhel-9-x86_64-debug-rpms    Red Hat In disabled
+insights-proxy-1-tech-preview-for-rhel-9-x86_64-rpms          Red Hat In disabled
+insights-proxy-1-tech-preview-for-rhel-9-x86_64-source-rpms   Red Hat In disabled
+insights-proxy-for-rhel-9-x86_64-debug-rpms                   Red Hat In disabled
+insights-proxy-for-rhel-9-x86_64-rpms                         Red Hat In disabled
+insights-proxy-for-rhel-9-x86_64-source-rpms                  Red Hat In disabled
+jb-coreservices-textonly-1-for-middleware-rhui-rpms           Red Hat JB disabled
+jb-coreservices-textonly-1-for-middleware-rpms                Red Hat JB disabled
+jb-datagrid-8.4-for-rhel-9-x86_64-debug-rpms                  Red Hat JB disabled
+jb-datagrid-8.4-for-rhel-9-x86_64-rpms                        Red Hat JB disabled
+jb-datagrid-8.4-for-rhel-9-x86_64-source-rpms                 Red Hat JB disabled
+jb-datagrid-textonly-1-for-middleware-rpms                    Red Hat JB disabled
+jb-eap-7.4-for-rhel-9-x86_64-debug-rpms                       JBoss Ente disabled
+jb-eap-7.4-for-rhel-9-x86_64-rpms                             JBoss Ente disabled
+jb-eap-7.4-for-rhel-9-x86_64-source-rpms                      JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-debug-rpms                       JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-rhui-debug-rpms                  JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-rhui-rpms                        JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-rhui-source-rpms                 JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-rpms                             JBoss Ente disabled
+jb-eap-8.0-for-rhel-9-x86_64-source-rpms                      JBoss Ente disabled
+jb-eap-8.1-for-rhel-9-x86_64-debug-rpms                       JBoss Ente disabled
+jb-eap-8.1-for-rhel-9-x86_64-rpms                             JBoss Ente disabled
+jb-eap-8.1-for-rhel-9-x86_64-source-rpms                      JBoss Ente disabled
+jb-eap-textonly-1-for-middleware-rpms                         Red Hat JB disabled
+jdv-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+jon-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+jpp-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+kmm-1-for-rhel-9-x86_64-debug-rpms                            Kernel Mod disabled
+kmm-1-for-rhel-9-x86_64-rpms                                  Kernel Mod disabled
+kmm-1-for-rhel-9-x86_64-source-rpms                           Kernel Mod disabled
+kmm-2-for-rhel-9-x86_64-debug-rpms                            Kernel Mod disabled
+kmm-2-for-rhel-9-x86_64-rpms                                  Kernel Mod disabled
+kmm-2-for-rhel-9-x86_64-source-rpms                           Kernel Mod disabled
+lvms-4.14-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.14-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.14-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.15-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.15-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.15-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.16-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.16-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.16-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.17-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.17-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.17-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.18-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.18-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.18-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.19-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.19-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.19-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+lvms-4.20-for-rhel-9-x86_64-debug-rpms                        Logical Vo disabled
+lvms-4.20-for-rhel-9-x86_64-rpms                              Logical Vo disabled
+lvms-4.20-for-rhel-9-x86_64-source-rpms                       Logical Vo disabled
+network-observability-1-for-rhel-9-x86_64-debug-rpms          Network Ob disabled
+network-observability-1-for-rhel-9-x86_64-rpms                Network Ob disabled
+network-observability-1-for-rhel-9-x86_64-source-rpms         Network Ob disabled
+ocp-tools-4.15-for-rhel-9-x86_64-debug-rpms                   OpenShift  disabled
+ocp-tools-4.15-for-rhel-9-x86_64-rpms                         OpenShift  disabled
+ocp-tools-4.15-for-rhel-9-x86_64-source-rpms                  OpenShift  disabled
+ocp-tools-4.16-for-rhel-9-x86_64-debug-rpms                   OpenShift  disabled
+ocp-tools-4.16-for-rhel-9-x86_64-rpms                         OpenShift  disabled
+ocp-tools-4.16-for-rhel-9-x86_64-source-rpms                  OpenShift  disabled
+ocp-tools-4.17-for-rhel-9-x86_64-debug-rpms                   OpenShift  disabled
+ocp-tools-4.17-for-rhel-9-x86_64-rpms                         OpenShift  disabled
+ocp-tools-4.17-for-rhel-9-x86_64-source-rpms                  OpenShift  disabled
+ocp-tools-4.18-for-rhel-9-x86_64-debug-rpms                   OpenShift  disabled
+ocp-tools-4.18-for-rhel-9-x86_64-rpms                         OpenShift  disabled
+ocp-tools-4.18-for-rhel-9-x86_64-source-rpms                  OpenShift  disabled
+openjdk-textonly-1-for-middleware-rpms                        OpenJDK Te disabled
+openliberty-textonly-1-for-middleware-rpms                    Open Liber disabled
+openstack-17-tools-for-rhel-9-x86_64-debug-rpms               Red Hat Op disabled
+openstack-17-tools-for-rhel-9-x86_64-rpms                     Red Hat Op disabled
+openstack-17-tools-for-rhel-9-x86_64-source-rpms              Red Hat Op disabled
+osso-1-for-rhel-9-x86_64-debug-rpms                           Secondary  disabled
+osso-1-for-rhel-9-x86_64-rpms                                 Secondary  disabled
+osso-1-for-rhel-9-x86_64-source-rpms                          Secondary  disabled
+pipelines-1.18-for-rhel-9-x86_64-debug-rpms                   Red Hat Op disabled
+pipelines-1.18-for-rhel-9-x86_64-rpms                         Red Hat Op disabled
+pipelines-1.18-for-rhel-9-x86_64-source-rpms                  Red Hat Op disabled
+pipelines-1.19-for-rhel-9-x86_64-debug-rpms                   Red Hat Op disabled
+pipelines-1.19-for-rhel-9-x86_64-rpms                         Red Hat Op disabled
+pipelines-1.19-for-rhel-9-x86_64-source-rpms                  Red Hat Op disabled
+quarkus-textonly-1-for-middleware-rpms                        Red Hat bu disabled
+rhbop-textonly-1-for-middleware-rpms                          Red Hat Bu disabled
+rhceph-5-tools-for-rhel-9-x86_64-debug-rpms                   Red Hat Ce disabled
+rhceph-5-tools-for-rhel-9-x86_64-rpms                         Red Hat Ce disabled
+rhceph-5-tools-for-rhel-9-x86_64-source-rpms                  Red Hat Ce disabled
+rhceph-6-tools-for-rhel-9-x86_64-debug-rpms                   Red Hat Ce disabled
+rhceph-6-tools-for-rhel-9-x86_64-rpms                         Red Hat Ce disabled
+rhceph-6-tools-for-rhel-9-x86_64-source-rpms                  Red Hat Ce disabled
+rhceph-7-tools-for-rhel-9-x86_64-debug-rpms                   Red Hat Ce disabled
+rhceph-7-tools-for-rhel-9-x86_64-rpms                         Red Hat Ce disabled
+rhceph-7-tools-for-rhel-9-x86_64-source-rpms                  Red Hat Ce disabled
+rhceph-8-tools-for-rhel-9-x86_64-debug-rpms                   Red Hat Ce disabled
+rhceph-8-tools-for-rhel-9-x86_64-rpms                         Red Hat Ce disabled
+rhceph-8-tools-for-rhel-9-x86_64-source-rpms                  Red Hat Ce disabled
+rhdh-1-for-rhel-9-x86_64-debug-rpms                           Red Hat De disabled
+rhdh-1-for-rhel-9-x86_64-rpms                                 Red Hat De disabled
+rhdh-1-for-rhel-9-x86_64-source-rpms                          Red Hat De disabled
+rhel-9-for-x86_64-appstream-debug-rpms                        Red Hat En disabled
+rhel-9-for-x86_64-appstream-e4s-debug-rpms                    Red Hat En disabled
+rhel-9-for-x86_64-appstream-e4s-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-appstream-e4s-source-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-appstream-eus-debug-rpms                    Red Hat En disabled
+rhel-9-for-x86_64-appstream-eus-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-appstream-eus-source-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-appstream-rpms                              Red Hat En enabled
+rhel-9-for-x86_64-appstream-source-rpms                       Red Hat En disabled
+rhel-9-for-x86_64-baseos-debug-rpms                           Red Hat En disabled
+rhel-9-for-x86_64-baseos-e4s-debug-rpms                       Red Hat En disabled
+rhel-9-for-x86_64-baseos-e4s-rpms                             Red Hat En disabled
+rhel-9-for-x86_64-baseos-e4s-source-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-baseos-eus-debug-rpms                       Red Hat En disabled
+rhel-9-for-x86_64-baseos-eus-rpms                             Red Hat En disabled
+rhel-9-for-x86_64-baseos-eus-source-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-baseos-rpms                                 Red Hat En enabled
+rhel-9-for-x86_64-baseos-source-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-highavailability-debug-rpms                 Red Hat En disabled
+rhel-9-for-x86_64-highavailability-e4s-debug-rpms             Red Hat En disabled
+rhel-9-for-x86_64-highavailability-e4s-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-highavailability-e4s-source-rpms            Red Hat En disabled
+rhel-9-for-x86_64-highavailability-eus-debug-rpms             Red Hat En disabled
+rhel-9-for-x86_64-highavailability-eus-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-highavailability-eus-source-rpms            Red Hat En disabled
+rhel-9-for-x86_64-highavailability-rpms                       Red Hat En disabled
+rhel-9-for-x86_64-highavailability-source-rpms                Red Hat En disabled
+rhel-9-for-x86_64-nfv-debug-rpms                              Red Hat En disabled
+rhel-9-for-x86_64-nfv-e4s-debug-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-nfv-e4s-rpms                                Red Hat En disabled
+rhel-9-for-x86_64-nfv-e4s-source-rpms                         Red Hat En disabled
+rhel-9-for-x86_64-nfv-rpms                                    Red Hat En disabled
+rhel-9-for-x86_64-nfv-source-rpms                             Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-debug-rpms                 Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-eus-debug-rpms             Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-eus-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-eus-source-rpms            Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-rpms                       Red Hat En disabled
+rhel-9-for-x86_64-resilientstorage-source-rpms                Red Hat En disabled
+rhel-9-for-x86_64-rt-debug-rpms                               Red Hat En disabled
+rhel-9-for-x86_64-rt-e4s-debug-rpms                           Red Hat En disabled
+rhel-9-for-x86_64-rt-e4s-rpms                                 Red Hat En disabled
+rhel-9-for-x86_64-rt-e4s-source-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-rt-rpms                                     Red Hat En disabled
+rhel-9-for-x86_64-rt-source-rpms                              Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-debug-rpms                    Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-e4s-debug-rpms                Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-e4s-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-e4s-source-rpms               Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-eus-debug-rpms                Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-eus-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-eus-source-rpms               Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-sap-netweaver-source-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-debug-rpms                    Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-e4s-debug-rpms                Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-e4s-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-e4s-source-rpms               Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-eus-debug-rpms                Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-eus-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-eus-source-rpms               Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-sap-solutions-source-rpms                   Red Hat En disabled
+rhel-9-for-x86_64-supplementary-debug-rpms                    Red Hat En disabled
+rhel-9-for-x86_64-supplementary-eus-debug-rpms                Red Hat En disabled
+rhel-9-for-x86_64-supplementary-eus-rpms                      Red Hat En disabled
+rhel-9-for-x86_64-supplementary-eus-source-rpms               Red Hat En disabled
+rhel-9-for-x86_64-supplementary-rpms                          Red Hat En disabled
+rhel-9-for-x86_64-supplementary-source-rpms                   Red Hat En disabled
+rhel-atomic-7-cdk-2.3-debug-rpms                              Red Hat Co disabled
+rhel-atomic-7-cdk-2.3-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-2.3-source-rpms                             Red Hat Co disabled
+rhel-atomic-7-cdk-3.10-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.11-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.12-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.13-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.14-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.15-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.16-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.17-rpms                                   Red Hat Co disabled
+rhel-atomic-7-cdk-3.3-debug-rpms                              Red Hat Co disabled
+rhel-atomic-7-cdk-3.3-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.3-source-rpms                             Red Hat Co disabled
+rhel-atomic-7-cdk-3.4-debug-rpms                              Red Hat Co disabled
+rhel-atomic-7-cdk-3.4-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.4-source-rpms                             Red Hat Co disabled
+rhel-atomic-7-cdk-3.5-debug-rpms                              Red Hat Co disabled
+rhel-atomic-7-cdk-3.5-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.5-source-rpms                             Red Hat Co disabled
+rhel-atomic-7-cdk-3.6-debug-rpms                              Red Hat Co disabled
+rhel-atomic-7-cdk-3.6-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.6-source-rpms                             Red Hat Co disabled
+rhel-atomic-7-cdk-3.7-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.8-rpms                                    Red Hat Co disabled
+rhel-atomic-7-cdk-3.9-rpms                                    Red Hat Co disabled
+rhelai-1.1-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-1.1-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-1.1-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-1.2-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-1.2-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-1.2-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-1.2-gaudi-for-rhel-9-x86_64-debug-rpms                 Red Hat En disabled
+rhelai-1.2-gaudi-for-rhel-9-x86_64-rpms                       Red Hat En disabled
+rhelai-1.2-gaudi-for-rhel-9-x86_64-source-rpms                Red Hat En disabled
+rhelai-1.3-cuda-for-rhel-9-x86_64-debug-rpms                  Red Hat En disabled
+rhelai-1.3-cuda-for-rhel-9-x86_64-rpms                        Red Hat En disabled
+rhelai-1.3-cuda-for-rhel-9-x86_64-source-rpms                 Red Hat En disabled
+rhelai-1.3-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-1.3-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-1.3-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-1.3-gaudi-for-rhel-9-x86_64-debug-rpms                 Red Hat En disabled
+rhelai-1.3-gaudi-for-rhel-9-x86_64-rpms                       Red Hat En disabled
+rhelai-1.3-gaudi-for-rhel-9-x86_64-source-rpms                Red Hat En disabled
+rhelai-1.4-cuda-for-rhel-9-x86_64-debug-rpms                  Red Hat En disabled
+rhelai-1.4-cuda-for-rhel-9-x86_64-rpms                        Red Hat En disabled
+rhelai-1.4-cuda-for-rhel-9-x86_64-source-rpms                 Red Hat En disabled
+rhelai-1.4-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-1.4-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-1.4-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-1.4-gaudi-for-rhel-9-x86_64-debug-rpms                 Red Hat En disabled
+rhelai-1.4-gaudi-for-rhel-9-x86_64-rpms                       Red Hat En disabled
+rhelai-1.4-gaudi-for-rhel-9-x86_64-source-rpms                Red Hat En disabled
+rhelai-1.5-cuda-for-rhel-9-x86_64-debug-rpms                  Red Hat En disabled
+rhelai-1.5-cuda-for-rhel-9-x86_64-rpms                        Red Hat En disabled
+rhelai-1.5-cuda-for-rhel-9-x86_64-source-rpms                 Red Hat En disabled
+rhelai-1.5-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-1.5-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-1.5-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-1.5-gaudi-for-rhel-9-x86_64-debug-rpms                 Red Hat En disabled
+rhelai-1.5-gaudi-for-rhel-9-x86_64-rpms                       Red Hat En disabled
+rhelai-1.5-gaudi-for-rhel-9-x86_64-source-rpms                Red Hat En disabled
+rhelai-3.0-cuda-for-rhel-9-x86_64-debug-rpms                  Red Hat En disabled
+rhelai-3.0-cuda-for-rhel-9-x86_64-rpms                        Red Hat En disabled
+rhelai-3.0-cuda-for-rhel-9-x86_64-source-rpms                 Red Hat En disabled
+rhelai-3.0-for-rhel-9-x86_64-debug-rpms                       Red Hat En disabled
+rhelai-3.0-for-rhel-9-x86_64-rpms                             Red Hat En disabled
+rhelai-3.0-for-rhel-9-x86_64-source-rpms                      Red Hat En disabled
+rhelai-3.0-gaudi-for-rhel-9-x86_64-debug-rpms                 Red Hat En disabled
+rhelai-3.0-gaudi-for-rhel-9-x86_64-rpms                       Red Hat En disabled
+rhelai-3.0-gaudi-for-rhel-9-x86_64-source-rpms                Red Hat En disabled
+rhocp-4.12-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.12-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.12-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.13-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.13-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.13-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.14-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.14-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.14-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.15-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.15-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.15-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.16-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.16-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.16-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.17-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.17-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.17-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.18-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.18-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.18-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.19-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.19-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.19-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-4.20-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhocp-4.20-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhocp-4.20-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhocp-ironic-4.12-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.12-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.12-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.13-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.13-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.13-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.14-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.14-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.14-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.15-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.15-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.15-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.16-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.16-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.16-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.17-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.17-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.17-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.18-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.18-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.18-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.19-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.19-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.19-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhocp-ironic-4.20-for-rhel-9-x86_64-debug-rpms                Ironic con disabled
+rhocp-ironic-4.20-for-rhel-9-x86_64-rpms                      Ironic con disabled
+rhocp-ironic-4.20-for-rhel-9-x86_64-source-rpms               Ironic con disabled
+rhosds-textonly-3-for-middleware-rpms                         Red Hat Op disabled
+rhose-textonly-1-for-middleware-rpms                          Red Hat Mi disabled
+rhoso-tools-18-beta-for-rhel-9-x86_64-debug-rpms              Red Hat Op disabled
+rhoso-tools-18-beta-for-rhel-9-x86_64-rpms                    Red Hat Op disabled
+rhoso-tools-18-beta-for-rhel-9-x86_64-source-rpms             Red Hat Op disabled
+rhoso-tools-18-for-rhel-9-x86_64-debug-rpms                   Red Hat Op disabled
+rhoso-tools-18-for-rhel-9-x86_64-rpms                         Red Hat Op disabled
+rhoso-tools-18-for-rhel-9-x86_64-source-rpms                  Red Hat Op disabled
+rhpm-1-for-rhel-9-x86_64-textonly-debug-rpms                  Power moni disabled
+rhpm-1-for-rhel-9-x86_64-textonly-rpms                        Power moni disabled
+rhpm-1-for-rhel-9-x86_64-textonly-source-rpms                 Power moni disabled
+rhsi-textonly-1-for-middleware-rpms                           Red Hat Se disabled
+rhv-4-tools-for-rhel-9-x86_64-debug-rpms                      Red Hat Vi disabled
+rhv-4-tools-for-rhel-9-x86_64-rpms                            Red Hat Vi disabled
+rhv-4-tools-for-rhel-9-x86_64-source-rpms                     Red Hat Vi disabled
+rhwa-far-1-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhwa-far-1-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhwa-far-1-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhwa-mdr-1-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhwa-mdr-1-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhwa-mdr-1-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhwa-nhc-1-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhwa-nhc-1-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhwa-nhc-1-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhwa-nmo-1-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhwa-nmo-1-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhwa-nmo-1-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rhwa-snr-1-for-rhel-9-x86_64-debug-rpms                       Red Hat Op disabled
+rhwa-snr-1-for-rhel-9-x86_64-rpms                             Red Hat Op disabled
+rhwa-snr-1-for-rhel-9-x86_64-source-rpms                      Red Hat Op disabled
+rodoo-1-for-rhel-9-x86_64-debug-rpms                          Run Once D disabled
+rodoo-1-for-rhel-9-x86_64-rpms                                Run Once D disabled
+rodoo-1-for-rhel-9-x86_64-source-rpms                         Run Once D disabled
+satellite-6-client-2-for-rhel-9-x86_64-debug-rpms             Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-e4s-debug-rpms         Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-e4s-rpms               Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-e4s-source-rpms        Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-eus-debug-rpms         Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-eus-rpms               Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-eus-source-rpms        Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-rpms                   Red Hat Sa disabled
+satellite-6-client-2-for-rhel-9-x86_64-source-rpms            Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-debug-rpms               Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-e4s-debug-rpms           Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-e4s-rpms                 Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-e4s-source-rpms          Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-eus-debug-rpms           Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-eus-rpms                 Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-eus-source-rpms          Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-rpms                     Red Hat Sa disabled
+satellite-client-6-for-rhel-9-x86_64-source-rpms              Red Hat Sa disabled
+satellite-maintenance-6.16-for-rhel-9-x86_64-debug-rpms       Red Hat Sa disabled
+satellite-maintenance-6.16-for-rhel-9-x86_64-rpms             Red Hat Sa disabled
+satellite-maintenance-6.16-for-rhel-9-x86_64-source-rpms      Red Hat Sa disabled
+satellite-maintenance-6.17-for-rhel-9-x86_64-debug-rpms       Red Hat Sa disabled
+satellite-maintenance-6.17-for-rhel-9-x86_64-rpms             Red Hat Sa disabled
+satellite-maintenance-6.17-for-rhel-9-x86_64-source-rpms      Red Hat Sa disabled
+satellite-utils-6.16-for-rhel-9-x86_64-debug-rpms             Red Hat Sa disabled
+satellite-utils-6.16-for-rhel-9-x86_64-rpms                   Red Hat Sa disabled
+satellite-utils-6.16-for-rhel-9-x86_64-source-rpms            Red Hat Sa disabled
+satellite-utils-6.17-for-rhel-9-x86_64-debug-rpms             Red Hat Sa disabled
+satellite-utils-6.17-for-rhel-9-x86_64-rpms                   Red Hat Sa disabled
+satellite-utils-6.17-for-rhel-9-x86_64-source-rpms            Red Hat Sa disabled
+service-interconnect-1-for-rhel-9-x86_64-debug-rpms           Red Hat Se disabled
+service-interconnect-1-for-rhel-9-x86_64-rpms                 Red Hat Se disabled
+service-interconnect-1-for-rhel-9-x86_64-source-rpms          Red Hat Se disabled
+service-interconnect-1.4-for-rhel-9-x86_64-debug-rpms         Red Hat Se disabled
+service-interconnect-1.4-for-rhel-9-x86_64-rpms               Red Hat Se disabled
+service-interconnect-1.4-for-rhel-9-x86_64-source-rpms        Red Hat Se disabled
+service-interconnect-1.8-for-rhel-9-x86_64-debug-rpms         Red Hat Se disabled
+service-interconnect-1.8-for-rhel-9-x86_64-rpms               Red Hat Se disabled
+service-interconnect-1.8-for-rhel-9-x86_64-source-rpms        Red Hat Se disabled
+service-interconnect-2-for-rhel-9-x86_64-debug-rpms           Red Hat Se disabled
+service-interconnect-2-for-rhel-9-x86_64-rpms                 Red Hat Se disabled
+service-interconnect-2-for-rhel-9-x86_64-source-rpms          Red Hat Se disabled
+soa-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+wfk-textonly-1-for-middleware-rpms                            Red Hat JB disabled
+[root@192 ~]# dnf install epel-release
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:30:40 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+No match for argument: epel-release
+Error: Unable to find a match: epel-release
+[root@192 ~]# dnf search cowsay
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:30:58 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+No matches found.
+[root@192 ~]# sudo dnf --enablerepo=epel install cowsay
+Updating Subscription Management repositories.
+Error: Unknown repo: 'epel'
+[root@192 ~]# sudo dnf --disablerepo=epel install cowsay
+Updating Subscription Management repositories.
+No repository match: epel
+Last metadata expiration check: 0:31:28 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+No match for argument: cowsay
+Error: Unable to find a match: cowsay
+[root@192 ~]# dnf history
+Updating Subscription Management repositories.
+ID     | Command line               | Date and time    | Action(s)      | Altered
+---------------------------------------------------------------------------------
+     8 | upgrade nano               | 2025-07-19 18:21 | Upgrade        |    1   
+     7 | downgrade nano             | 2025-07-19 18:19 | Downgrade      |    1   
+     6 | install createrepo         | 2025-07-16 18:16 | Install        |    2   
+     5 | remove createrepo          | 2025-07-16 18:15 | Removed        |    2   
+     4 | install createrepo         | 2025-07-16 18:13 | Install        |    2   
+     3 | remove createrepo          | 2025-07-16 18:13 | Removed        |    2   
+     2 | install createrepo         | 2025-07-16 18:12 | Install        |    2  <
+     1 |                            | 2025-06-10 14:40 | Install        | 1213 >E
+[root@192 ~]# dnf install nginx
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:32:03 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+Dependencies resolved.
+=================================================================================
+ Package       Arch   Version             Repository                        Size
+=================================================================================
+Installing:
+ nginx         x86_64 2:1.20.1-22.el9_6.3 rhel-9-for-x86_64-appstream-rpms  37 k
+Installing dependencies:
+ nginx-core    x86_64 2:1.20.1-22.el9_6.3 rhel-9-for-x86_64-appstream-rpms 571 k
+ nginx-filesystem
+               noarch 2:1.20.1-22.el9_6.3 rhel-9-for-x86_64-appstream-rpms  10 k
+ redhat-logos-httpd
+               noarch 90.5-1.el9_6.1      rhel-9-for-x86_64-appstream-rpms  16 k
+
+Transaction Summary
+=================================================================================
+Install  4 Packages
+
+Total download size: 635 k
+Installed size: 1.8 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/4): nginx-filesystem-1.20.1-22.el9_6.3.noarch  16 kB/s |  10 kB     00:00    
+(2/4): nginx-core-1.20.1-22.el9_6.3.x86_64.rpm   754 kB/s | 571 kB     00:00    
+(3/4): redhat-logos-httpd-90.5-1.el9_6.1.noarch.  54 kB/s |  16 kB     00:00    
+(4/4): nginx-1.20.1-22.el9_6.3.x86_64.rpm         28 kB/s |  37 kB     00:01    
+---------------------------------------------------------------------------------
+Total                                            481 kB/s | 635 kB     00:01     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                         1/1 
+  Running scriptlet: nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             1/4 
+  Installing       : nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             1/4 
+  Installing       : nginx-core-2:1.20.1-22.el9_6.3.x86_64                   2/4 
+  Installing       : redhat-logos-httpd-90.5-1.el9_6.1.noarch                3/4 
+  Installing       : nginx-2:1.20.1-22.el9_6.3.x86_64                        4/4 
+  Running scriptlet: nginx-2:1.20.1-22.el9_6.3.x86_64                        4/4 
+  Verifying        : nginx-2:1.20.1-22.el9_6.3.x86_64                        1/4 
+  Verifying        : nginx-core-2:1.20.1-22.el9_6.3.x86_64                   2/4 
+  Verifying        : nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             3/4 
+  Verifying        : redhat-logos-httpd-90.5-1.el9_6.1.noarch                4/4 
+Installed products updated.
+
+Installed:
+  nginx-2:1.20.1-22.el9_6.3.x86_64                                               
+  nginx-core-2:1.20.1-22.el9_6.3.x86_64                                          
+  nginx-filesystem-2:1.20.1-22.el9_6.3.noarch                                    
+  redhat-logos-httpd-90.5-1.el9_6.1.noarch                                       
+
+Complete!
+[root@192 ~]# dnf history
+Updating Subscription Management repositories.
+ID     | Command line               | Date and time    | Action(s)      | Altered
+---------------------------------------------------------------------------------
+     9 | install nginx              | 2025-07-22 21:14 | Install        |    4   
+     8 | upgrade nano               | 2025-07-19 18:21 | Upgrade        |    1   
+     7 | downgrade nano             | 2025-07-19 18:19 | Downgrade      |    1   
+     6 | install createrepo         | 2025-07-16 18:16 | Install        |    2   
+     5 | remove createrepo          | 2025-07-16 18:15 | Removed        |    2   
+     4 | install createrepo         | 2025-07-16 18:13 | Install        |    2   
+     3 | remove createrepo          | 2025-07-16 18:13 | Removed        |    2   
+     2 | install createrepo         | 2025-07-16 18:12 | Install        |    2  <
+     1 |                            | 2025-06-10 14:40 | Install        | 1213 >E
+[root@192 ~]# sudo dnf history rollback  8
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:33:03 ago on Tue 22 Jul 2025 08:41:58 PM IST.
+Dependencies resolved.
+=================================================================================
+ Package      Arch   Version             Repository                         Size
+=================================================================================
+Removing:
+ nginx        x86_64 2:1.20.1-22.el9_6.3 @rhel-9-for-x86_64-appstream-rpms 148 k
+Removing dependent packages:
+ nginx-core   x86_64 2:1.20.1-22.el9_6.3 @rhel-9-for-x86_64-appstream-rpms 1.6 M
+ nginx-filesystem
+              noarch 2:1.20.1-22.el9_6.3 @rhel-9-for-x86_64-appstream-rpms 141  
+ redhat-logos-httpd
+              noarch 90.5-1.el9_6.1      @rhel-9-for-x86_64-appstream-rpms  12 k
+
+Transaction Summary
+=================================================================================
+Remove  4 Packages
+
+Freed space: 1.8 M
+Is this ok [y/N]: y
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                         1/1 
+  Running scriptlet: nginx-2:1.20.1-22.el9_6.3.x86_64                        1/4 
+  Erasing          : nginx-2:1.20.1-22.el9_6.3.x86_64                        1/4 
+  Running scriptlet: nginx-2:1.20.1-22.el9_6.3.x86_64                        1/4 
+  Erasing          : redhat-logos-httpd-90.5-1.el9_6.1.noarch                2/4 
+  Erasing          : nginx-core-2:1.20.1-22.el9_6.3.x86_64                   3/4 
+  Erasing          : nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             4/4 
+  Running scriptlet: nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             4/4 
+  Verifying        : nginx-2:1.20.1-22.el9_6.3.x86_64                        1/4 
+  Verifying        : nginx-core-2:1.20.1-22.el9_6.3.x86_64                   2/4 
+  Verifying        : nginx-filesystem-2:1.20.1-22.el9_6.3.noarch             3/4 
+  Verifying        : redhat-logos-httpd-90.5-1.el9_6.1.noarch                4/4 
+Installed products updated.
+
+Removed:
+  nginx-2:1.20.1-22.el9_6.3.x86_64                                               
+  nginx-core-2:1.20.1-22.el9_6.3.x86_64                                          
+  nginx-filesystem-2:1.20.1-22.el9_6.3.noarch                                    
+  redhat-logos-httpd-90.5-1.el9_6.1.noarch                                       
+
+Complete!
+[root@192 ~]# sudo dnf clean all
+Updating Subscription Management repositories.
+17 files removed
+[root@192 ~]# dnf provides /etc/dnf/dnf.conf
+Updating Subscription Management repositories.
+Red Hat Enterprise Linux 9 for x86_64 - BaseOS ( 5.2 MB/s |  68 MB     00:13    
+Red Hat Enterprise Linux 9 for x86_64 - AppStrea 5.2 MB/s |  64 MB     00:12    
+Last metadata expiration check: 0:00:09 ago on Tue 22 Jul 2025 09:15:55 PM IST.
+dnf-data-4.10.0-5.el9_0.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.12.0-4.el9.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-5.el9_2.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-8.el9.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-9.el9.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-17.el9.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-25.el9.noarch : Common data and configuration files for DNF
+Repo        : @System
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+dnf-data-4.14.0-25.el9.noarch : Common data and configuration files for DNF
+Repo        : rhel-9-for-x86_64-baseos-rpms
+Matched from:
+Filename    : /etc/dnf/dnf.conf
+
+[root@192 ~]# sudo dnf needs-restarting
+Updating Subscription Management repositories.
+
