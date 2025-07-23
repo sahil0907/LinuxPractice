@@ -1,0 +1,43 @@
+[root@192 ~]# 
+[root@192 ~]# systemctl get-default 
+graphical.target
+[root@192 ~]# who -r
+         run-level 5  2025-07-23 13:41
+[root@192 ~]# runlevel
+N 5
+
+[root@192 ~]# systemctl isolate multi-user.target 
+[root@192 ~]# systemctl isolate graphical.target
+
+[root@192 ~]# systemctl get-default 
+graphical.target
+[root@192 ~]# systemctl set-default multi-user.target 
+Removed "/etc/systemd/system/default.target".
+Created symlink /etc/systemd/system/default.target → /usr/lib/systemd/system/multi-user.target.
+[root@192 ~]# systemctl reboot
+
+[root@192 ~]# systemctl get-default 
+multi.target
+[root@192 ~]# systemctl set-default graphical.target 
+[root@192 ~]# systemctl reboot
+
+-----------------------------------------------------------------------------
+We can only use one mode or runlevel at a time
+Single User Mode is used for troubleshooting errors.
+rd.break at startup
+ init command is still working but its replaced by systemctl
+To do permanent changes we can use systemctl set-default ----
+production servers runs of runlevel 3 or 5. 
+3 is cli mode
+5 is gui mode 
+there are total 7 modes (0-6) in runlevels
+0 is for shutdown 
+6 is for reboot
+3 is for cli mode
+5 is for gui mode
+2 is for cli without network
+4 is blank
+1 is for single usermode
+
+
+
