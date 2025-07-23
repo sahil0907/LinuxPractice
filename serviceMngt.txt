@@ -1,0 +1,137 @@
+[root@192 ~]# systemctl list-unit-files 
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# systemctl list-unit-files
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# 
+[root@192 ~]# systemctl list-unit-files
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# systectl status sshd
+bash: systectl: command not found...
+[root@192 ~]# systemctl status sshd
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: e>
+     Active: active (running) since Wed 2025-07-23 13:41:45 IST; 3min 1s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 1099 (sshd)
+      Tasks: 1 (limit: 16985)
+     Memory: 2.9M
+        CPU: 28ms
+     CGroup: /system.slice/sshd.service
+             └─1099 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+[root@192 ~]# systemctl stop sshd
+[root@192 ~]# systectl disable sshd
+bash: systectl: command not found...
+[root@192 ~]# systemctl disable sshd
+Removed "/etc/systemd/system/multi-user.target.wants/sshd.service".
+[root@192 ~]# systemctl status sshd
+○ sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; disabled; preset: >
+     Active: inactive (dead)
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+[root@192 ~]# systemctl mask sshd
+Created symlink /etc/systemd/system/sshd.service → /dev/null.
+[root@192 ~]# systemctl status sshd
+○ sshd.service
+     Loaded: masked (Reason: Unit sshd.service is masked.)
+     Active: inactive (dead)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+...skipping...
+○ sshd.service
+     Loaded: masked (Reason: Unit sshd.service is masked.)
+     Active: inactive (dead)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+~
+~
+[root@192 ~]# systemctl start sshd
+Failed to start sshd.service: Unit sshd.service is masked.
+[root@192 ~]# systemctl unmask sshd
+Removed "/etc/systemd/system/sshd.service".
+[root@192 ~]# systemctl start sshd
+[root@192 ~]# systemctl enable sshd
+Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+[root@192 ~]# systemctl status sshd
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: e>
+     Active: active (running) since Wed 2025-07-23 13:46:10 IST; 16s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3091 (sshd)
+      Tasks: 1 (limit: 16985)
+     Memory: 1.5M
+        CPU: 13ms
+     CGroup: /system.slice/sshd.service
+             └─3091 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Jul 23 13:46:10 192.168.130.128 systemd[1]: Starting OpenSSH server daemon...
+Jul 23 13:46:10 192.168.130.128 sshd[3091]: Server listening on 0.0.0.0 port >
+[root@192 ~]# 
+
