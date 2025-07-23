@@ -1271,7 +1271,7 @@ grep: enabled = 1: invalid context length argument
 
 --------------------------------------------------------------- 
 --------------------------------------------------------------- 
-SED EXAMPLES
+GREP EXAMPLES
 
  528  cat sed.txt 
   529  grep -w "name"
@@ -1296,6 +1296,49 @@ SED EXAMPLES
   548  grep -o "Let's learn" -e -i "linux" sed.txt 
   549  grep -ie "Let's learn" -e "linux" sed.txt 
   550  grep ^This sed.txt
+
+
 ---------------------------------------------------------------
+More GREP COMMANDS:
+
+[root@192 ~]# cat sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# grep -iE "linux" "Let's Learn" sed.txt
+grep: Let's Learn: No such file or directory
+sed.txt:I love Linux and open-source.
+sed.txt:Linux is powerful.
+sed.txt:linux is everywhere.
+[root@192 ~]# grep -iE "linux|Let's Learn" sed.txt
+I love Linux and open-source.
+Let's learn sed with some useful commands.
+Linux is powerful.
+linux is everywhere.
+[root@192 ~]# cat sed.txt
+Hello, my name is Alice.
+I love Linux and open-source.
+The sky is blue and the grass is green.
+This is a test file for sed practice.
+Let's learn sed with some useful commands.
+Did you know that sed stands for stream editor?
+Linux is powerful.
+linux is everywhere.
+Welcome to the world of DevOps.
+
+[root@192 ~]# fgrep -i "stream editor?" sed.txt
+Did you know that sed stands for stream editor?
+[root@192 ~]# grep -fi "stream editor?" sed.txt
+grep: i: No such file or directory
+[root@192 ~]# grep -Fi "stream editor?" sed.txt
+Did you know that sed stands for stream editor?
+
 ---------------------------------------------------------------
 
