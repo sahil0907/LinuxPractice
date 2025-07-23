@@ -1267,6 +1267,35 @@ grep: enabled = 1: invalid context length argument
    758	gpgcheck = 1
    759	gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
 [root@192 yum.repos.d]# 
- 
 
+
+--------------------------------------------------------------- 
+--------------------------------------------------------------- 
+SED EXAMPLES
+
+ 528  cat sed.txt 
+  529  grep -w "name"
+  530  grep -w "name" sed.txt
+  531  grep -wn "name" sed.txt
+  532  grep -v "name" sed.txt
+  533  cat sed.txt 
+  534  grep -iw "linux" sed.txt 
+  535  grep -iwc "linux" sed.txt 
+  536  grep -B2 "linux" sed.txt 
+  537  grep -w "linux" sed.txt 
+  538  grep -o "linux" sed.txt 
+  539  grep - "linux" sed.txt 
+  540  clear
+  541  cat sed.txt 
+  542  grep -w "Let's learn" sed.txt 
+  543  grep -o "Let's learn" sed.txt 
+  544  grep -i "Let's learn" sed.txt 
+  545  grep -e "Let's learn" "linux" sed.txt 
+  546  grep -e "Let's learn" -e "linux" sed.txt 
+  547  grep -eo "Let's learn" -ie "linux" sed.txt 
+  548  grep -o "Let's learn" -e -i "linux" sed.txt 
+  549  grep -ie "Let's learn" -e "linux" sed.txt 
+  550  grep ^This sed.txt
+---------------------------------------------------------------
+---------------------------------------------------------------
 
