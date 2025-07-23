@@ -680,4 +680,489 @@ Note:-3  we can register this machine with redhat using  subscription-manager co
 =================================================================================
 =================================================================================
 
+//
 
+
+[root@192 ~]# systemctl list-unit-files 
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# systemctl list-unit-files
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# 
+[root@192 ~]# systemctl list-unit-files
+UNIT FILE                                  STATE           PRESET  
+proc-sys-fs-binfmt_misc.automount          static          -       
+-.mount                                    generated       -       
+boot-efi.mount                             generated       -       
+boot.mount                                 generated       -       
+dev-hugepages.mount                        static          -       
+dev-mqueue.mount                           static          -       
+proc-sys-fs-binfmt_misc.mount              disabled        disabled
+run-vmblock\x2dfuse.mount                  enabled         disabled
+sys-fs-fuse-connections.mount              static          -       
+sys-kernel-config.mount                    static          -       
+sys-kernel-debug.mount                     static          -       
+sys-kernel-tracing.mount                   static          -       
+tmp.mount                                  disabled        disabled
+[root@192 ~]# systectl status sshd
+bash: systectl: command not found...
+[root@192 ~]# systemctl status sshd
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: e>
+     Active: active (running) since Wed 2025-07-23 13:41:45 IST; 3min 1s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 1099 (sshd)
+      Tasks: 1 (limit: 16985)
+     Memory: 2.9M
+        CPU: 28ms
+     CGroup: /system.slice/sshd.service
+             └─1099 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+[root@192 ~]# systemctl stop sshd
+[root@192 ~]# systectl disable sshd
+bash: systectl: command not found...
+[root@192 ~]# systemctl disable sshd
+Removed "/etc/systemd/system/multi-user.target.wants/sshd.service".
+[root@192 ~]# systemctl status sshd
+○ sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; disabled; preset: >
+     Active: inactive (dead)
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+[root@192 ~]# systemctl mask sshd
+Created symlink /etc/systemd/system/sshd.service → /dev/null.
+[root@192 ~]# systemctl status sshd
+○ sshd.service
+     Loaded: masked (Reason: Unit sshd.service is masked.)
+     Active: inactive (dead)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+...skipping...
+○ sshd.service
+     Loaded: masked (Reason: Unit sshd.service is masked.)
+     Active: inactive (dead)
+
+Jul 23 13:41:44 localhost.localdomain systemd[1]: Starting OpenSSH server dae>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on 0.0.0.0>
+Jul 23 13:41:45 localhost.localdomain sshd[1099]: Server listening on :: port>
+Jul 23 13:41:45 localhost.localdomain systemd[1]: Started OpenSSH server daem>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopping OpenSSH server daemon...
+Jul 23 13:44:56 192.168.130.128 sshd[1099]: Received signal 15; terminating.
+Jul 23 13:44:56 192.168.130.128 systemd[1]: sshd.service: Deactivated success>
+Jul 23 13:44:56 192.168.130.128 systemd[1]: Stopped OpenSSH server daemon.
+~
+~
+[root@192 ~]# systemctl start sshd
+Failed to start sshd.service: Unit sshd.service is masked.
+[root@192 ~]# systemctl unmask sshd
+Removed "/etc/systemd/system/sshd.service".
+[root@192 ~]# systemctl start sshd
+[root@192 ~]# systemctl enable sshd
+Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+[root@192 ~]# systemctl status sshd
+● sshd.service - OpenSSH server daemon
+     Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; preset: e>
+     Active: active (running) since Wed 2025-07-23 13:46:10 IST; 16s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 3091 (sshd)
+      Tasks: 1 (limit: 16985)
+     Memory: 1.5M
+        CPU: 13ms
+     CGroup: /system.slice/sshd.service
+             └─3091 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+
+Jul 23 13:46:10 192.168.130.128 systemd[1]: Starting OpenSSH server daemon...
+Jul 23 13:46:10 192.168.130.128 sshd[3091]: Server listening on 0.0.0.0 port >
+[root@192 ~]# 
+[root@192 ~]# systemctl list-units --type=socket
+  UNIT                            LOAD   ACTIVE SUB       DESCRIPTION                                      
+  avahi-daemon.socket             loaded active running   Avahi mDNS/DNS-SD Stack Activation Socket
+  cups.socket                     loaded active running   CUPS Scheduler
+  dbus.socket                     loaded active running   D-Bus System Message Bus Socket
+  dm-event.socket                 loaded active listening Device-mapper event daemon FIFOs
+  iscsid.socket                   loaded active listening Open-iSCSI iscsid Socket
+  iscsiuio.socket                 loaded active listening Open-iSCSI iscsiuio Socket
+  lvm2-lvmpolld.socket            loaded active listening LVM2 poll daemon socket
+  sssd-kcm.socket                 loaded active running   SSSD Kerberos Cache Manager responder socket
+  systemd-coredump.socket         loaded active listening Process Core Dump Socket
+  systemd-initctl.socket          loaded active listening initctl Compatibility Named Pipe
+  systemd-journald-dev-log.socket loaded active running   Journal Socket (/dev/log)
+  systemd-journald.socket         loaded active running   Journal Socket
+  systemd-rfkill.socket           loaded active listening Load/Save RF Kill Switch Status /dev/rfkill Watch
+  systemd-udevd-control.socket    loaded active running   udev Control Socket
+  systemd-udevd-kernel.socket     loaded active running   udev Kernel Socket
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+15 loaded units listed. Pass --all to see loaded but inactive units, too.
+[root@192 ~]# systemctl list-units --type=service
+  UNIT                                                  LOAD   ACTIVE SUB     DESCRIPTION                    >
+  accounts-daemon.service                               loaded active running Accounts Service
+  alsa-state.service                                    loaded active running Manage Sound Card State (restor>
+  atd.service                                           loaded active running Deferred execution scheduler
+  auditd.service                                        loaded active running Security Auditing Service
+  avahi-daemon.service                                  loaded active running Avahi mDNS/DNS-SD Stack
+  chronyd.service                                       loaded active running NTP client/server
+  colord.service                                        loaded active running Manage, Install and Generate Co>
+  crond.service                                         loaded active running Command Scheduler
+  cups.service                                          loaded active running CUPS Scheduler
+  dbus-broker.service                                   loaded active running D-Bus System Message Bus
+  dracut-shutdown.service                               loaded active exited  Restore /run/initramfs on shutd>
+  firewalld.service                                     loaded active running firewalld - dynamic firewall da>
+  fwupd.service                                         loaded active running Firmware update daemon
+  gdm.service                                           loaded active running GNOME Display Manager
+  irqbalance.service                                    loaded active running irqbalance daemon
+  kdump.service                                         loaded active exited  Crash recovery kernel arming
+  kmod-static-nodes.service                             loaded active exited  Create List of Static Device No>
+  libstoragemgmt.service                                loaded active running libstoragemgmt plug-in server d>
+  lvm2-monitor.service                                  loaded active exited  Monitoring of LVM2 mirrors, sna>
+  mcelog.service                                        loaded active running Machine Check Exception Logging>
+[root@192 ~]# systemctl list-units --type=path
+  UNIT                               LOAD   ACTIVE SUB     DESCRIPTION                                       >
+  cups.path                          loaded active running CUPS Scheduler
+  systemd-ask-password-plymouth.path loaded active waiting Forward Password Requests to Plymouth Directory Wa>
+  systemd-ask-password-wall.path     loaded active waiting Forward Password Requests to Wall Directory Watch
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+3 loaded units listed. Pass --all to see loaded but inactive units, too.
+To show all installed unit files use 'systemctl list-unit-files'.
+[root@192 ~]# systemctl list-units --type=target
+  UNIT                   LOAD   ACTIVE SUB    DESCRIPTION                       
+  basic.target           loaded active active Basic System
+  cryptsetup.target      loaded active active Local Encrypted Volumes
+  getty.target           loaded active active Login Prompts
+  graphical.target       loaded active active Graphical Interface
+  integritysetup.target  loaded active active Local Integrity Protected Volumes
+  local-fs-pre.target    loaded active active Preparation for Local File Systems
+  local-fs.target        loaded active active Local File Systems
+  multi-user.target      loaded active active Multi-User System
+  network-online.target  loaded active active Network is Online
+  network-pre.target     loaded active active Preparation for Network
+  network.target         loaded active active Network
+  nss-user-lookup.target loaded active active User and Group Name Lookups
+  paths.target           loaded active active Path Units
+  remote-fs.target       loaded active active Remote File Systems
+  slices.target          loaded active active Slice Units
+  sockets.target         loaded active active Socket Units
+  sound.target           loaded active active Sound Card
+  sshd-keygen.target     loaded active active sshd-keygen.target
+  swap.target            loaded active active Swaps
+  sysinit.target         loaded active active System Initialization
+[root@192 ~]# systemctl list-units --type=slice
+  UNIT                                                                    LOAD   ACTIVE SUB    DESCRIPTION   >
+  -.slice                                                                 loaded active active Root Slice
+  system-dbus\x2d:1.1\x2dorg.fedoraproject.SetroubleshootPrivileged.slice loaded active active Slice /system/>
+  system-getty.slice                                                      loaded active active Slice /system/>
+  system-modprobe.slice                                                   loaded active active Slice /system/>
+  system-sshd\x2dkeygen.slice                                             loaded active active Slice /system/>
+  system-systemd\x2dfsck.slice                                            loaded active active Slice /system/>
+  system-systemd\x2dhibernate\x2dresume.slice                             loaded active active Slice /system/>
+  system.slice                                                            loaded active active System Slice
+  user-0.slice                                                            loaded active active User Slice of >
+  user.slice                                                              loaded active active User and Sessi>
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+10 loaded units listed. Pass --all to see loaded but inactive units, too.
+To show all installed unit files use 'systemctl list-unit-files'.
+[root@192 ~]# ls /usr/lib/systemd/system
+ accounts-daemon.service                     plymouth-reboot.service
+ alsa-restore.service                        plymouth-start.service
+ alsa-state.service                          plymouth-switch-root-initramfs.service
+ arp-ethers.service                          plymouth-switch-root.service
+ atd.service                                 podman-auto-update.service
+ auditd.service                              podman-auto-update.timer
+ autovt@.service                             podman-clean-transient.service
+ avahi-daemon.service                        podman-kube@.service
+ avahi-daemon.socket                         podman-restart.service
+ basic.target                                podman.service
+ basic.target.wants                          podman.socket
+ blk-availability.service                    polkit.service
+ blockdev@.target                            poweroff.target
+ bluetooth.service                           poweroff.target.wants
+ bluetooth.target                            printer.target
+ bolt.service                                proc-sys-fs-binfmt_misc.automount
+ boot-complete.target                        proc-sys-fs-binfmt_misc.mount
+ brltty.service                              psacct.service
+ canberra-system-bootup.service              qemu-guest-agent.service
+ canberra-system-shutdown-reboot.service     quotaon.service
+ canberra-system-shutdown.service            raid-check.service
+ chronyd-restricted.service                  raid-check.timer
+ chronyd.service                             rasdaemon.service
+ chrony-wait.service                         ras-mc-ctl.service
+ cni-dhcp.service                            rc-local.service
+ cni-dhcp.socket                             rdisc.service
+ cockpit-issue.service                       realmd.service
+ cockpit.service                             reboot.target
+ cockpit-session@.service                    reboot.target.wants
+ cockpit-session.socket                      remote-cryptsetup.target
+ cockpit-session-socket-user.service         remote-fs-pre.target
+ cockpit.socket                              remote-fs.target
+ cockpit-wsinstance-http.service             remote-fs.target.wants
+ cockpit-wsinstance-https-factory@.service   remote-veritysetup.target
+ cockpit-wsinstance-https-factory.socket     rescue.service
+ cockpit-wsinstance-http.socket              rescue.target
+ cockpit-wsinstance-https@.service           rescue.target.wants
+ cockpit-wsinstance-https@.socket            rhcd.service
+ cockpit-wsinstance-socket-user.service      rhsmcertd.service
+ colord.service                              rhsm-facts.service
+ configure-printer@.service                  rhsm.service
+ console-getty.service                       rpcbind.target
+ container-getty@.service                    rpmdb-rebuild.service
+ cpupower.service                            rsyslog.service
+ crond.service                               rtkit-daemon.service
+ cryptsetup-pre.target                       runlevel0.target
+ cryptsetup.target                           runlevel1.target
+ ctrl-alt-del.target                         runlevel1.target.wants
+ cups-browsed.service                        runlevel2.target
+ cups.path                                   runlevel2.target.wants
+ cups.service                                runlevel3.target
+ cups.service.d                              runlevel3.target.wants
+ cups.socket                                 runlevel4.target
+ dbus-broker.service                         runlevel4.target.wants
+ dbus-daemon.service                         runlevel5.target
+ dbus-org.freedesktop.hostname1.service      runlevel5.target.wants
+ dbus-org.freedesktop.locale1.service        runlevel6.target
+ dbus-org.freedesktop.login1.service        'run-vmblock\x2dfuse.mount'
+ dbus-org.freedesktop.timedate1.service      selinux-autorelabel-mark.service
+ dbus.socket                                 selinux-autorelabel.service
+ dbus.target.wants                           selinux-autorelabel.target
+ debug-shell.service                         selinux-check-proper-disable.service
+ default.target                              serial-getty@.service
+ default.target.wants                        setroubleshootd.service
+ dev-hugepages.mount                         shutdown.target
+ dev-mqueue.mount                            sigpwr.target
+ dm-event.service                            sleep.target
+ dm-event.socket                             -.slice.d
+ dnf-makecache.service                       slices.target
+ dnf-makecache.timer                         smartcard.target
+ dnf-system-upgrade-cleanup.service          smartd.service
+ dnf-system-upgrade.service                  sockets.target
+ dnsmasq.service                             sockets.target.wants
+ dracut-cmdline.service                      sound.target
+ dracut-initqueue.service                    sound.target.wants
+ dracut-mount.service                        speech-dispatcherd.service
+ dracut-pre-mount.service                    spice-vdagentd.service
+ dracut-pre-pivot.service                    spice-vdagentd.socket
+ dracut-pre-trigger.service                  sshd-keygen@.service
+ dracut-pre-udev.service                     sshd-keygen.target
+ dracut-shutdown-onfailure.service           sshd.service
+ dracut-shutdown.service                     sshd@.service
+ emergency.service                           sshd.socket
+ emergency.target                            sssd-autofs.service
+ exit.target                                 sssd-autofs.socket
+ factory-reset.target                        sssd-kcm.service
+ final.target                                sssd-kcm.socket
+ firewalld.service                           sssd-nss.service
+ first-boot-complete.target                  sssd-nss.socket
+ flatpak-system-helper.service               sssd-pac.service
+ fprintd.service                             sssd-pac.socket
+ fstrim.service                              sssd-pam-priv.socket
+ fstrim.timer                                sssd-pam.service
+ fwupd-offline-update.service                sssd-pam.socket
+ fwupd-refresh.service                       sssd.service
+ fwupd-refresh.timer                         sssd-ssh.service
+ fwupd.service                               sssd-ssh.socket
+ gdm.service                                 sssd-sudo.service
+ geoclue.service                             sssd-sudo.socket
+ getty-pre.target                            suspend.target
+ getty@.service                              suspend-then-hibernate.target
+ getty.target                                swap.target
+ graphical.target                            switcheroo-control.service
+ graphical.target.wants                      sys-fs-fuse-connections.mount
+ grub2-systemd-integration.service           sysinit.target
+ grub-boot-indeterminate.service             sysinit.target.wants
+ halt.target                                 sys-kernel-config.mount
+ halt.target.wants                           sys-kernel-debug.mount
+ hibernate.target                            sys-kernel-tracing.mount
+ hybrid-sleep.target                         syslog.socket
+ hypervfcopyd.service                        syslog.target.wants
+ hypervkvpd.service                          system-cockpithttps.slice
+ hypervvssd.service                          systemd-ask-password-console.path
+ iio-sensor-proxy.service                    systemd-ask-password-console.service
+ initrd-cleanup.service                      systemd-ask-password-plymouth.path
+ initrd-fs.target                            systemd-ask-password-plymouth.service
+ initrd-parse-etc.service                    systemd-ask-password-wall.path
+ initrd-root-device.target                   systemd-ask-password-wall.service
+ initrd-root-device.target.wants             systemd-backlight@.service
+ initrd-root-fs.target                       systemd-binfmt.service
+ initrd-root-fs.target.wants                 systemd-bless-boot.service
+ initrd-switch-root.service                  systemd-boot-check-no-failures.service
+ initrd-switch-root.target                   systemd-boot-random-seed.service
+ initrd-switch-root.target.wants             systemd-boot-update.service
+ initrd.target                               systemd-coredump@.service
+ initrd.target.wants                         systemd-coredump.socket
+ initrd-udevadm-cleanup-db.service           systemd-exit.service
+ initrd-usr-fs.target                        systemd-firstboot.service
+ insights-client-boot.service                systemd-fsck-root.service
+ insights-client-results.path                systemd-fsck@.service
+ insights-client-results.service             systemd-growfs-root.service
+ insights-client.service                     systemd-growfs@.service
+ insights-client.timer                       systemd-halt.service
+ integritysetup-pre.target                   systemd-hibernate-resume@.service
+ integritysetup.target                       systemd-hibernate.service
+ iprdump.service                             systemd-hostnamed.service
+ iprinit.service                             systemd-hostnamed.service.d
+ iprupdate.service                           systemd-hwdb-update.service
+ iprutils.target                             systemd-hybrid-sleep.service
+ irqbalance.service                          systemd-initctl.service
+ iscsid.service                              systemd-initctl.socket
+ iscsid.socket                               systemd-journal-catalog-update.service
+ iscsi-init.service                          systemd-journald-audit.socket
+ iscsi-onboot.service                        systemd-journald-dev-log.socket
+ iscsi.service                               systemd-journald.service
+ iscsi-shutdown.service                      systemd-journald@.service
+ iscsi-starter.service                       systemd-journald.socket
+ iscsiuio.service                            systemd-journald@.socket
+ iscsiuio.socket                             systemd-journald-varlink@.socket
+ kdump.service                               systemd-journal-flush.service
+ kexec.target                                systemd-kexec.service
+ kexec.target.wants                          systemd-localed.service
+ kmod-static-nodes.service                   systemd-logind.service
+ kpatch.service                              systemd-logind.service.d
+ kvm_stat.service                            systemd-machine-id-commit.service
+ ldconfig.service                            systemd-modules-load.service
+ ledmon.service                              systemd-network-generator.service
+ libstoragemgmt.service                      systemd-pcrfs-root.service
+ local-fs-pre.target                         systemd-pcrfs@.service
+ local-fs.target                             systemd-pcrmachine.service
+ logrotate.service                           systemd-pcrphase-initrd.service
+ logrotate.timer                             systemd-pcrphase.service
+ low-memory-monitor.service                  systemd-pcrphase-sysinit.service
+ lvm2-lvmpolld.service                       systemd-poweroff.service
+ lvm2-lvmpolld.socket                        systemd-pstore.service
+ lvm2-monitor.service                        systemd-quotacheck.service
+ lvm-devices-import.path                     systemd-random-seed.service
+ lvm-devices-import.service                  systemd-reboot.service
+ man-db-cache-update.service                 systemd-remount-fs.service
+ man-db-restart-cache-update.service         systemd-repart.service
+ mcelog.service                              systemd-rfkill.service
+ mdadm-grow-continue@.service                systemd-rfkill.socket
+ mdadm-last-resort@.service                  systemd-suspend.service
+ mdadm-last-resort@.timer                    systemd-suspend-then-hibernate.service
+ mdcheck_continue.service                    systemd-sysctl.service
+ mdcheck_continue.timer                      systemd-sysext.service
+ mdcheck_start.service                       systemd-sysupdate-reboot.service
+ mdcheck_start.timer                         systemd-sysupdate-reboot.timer
+ mdmonitor-oneshot.service                   systemd-sysupdate.service
+ mdmonitor-oneshot.timer                     systemd-sysupdate.timer
+ mdmonitor.service                           systemd-sysusers.service
+ mdmon@.service                              systemd-timedated.service
+ microcode.service                           systemd-tmpfiles-clean.service
+ mlocate-updatedb.service                    systemd-tmpfiles-clean.timer
+ mlocate-updatedb.timer                      systemd-tmpfiles-setup-dev.service
+ ModemManager.service                        systemd-tmpfiles-setup.service
+ modprobe@.service                           systemd-udevd-control.socket
+ multipathd.service                          systemd-udevd-kernel.socket
+ multipathd.socket                           systemd-udevd.service
+ multi-user.target                           systemd-udev-settle.service
+ multi-user.target.wants                     systemd-udev-trigger.service
+ netavark-dhcp-proxy.service                 systemd-udev-trigger.service.d
+ netavark-dhcp-proxy.socket                  systemd-update-done.service
+ netavark-firewalld-reload.service           systemd-update-utmp-runlevel.service
+ NetworkManager-dispatcher.service           systemd-update-utmp.service
+ NetworkManager.service                      systemd-user-sessions.service
+ NetworkManager-wait-online.service          systemd-vconsole-setup.service
+ network-online.target                       systemd-volatile-root.service
+ network-pre.target                         'system-systemd\x2dcryptsetup.slice'
+ network.target                              system-update-cleanup.service
+ nftables.service                            system-update-pre.target
+ nis-domainname.service                      system-update.target
+ nm-priv-helper.service                      system-update.target.wants
+ nss-lookup.target                           teamd@.service
+ nss-user-lookup.target                      timers.target
+ nvmefc-boot-connections.service             timers.target.wants
+ nvmf-autoconnect.service                    time-set.target
+ nvmf-connect-nbft.service                   time-sync.target
+ nvmf-connect@.service                       tmp.mount
+ nvmf-connect.target                         tuned-ppd.service
+ ostree-boot-complete.service                tuned.service
+ ostree-finalize-staged-hold.service         udisks2.service
+ ostree-finalize-staged.path                 umount.target
+ ostree-finalize-staged.service              upower.service
+ ostree-prepare-root.service                 usb-gadget.target
+ ostree-readonly-sysroot-migration.service   usb_modeswitch@.service
+ ostree-remount.service                      user@0.service.d
+ ostree-state-overlay@.service               user-runtime-dir@.service
+ packagekit-offline-update.service           user@.service
+ packagekit.service                          user@.service.d
+ pam_namespace.service                       user.slice
+ paths.target                                user-.slice.d
+ plymouth-halt.service                       veritysetup-pre.target
+ plymouth-kexec.service                      veritysetup.target
+ plymouth-poweroff.service                   vgauthd.service
+ plymouth-quit.service                       vmtoolsd.service
+ plymouth-quit-wait.service                  wacom-inputattach@.service
+ plymouth-read-write.service                 wpa_supplicant.service
+[root@192 ~]# ls /usr/lib/systemd/system/multi-user.target
+/usr/lib/systemd/system/multi-user.target
+[root@192 ~]# cat /usr/lib/systemd/system/multi-user.target
+#  SPDX-License-Identifier: LGPL-2.1-or-later
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+
+[Unit]
+Description=Multi-User System
+Documentation=man:systemd.special(7)
+Requires=basic.target
+Conflicts=rescue.service rescue.target
+After=basic.target rescue.service rescue.target
+AllowIsolate=yes
+[root@192 ~]# netstat -tunlp |grep sshd
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      3091/sshd: /usr/sbi 
+tcp6       0      0 :::22                   :::*                    LISTEN      3091/sshd: /usr/sbi 
+[root@192 ~]# 
