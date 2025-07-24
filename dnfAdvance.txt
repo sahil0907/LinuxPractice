@@ -852,3 +852,22 @@ Filename    : /etc/dnf/dnf.conf
 [root@192 ~]# sudo dnf needs-restarting
 Updating Subscription Management repositories.
 
+------------------------------------------------
+------------------------------------------------
+upgrading from cli to gui using dnf or yum
+
+
+root@192 ~]# yum grouplist -all
+[root@192 ~]# yum groupinstall "Server with GUI" -y
+[root@192 ~]# reboot
+
+By doing this we will add gui packages required for server with GGUI.
+------------------------------------------------
+------------------------------------------------
+
+
+
+
+
+
+
