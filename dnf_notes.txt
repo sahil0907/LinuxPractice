@@ -1,0 +1,30 @@
+  - sudo dnf install <package_name>: Installs the specified package and its dependencies. If the package is already installed, it attempts to update it.
+      - Options:
+          - -y or --assumeyes: Automatically answers yes to prompts (use with caution).
+          - --nogpgcheck: Disables GPG signature checking for the current operation (not recommended for security).
+          - --enablerepo=<repo_id>: Temporarily enables a disabled repository.
+          - --disablerepo=<repo_id>: Temporarily disables an enabled repository.
+  - sudo dnf update / sudo dnf upgrade: Updates all installed packages to their latest available versions, resolving dependencies and handling obsoleted packages.
+      - In DNF, update and upgrade are functionally very similar and generally produce the same result (a full system upgrade). upgrade is often preferred for clarity.
+      - Options:
+          - --best: Forces DNF to use the highest available version for packages, or fail if dependencies cannot be resolved.
+          - --allowerasing: Allows erasing installed packages to resolve dependencies (useful for package swaps).
+          - --security: Applies only security updates.
+          - --bugfix: Applies only bug fix updates.
+  - sudo dnf remove <package_name>: Uninstalls the specified package and any dependencies that are no longer required by other installed packages.
+      - Options:
+          - --noautoremove: Removes only the specified package, leaving its dependencies installed.
+  - dnf search : Searches for packages whose name or summary/description contains the specified keyword.
+  - dnf info <package_name>: Displays detailed information about a package, including its version, size, description, and dependencies.
+  - dnf list [installed|available|updates|extras|obsoletes]: Lists packages based on their status.
+      - installed: Packages currently on the system.
+      - available: Packages in enabled repositories that can be installed.
+      - updates: Packages with available updates.
+      - extras: Installed packages not found in any enabled repository.
+      - obsoletes: Packages that are superseded by other packages.
+  - dnf repolist [all]: Displays information about configured repositories. all shows both enabled and disabled repositories.
+  - dnf provides <file_path_or_command>: Determines which package provides a specific file or command.
+  - sudo dnf reinstall <package_name>: Reinstalls an already installed package, useful for fixing corrupted installations.
+  - sudo dnf downgrade <package_version>: Downgrades a package to a specified older version (requires the specific version to be available in repositories).
+  - sudo dnf groupinstall "<group_name>": Installs a predefined group of packages (e.g., "Development Tools", "Server with GUI").
+  - dnf grouplist: Lists available package groups.
