@@ -1,0 +1,409 @@
+===================================================================================
+
+User management Practical Notes ?
+
+===================================================================================
+
+Task-1 How we can add any user and verify their account information ? 
+
+
+[root@localhost ~]# 
+[root@localhost ~]# ls /home 
+student
+[root@localhost ~]# useradd sachin 
+[root@localhost ~]# 
+[root@localhost ~]# passwd sachin
+Changing password for user sachin.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls /home 
+sachin  student
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin  /etc/passwd
+sachin:x:1001:1001::/home/sachin:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin  /etc/group 
+sachin:x:1001:
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin  /etc/shadow
+sachin:$6$pwNMTS88qxvLdFi6$UHg5t.fQuixWd3VnHlctsBVLy1ZVe1AuwTJ9W8E7v/kyd/BB20IXhQI2vYTSv4SyKOjwRN1wZ5wZOmHGhbepW0:20297:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# id sachin  
+uid=1001(sachin) gid=1001(sachin) groups=1001(sachin)
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# groups sachin 
+sachin : sachin
+[root@localhost ~]# su - sachin 
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ ls
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ pwd
+/home/sachin
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ exit
+logout
+
+===================================================================================
+Task-2 How we can modify comment fields or profile name or display name OR GECOS of any user account ? ==> OPTIONAL ==>  
+
+===================================================================================
+
+[root@localhost ~]# usermod -c DBadmin sachin 
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin  /etc/passwd
+sachin:x:1001:1001:DBadmin:/home/sachin:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# useradd -c "HR manager" natasha
+[root@localhost ~]# 
+[root@localhost ~]# passwd natasha
+Changing password for user natasha.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR manager:/home/natasha:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# usermod -c  HR natasha
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR:/home/natasha:/bin/bash
+
+
+===================================================================================
+
+Task-3 How we can change login shell of any user ?  
+
+[root@localhost ~]# which bash
+/usr/bin/bash
+[root@localhost ~]# which nologin 
+/usr/sbin/nologin
+[root@localhost ~]# which python
+/usr/bin/python
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR:/home/natasha:/bin/bash
+
+
+
+[root@localhost ~]# usermod -s  /sbin/nologin natasha
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# su - natasha
+This account is currently not available.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR:/home/natasha:/sbin/nologin
+[root@localhost ~]# 
+[root@localhost ~]# usermod -s  /bin/bash natasha
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR:/home/natasha:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# su - natasha
+[natasha@localhost ~]$ pwd
+/home/natasha
+[natasha@localhost ~]$ ls
+[natasha@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+[root@localhost ~]# useradd -c admin -s /sbin/nologin sarah
+[root@localhost ~]# 
+[root@localhost ~]# passwd sarah
+Changing password for user sarah.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# grep sarah  /etc/passwd
+sarah:x:1003:1003:admin:/home/sarah:/sbin/nologin
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# usermod -s /bin/bash sarah
+[root@localhost ~]# 
+[root@localhost ~]# grep sarah  /etc/passwd
+sarah:x:1003:1003:admin:/home/sarah:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# usermod -c dbadmin sarah
+[root@localhost ~]# 
+[root@localhost ~]# grep sarah  /etc/passwd
+sarah:x:1003:1003:dbadmin:/home/sarah:/bin/bash
+
+===================================================================================
+
+Task-4 How can add any user into any different directory rather then /home ?  ==> 
+
+
+[root@localhost ~]# cat  /etc/default/useradd 
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+
+[root@localhost ~]# 
+[root@localhost ~]# mkdir /test 
+[root@localhost ~]# 
+[root@localhost ~]# useradd  -d   /test/user1   user1  
+[root@localhost ~]# 
+[root@localhost ~]# useradd  -d   /test/user2   user2
+[root@localhost ~]# 
+[root@localhost ~]# ls  /test 
+user1  user2
+[root@localhost ~]# ls /home
+natasha  sachin  sarah  student
+[root@localhost ~]# 
+
+[root@localhost ~]# su - natasha
+[natasha@localhost ~]$ pwd
+/home/natasha
+[natasha@localhost ~]$ touch abc{1..5}
+[natasha@localhost ~]$ ls
+abc1  abc2  abc3  abc4  abc5
+[natasha@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+===================================================================================
+
+[root@localhost ~]# grep user1  /etc/passwd
+user1:x:1004:1004::/test/user1:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# grep user2  /etc/passwd
+user2:x:1005:1005::/test/user2:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha  /etc/passwd
+natasha:x:1002:1002:HR:/home/natasha:/bin/bash
+[root@localhost ~]# 
+
+===================================================================================
+
+Task-5 How we can move any existing user from one directory to another directory ?    
+
+===================================================================================
+[root@localhost ~]# 
+[root@localhost ~]# usermod   -m  -d  /test/natasha   natasha
+[root@localhost ~]# 
+[root@localhost ~]# ls /test 
+natasha  user1  user2
+[root@localhost ~]# 
+[root@localhost ~]# grep natasha /etc/passwd
+natasha:x:1002:1002:HR:/test/natasha:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# su - natasha
+[natasha@localhost ~]$ pwd
+/test/natasha
+[natasha@localhost ~]$ ls
+abc1  abc2  abc3  abc4  abc5
+[natasha@localhost ~]$ 
+[natasha@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+===================================================================================
+[root@localhost ~]# usermod  -d  /test/sarah  sarah
+[root@localhost ~]# 
+[root@localhost ~]# grep sarah /etc/passwd
+sarah:x:1003:1003:dbadmin:/test/sarah:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# ls /test
+natasha  user1  user2
+[root@localhost ~]# 
+[root@localhost ~]# su - sarah
+su: warning: cannot change directory to /test/sarah: No such file or directory
+[sarah@localhost root]$ exit
+logout
+[root@localhost ~]# mv  /home/sarah    /test
+[root@localhost ~]# 
+[root@localhost ~]# su - sarah
+[sarah@localhost ~]$ pwd
+/test/sarah
+[sarah@localhost ~]$ ls
+xyz1  xyz2  xyz3
+[sarah@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+===================================================================================
+How we can change default home directory and login shell using  /etc/default/useradd file ===>
+
+
+===================================================================================
+
+Task-6 How to add any user with any special UID and GID ? 
+
+[root@localhost ~]# tail -n 1  /etc/passwd
+user2:x:1005:1005::/test/user2:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# useradd -u  3000 mac  
+[root@localhost ~]# 
+[root@localhost ~]# passwd mac
+Changing password for user mac.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# id mac 
+uid=3000(mac) gid=3000(mac) groups=3000(mac)
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# usermod -u  3500 mac
+[root@localhost ~]# 
+[root@localhost ~]# id mac 
+uid=3500(mac) gid=3000(mac) groups=3000(mac)
+[root@localhost ~]# 
+[root@localhost ~]# groupmod  -g  3500 mac  
+[root@localhost ~]# 
+[root@localhost ~]# id mac 
+uid=3500(mac) gid=3500(mac) groups=3500(mac)
+[root@localhost ~]# 
+[root@localhost ~]# userdel -rf mac  
+[root@localhost ~]# 
+[root@localhost ~]# tail -n 1  /etc/passwd
+user2:x:1005:1005::/test/user2:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# useradd mac
+[root@localhost ~]# 
+[root@localhost ~]# tail -n 1  /etc/passwd
+mac:x:1006:1006::/home/mac:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# usermod -u 3500 mac
+[root@localhost ~]# 
+[root@localhost ~]# id mac 
+uid=3500(mac) gid=1006(mac) groups=1006(mac)
+[root@localhost ~]# 
+[root@localhost ~]# groupmod  -g  3500 mac  
+[root@localhost ~]# 
+[root@localhost ~]# id mac 
+uid=3500(mac) gid=3500(mac) groups=3500(mac)
+[root@localhost ~]# 
+[root@localhost ~]# grep mac  /etc/passwd
+mac:x:3500:3500::/home/mac:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep mac  /etc/group
+mac:x:3500:
+[root@localhost ~]# userdel -rf mac 
+[root@localhost ~]# 
+
+===================================================================================
+
+Task-7 How we can rename any user account  ?
+
+
+[root@localhost ~]# tail -n 5 /etc/passwd
+sachin:x:1001:1001:DBadmin:/home/sachin:/bin/bash
+natasha:x:1002:1002:HR:/test/natasha:/bin/bash
+sarah:x:1003:1003:dbadmin:/test/sarah:/bin/bash
+user1:x:1004:1004::/test/user1:/bin/bash
+user2:x:1005:1005::/test/user2:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# usermod -l  shyam sachin  
+[root@localhost ~]# 
+[root@localhost ~]# su - sachin 
+su: user sachin does not exist or the user entry does not contain all the required fields
+[root@localhost ~]# 
+[root@localhost ~]# su - shyam
+[shyam@localhost ~]$ pwd
+/home/sachin
+[shyam@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+===================================================================================
+Task-8 How we can delete any user ? 
+
+
+[root@localhost ~]# useradd punit
+[root@localhost ~]# 
+[root@localhost ~]# ls /home
+punit  sachin  student
+[root@localhost ~]# 
+[root@localhost ~]# ls /var/spool/mail
+natasha  punit  sarah  shyam  student  user1  user2
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/passwd
+punit:x:1006:1006::/home/punit:/bin/bash
+[root@localhost ~]# grep punit /etc/group
+punit:x:1006:
+[root@localhost ~]# grep punit /etc/shadow
+punit:!!:20297:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# passwd punit
+Changing password for user punit.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/shadow
+punit:$6$l0fecRQgrjoNeATy$w/0XUnOutvwR/zTkhFzYJLKA4ZVIfIRH.kbP/Op3WMAY.yfx3WYLj/EvmuSDybtHipW/VYCJdfyd6O1KusLgI0:20297:0:99999:7:::
+[root@localhost ~]# 
+
+
+[root@localhost ~]# userdel punit
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/passwd
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/group
+[root@localhost ~]# grep punit /etc/shadow
+[root@localhost ~]# 
+[root@localhost ~]# ls /home 
+punit  sachin  student
+[root@localhost ~]# 
+[root@localhost ~]# ls /var/spool/mail
+natasha  punit  sarah  shyam  student  user1  user2
+[root@localhost ~]# 
+[root@localhost ~]# userdel punit
+userdel: user 'punit' does not exist
+[root@localhost ~]# 
+[root@localhost ~]# rm -rf  /home/punit
+[root@localhost ~]# rm -rf  /var/spool/mail/punit 
+[root@localhost ~]# 
+[root@localhost ~]# useradd punit  
+[root@localhost ~]# useradd punit  
+[root@localhost ~]# 
+[root@localhost ~]# userdel -rf punit 
+[root@localhost ~]# 
+[root@localhost ~]# ls /var/spool/mail
+natasha  sarah  shyam  student  user1  user2
+[root@localhost ~]# 
+[root@localhost ~]# ls /home 
+sachin  student
+[root@localhost ~]# 
+[root@localhost ~]# grep punit  /etc/passwd
+
+
+===============================================================================
+How we can password management OR account policy on any users ?
+How we can give SUDO power to any users to execute any admin level access commands ?  ===> Command controlling 
+How we can give rights on any particular file or directory to any user OR any group ? ===> data controlling 
+===============================================================================
+As per Use Case 
+===============================================================================
+
+
+
+
+
+
