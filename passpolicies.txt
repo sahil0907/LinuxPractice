@@ -1,0 +1,830 @@
+====================================================================================
+
+    Password Policy
+        OR
+     /etc/shadow
+        OR
+    Password Aging Policy 
+        OR
+   Examples of chage Command
+
+===================================================================================
+===================================================================================
+  
+# useradd sachin 
+
+# passwd  sachin 
+
+Type Password:  123
+Retype Password: 123
+
+# chage -l  sachin   ===> to check current available policy details on this user
+
+===================================================================================
+
+# cat  /etc/passwd   ==> user information 
+# cat  /etc/group    ==> group information 
+# cat  /etc/shadow   ==> user's password in Encrypted Formats and password policy information 
+
+===================================================================================
+
+
+Types of algo ?
+
+MD-5
+SHA-256
+SHA-512  ==> RHEL-7+8+9-10
+
+
+===================================================================================
+===================================================================================
+
+1- default policy   ==> /etc/defaullt/useradd and /etc/login.defs
+
+2- custom policy    ==> we can apply the policy on any user as per needs using chage command
+
+=================================================================================== 
+# chage  --help
+# chage  option-1 value option-2 value ...so on   username
+===================================================================================
+===================================================================================
+
+# cat /etc/shadow  ==> 9 Fields 
+
+
+
+
+First Field  ==> Username
+Second Filed ==> password or hash code or encrypted password which is converted by supported Algo.
+Third Fields ==> last password change ( in days ) ==>  since 1-jan-1970 ==> OR  # chage -l sachin 
+Forth Fields ==> Min Age       ==> by default  0 
+             ==> number of days left before the user is allowed to change his/her password
+    
+Fifth Fields ==> Max Age ==>Password Expire   ==> by default  99999   ==> we can use this password as much long time 
+Six Fields   ==> Warning days  ==> by default 7 Days 
+Seven Fields ==> Inactive Days ==> Grace period ==> account inactive and disabled
+Eight Fields ==> Account Expiry date (in days 1-jan-1970)==> account locked 
+Nine Fields  ==> This field is ignored. It is reserved for future use OR Blank (Future Use)
+
+===================================================================================
+
+
+
+
+# man shadow 
+
+# chage -l  <username>
+
+
+Field number 5- password expire
+Field number 8- account  expire   ==> super user or sudo can increase this date if your
+                                      project is going to extend
+
+
+===================================================================================
+
+===================================================================================
+
+===================================================================================
+
+Examples of chage   OR [ change age ] command ? 
+
+
+
+[root@localhost ~]# useradd sachin 
+[root@localhost ~]# passwd sachin
+Changing password for user sachin.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin /etc/passwd
+sachin:x:1001:1001::/home/sachin:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin /etc/group 
+sachin:x:1001:
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin /etc/shadow
+sachin:$6$EgYALISXNbNFaSDw$.7HIi3q2Ixo/UT0jTXzw0LhF9TzriK2E7B4qlTmjSIshmIQyk.RmdrSdEON8amrDb9J1p6RBjvKTG8NxmMevC1:20298:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin
+Last password change					: Jul 29, 2025
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+
+
+[root@localhost ~]# chage -m 10 -M 90  -W 10 -I  15 sachin  
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: never
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+
+
+
+
+
+[root@localhost ~]# grep sachin /etc/passwd
+sachin:x:1001:1001::/home/sachin:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin /etc/shadow
+sachin:$6$EgYALISXNbNFaSDw$.7HIi3q2Ixo/UT0jTXzw0LhF9TzriK2E7B4qlTmjSIshmIQyk.RmdrSdEON8amrDb9J1p6RBjvKTG8NxmMevC1:20298:10:90:10:15::
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage  -E  2026-12-31 sachin 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2026
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# usermod -e    2027-12-31 sachin 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# grep sachin /etc/shadow
+sachin:$6$EgYALISXNbNFaSDw$.7HIi3q2Ixo/UT0jTXzw0LhF9TzriK2E7B4qlTmjSIshmIQyk.RmdrSdEON8amrDb9J1p6RBjvKTG8NxmMevC1:20298:10:90:10:15:21183:
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+=============================================================================================
+How we can set first login password expire policy ?
+=============================================================================================
+[root@localhost ~]# chage  --help  
+Usage: chage [options] LOGIN
+
+Options:
+  -d, --lastday LAST_DAY        set date of last password change to LAST_DAY
+  -E, --expiredate EXPIRE_DATE  set account expiration date to EXPIRE_DATE
+  -h, --help                    display this help message and exit
+  -i, --iso8601                 use YYYY-MM-DD when printing dates
+  -I, --inactive INACTIVE       set password inactive after expiration
+                                to INACTIVE
+  -l, --list                    show account aging information
+  -m, --mindays MIN_DAYS        set minimum number of days before password
+                                change to MIN_DAYS
+  -M, --maxdays MAX_DAYS        set maximum number of days before password
+                                change to MAX_DAYS
+  -R, --root CHROOT_DIR         directory to chroot into
+  -W, --warndays WARN_DAYS      set expiration warning days to WARN_DAYS
+
+[root@localhost ~]# 
+[root@localhost ~]# chage -d 0 sachin 
+
+
+[root@localhost ~]# su - sachin 
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ exit
+logout
+[root@localhost ~]# ls /home  
+sachin  student
+[root@localhost ~]# 
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - sachin
+Password: 123
+You are required to change your password immediately (administrator enforced).
+Current password: 123
+New password: Widget_123
+Retype new password: Widget_123
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$
+[sachin@localhost ~]$ exit
+logout
+[student@localhost ~]$ su - sachin
+Password: 
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ chage -l sachin
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+
+[sachin@localhost ~]$ exit
+logout
+[student@localhost ~]$ 
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# date
+Tue Jul 29 10:14:07 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# date 
+Tue Jul 29 10:14:33 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# date  -s   "Tue Oct 21 10:14:33 AM IST 2025"
+Tue Oct 21 10:14:33 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# date 
+Tue Oct 21 10:14:34 AM IST 2025
+
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - sachin
+Password: 
+Warning: your password will expire in 6 days.
+[sachin@localhost ~]$ 
+[sachin@localhost ~]$ exit
+logout
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# date
+Tue Oct 21 10:15:54 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# date  -s   "Tue Oct 29 10:14:33 AM IST 2025"
+Wed Oct 29 10:14:33 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# date
+Wed Oct 29 10:14:34 AM IST 2025
+[root@localhost ~]# 
+
+
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - sachin
+Password: 
+You are required to change your password immediately (password expired).
+Current password: 
+
+Press CTRL + C 
+
+[student@localhost ~]$ 
+[student@localhost ~]$ 
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+
+=============================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# date  -s   "Tue Nov 12 10:14:33 AM IST 2025"
+Wed Nov 12 10:14:33 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# date  
+Wed Nov 12 10:14:34 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Jul 29, 2025
+Password expires					: Oct 27, 2025
+Password inactive					: Nov 11, 2025
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+
+=============================================================================================
+
+
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - sachin
+Password: 
+Your account has expired; please contact your system administrator.
+su: Authentication token expired
+[student@localhost ~]$ 
+[student@localhost ~]$ 
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+=============================================================================================
+[root@localhost ~]# passwd sachin
+Changing password for user sachin.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# date 
+Wed Nov 12 10:15:55 AM IST 2025
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: Nov 12, 2025
+Password expires					: Feb 10, 2026
+Password inactive					: Feb 25, 2026
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+
+
+[root@localhost ~]# chage -d 0  sachin 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+
+root@localhost ~]# grep sachin /etc/shadow
+sachin:$6$POB4VL2b5TT82fio$qKxnRWgb8ZUcB8ngenxsNFpqIdHnyPZU/XoQS2RPwhHJcp/NqkAfZZiT1DoAk39jfdoAihnXoZ37roccPHdzQ1:0:10:90:10:15:21183:
+[root@localhost ~]# 
+
+[root@localhost ~]# chage -l sachin  
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage -E -1  -I  -1   sachin  
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: never
+Minimum number of days between password change		: 10
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# chage -m 0 -M  99999 -W 7 sachin  
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sachin  
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+
+=============================================================================================
+=============================================================================================
+
+
+[root@localhost ~]# useradd kapil 
+[root@localhost ~]# passwd kapil
+Changing password for user kapil.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# chage -l kapil
+Last password change					: Nov 12, 2025
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+[root@localhost ~]# 
+[root@localhost ~]# chage -M  90  -d  0  -E 2027-12-31 kapil 
+[root@localhost ~]# 
+
+[root@localhost ~]# chage -l kapil
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
+[root@localhost ~]# 
+
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - kapil
+Password: 
+You are required to change your password immediately (administrator enforced).
+Current password: 
+New password: 
+Retype new password: 
+[kapil@localhost ~]$ 
+[kapil@localhost ~]$ 
+logout
+[student@localhost ~]$ 
+[student@localhost ~]$ su - kapil
+Password: 
+[kapil@localhost ~]$ exit
+logout
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# chage -l kapil
+Last password change					: Nov 12, 2025
+Password expires					: Feb 10, 2026
+Password inactive					: never
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 7
+[root@localhost ~]# 
+
+[root@localhost ~]# chage -E -1 -M 99999  kapil 
+[root@localhost ~]# 
+[root@localhost ~]# chage -l kapil
+Last password change					: Nov 12, 2025
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+[root@localhost ~]# 
+
+=============================================================================================
+[root@localhost ~]# 
+[root@localhost ~]# cat /etc/default/useradd 
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+
+[root@localhost ~]# vim /etc/login.defs 
+
+
+PASS_MAX_DAYS   90
+
+
+:wq!
+
+
+# useradd rajeev 
+# passwd rajeev
+123
+123
+
+# chage -l rajeev 
+
+MAX password age  ==>  90  
+
+=============================================================================================
+SYNTAX
+
+[root@localhost ~]# chage option1 value  option2 value  option2 value   username 
+
+=============================================================================================
+[root@localhost ~]# useradd sumit 
+[root@localhost ~]# passwd sumit
+Changing password for user sumit.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chage sumit
+Changing the aging information for sumit
+Enter the new value, or press ENTER for the default
+
+	Minimum Password Age [0]: 5
+	Maximum Password Age [99999]: 90
+	Last Password Change (YYYY-MM-DD) [2025-11-12]: 
+	Password Expiration Warning [7]: 10
+	Password Inactive [-1]: 12
+	Account Expiration Date (YYYY-MM-DD) [-1]: 2027-12-31
+[root@localhost ~]# 
+
+[root@localhost ~]# chage -l sumit
+Last password change					: Nov 12, 2025
+Password expires					: Feb 10, 2026
+Password inactive					: Feb 22, 2026
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 5
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+[root@localhost ~]# 
+[root@localhost ~]# chage -d 0  sumit
+[root@localhost ~]# 
+[root@localhost ~]# chage -l sumit
+Last password change					: password must be changed
+Password expires					: password must be changed
+Password inactive					: password must be changed
+Account expires						: Dec 31, 2027
+Minimum number of days between password change		: 5
+Maximum number of days between password change		: 90
+Number of days of warning before password expires	: 10
+
+=============================================================================================
+
+PAM Policy ?
+
+In Red Hat systems, Pluggable Authentication Modules (PAM) provide a flexible framework for managing authentication and authorization. PAM allows applications to use a centralized mechanism for verifying user identities and managing access to resources, rather than implementing their own unique authentication processes. 
+
+
+=============================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# ls /etc/pam.d
+atd          cups                    gdm-pin        polkit-1        sshd                  su-l
+chfn         fingerprint-auth        gdm-smartcard  postlogin       sssd-shadowutils      system-auth
+chsh         gdm-autologin           login          remote          su                    systemd-user
+cockpit      gdm-fingerprint         other          runuser         subscription-manager  vlock
+config-util  gdm-launch-environment  passwd         runuser-l       sudo                  vmtoolsd
+crond        gdm-password            password-auth  smartcard-auth  sudo-i                xserver
+[root@localhost ~]# 
+[root@localhost ~]# ls /etc/security
+access.conf   console.handlers  faillock.conf  limits.d        namespace.init  pwquality.conf    time.conf
+chroot.conf   console.perms     group.conf     namespace.conf  opasswd         pwquality.conf.d
+console.apps  console.perms.d   limits.conf    namespace.d     pam_env.conf    sepermit.conf
+[root@localhost ~]# 
+[root@localhost ~]# 
+=============================================================================================
+[root@localhost ~]# useradd punit
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/passwd
+punit:x:1004:1004::/home/punit:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/group 
+punit:x:1004:
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/shadow
+punit:!!:20404:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# su - punit 
+[punit@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+[root@localhost ~]# passwd punit
+Changing password for user punit.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/shadow
+punit:$6$Xl8RdOFiO5faUyq1$2jJEvep53g/DAKCAcNjYzUZaKj.ZSDiWqW5lnbvDE.wxoiITSP2HFA3AMvHerD3B0UplYIjoo1y2ZW5hNXo8k1:20404:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+=============================================================================================
+[root@localhost ~]# usermod  -L punit  
+[root@localhost ~]# 
+
+                      OR
+
+[root@localhost ~]# passwd -l  punit  
+Locking password for user punit.
+passwd: Success
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+=============================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# grep punit /etc/shadow
+punit:!$6$Xl8RdOFiO5faUyq1$2jJEvep53g/DAKCAcNjYzUZaKj.ZSDiWqW5lnbvDE.wxoiITSP2HFA3AMvHerD3B0UplYIjoo1y2ZW5hNXo8k1:20404:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - punit
+Password: 
+su: Authentication failure
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+=============================================================================================
+
+[root@localhost ~]# usermod  -U punit 
+ 
+                    OR
+
+[root@localhost ~]# passwd -u  punit  
+Unlocking password for user punit.
+passwd: Success
+
+=============================================================================================
+[root@localhost ~]# grep punit /etc/shadow
+punit:$6$Xl8RdOFiO5faUyq1$2jJEvep53g/DAKCAcNjYzUZaKj.ZSDiWqW5lnbvDE.wxoiITSP2HFA3AMvHerD3B0UplYIjoo1y2ZW5hNXo8k1:20404:0:99999:7:::
+[root@localhost ~]# 
+
+=============================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# useradd raju 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# su - raju 
+[raju@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+=============================================================================================
+
+
+1- local to local 
+2- Remote login 
+
+Cos we need to set the password first 
+
+=============================================================================================
+
+[root@localhost ~]# grep raju /etc/shadow
+raju:!!:20404:0:99999:7:::
+[root@localhost ~]# 
+
+
+How we wan delete password prompt for this user 
+
+
+[root@localhost ~]# grep raju /etc/shadow
+raju:!!:20404:0:99999:7:::
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# passwd -d raju 
+Removing password for user raju.
+passwd: Note: deleting a password also unlocks the password.
+passwd: Success
+[root@localhost ~]# 
+[root@localhost ~]# grep raju /etc/shadow
+raju::20404:0:99999:7:::
+[root@localhost ~]# 
+
+[root@localhost ~]# su - student 
+[student@localhost ~]$ 
+[student@localhost ~]$ su - raju 
+[raju@localhost ~]$ exit
+logout
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+=============================================================================================
+
+[root@localhost ~]# cd /etc/skel
+[root@localhost skel]# ls -a 
+.  ..  .bash_logout  .bash_profile  .bashrc  .mozilla
+[root@localhost skel]# 
+[root@localhost skel]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# useradd sujeet 
+[root@localhost ~]# 
+[root@localhost ~]# su - sujeet 
+[sujeet@localhost ~]$ ls -a
+.  ..  .bash_logout  .bash_profile  .bashrc  .cache  .mozilla
+[sujeet@localhost ~]$ 
+[sujeet@localhost ~]$ rm -rf .* 
+rm: refusing to remove '.' or '..' directory: skipping '.'
+rm: refusing to remove '.' or '..' directory: skipping '..'
+[sujeet@localhost ~]$ 
+[sujeet@localhost ~]$ ls -a  
+.  ..
+[sujeet@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+[root@localhost ~]# su - sujeet 
+[sujeet@localhost ~]$ 
+[sujeet@localhost ~]$ cd /etc/skel
+[sujeet@localhost skel]$ ls
+[sujeet@localhost skel]$ 
+[sujeet@localhost skel]$ 
+[sujeet@localhost skel]$ ls -a
+.  ..  .bash_logout  .bash_profile  .bashrc  .mozilla
+[sujeet@localhost skel]$ 
+[sujeet@localhost skel]$ cp -rf  .bash*   .mozilla    /home/sujeet
+[sujeet@localhost skel]$ cd
+[sujeet@localhost ~]$ 
+[sujeet@localhost ~]$ 
+[sujeet@localhost ~]$ ls -a  
+.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .cache  .mozilla
+[sujeet@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+[root@localhost ~]# 
+[root@localhost ~]# cd /etc/skel
+[root@localhost skel]# ls
+[root@localhost skel]# 
+[root@localhost skel]# touch hello{1..3}.py  
+[root@localhost skel]# 
+[root@localhost skel]# ls 
+hello1.py  hello2.py  hello3.py
+[root@localhost skel]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# useradd deep 
+[root@localhost ~]# 
+[root@localhost ~]# su - deep 
+[deep@localhost ~]$ ls -a 
+.  ..  .bash_logout  .bash_profile  .bashrc  .cache  hello1.py  hello2.py  hello3.py  .mozilla
+[deep@localhost ~]$ 
+[deep@localhost ~]$ rm -rf hello*  
+[deep@localhost ~]$ ls 
+[deep@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# rm -rf /etc/skel/hello* 
+
+=============================================================================================
+
+[root@localhost ~]# ls -a
+.                .bash_history  .bashrc  .cshrc     Downloads  Music     .tcshrc    .viminfo
+..               .bash_logout   .cache   Desktop    .lesshst   Pictures  Templates
+anaconda-ks.cfg  .bash_profile  .config  Documents  .local     Public    Videos
+[root@localhost ~]# 
+[root@localhost ~]# rm -rf .bashrc 
+[root@localhost ~]# 
+[root@localhost ~]# exit
+
+bash-5.1# cd /etc/skel/
+bash-5.1# ls -a 
+.  ..  .bash_logout  .bash_profile  .bashrc  .mozilla
+bash-5.1# 
+bash-5.1# cp -rf  .bashrc  /root  
+bash-5.1# cd
+bash-5.1# 
+bash-5.1# exit
+
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+=============================================================================================
+
+Permissions Management 
+
+
+=============================================================================================
