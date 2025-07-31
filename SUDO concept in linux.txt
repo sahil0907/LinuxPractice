@@ -1,0 +1,798 @@
+===============================================================
+SUDO Concept in Linux ? OR super user do Concept 
+===============================================================
+
+1- Command execution OR command controlling permissions ==> using SUDO and SUID concept
+
+2- Data Controlling OR file manaement permission ===> on any file or directory ?
+
+===============================================================
+
+[root @ localhost ~ ] # fdisk -l 
+
+
+[sachin @ localhost ~ ] $ fdisk -l 
+
+Permission deined 
+
+
+[sachin @ localhost ~ ] $ sudo fdisk -l 
+
+[sachin @ localhost ~ ] $ useradd deepak   OR sudo useradd deepak
+
+
+by default this command will not execute why ? cos we don't have any entry in SUDO configuration file of this user to execute this command.
+
+
+===============================================================
+with the help of SUDO concept we can give admin level acccess on Super binary OR super admin level commands to any user OR any group as per project needs.
+
+
+# ls /
+
+/bin    and  /sbin 
+
+
+/bin   <===>  /usr/bin 
+
+/sbin  <===>  /usr/sbin 
+
+===============================================================
+[root@localhost ~]# ls /bin  | wc -l  
+1491
+[root@localhost ~]# ls /usr/bin  | wc -l  
+1491
+[root@localhost ~]# 
+[root@localhost ~]# ls /sbin | wc -l  
+534
+[root@localhost ~]# ls /usr/sbin | wc -l  
+534
+
+===============================================================
+configuration file of SUDO user is 
+
+1-   /etc/sudoers                ===> main configuration file.
+2-   /etc/sudoers.d/filename     ===> we can create seperate files for all the user and groups.
+===============================================================
+
+#  ls  /etc/sudoers.d
+
+
+Syntax will be same in all files.
+
+===============================================================
+username      ===>  is the examples of any user
+%groupname    ===>  is the examples of any group
+===============================================================
+# which useradd
+# which userdel
+# which groupadd
+# which fdisk 
+
+will print the location of any command if it is available in our machine  OR absolute Path Print
+
+===============================================================
+log file of SUDO ?
+
+
+# cat   /var/log/secure   ==> will display all the user's command execution records if we want to monitor OR autdit
+
+===============================================================
+SYNTAX Examples
+
+
+Choice-1     ALL 
+Choice-2     command-1,command-2,command-3,command-4....so on 
+Choice-3     ALL,!command-1,!command-2,!command-3
+
+===============================================================
+Examples of SUDO User ?
+
+
+
+/etc/sudoers  ===> default entry 
+
+1- root user
+
+2- wheel group
+
+
+Except of these two, we need to mention every user or group in sudo configuration file.
+
+===============================================================
+
+[root@localhost ~]# useradd user1
+[root@localhost ~]# useradd user2
+[root@localhost ~]# useradd user3
+[root@localhost ~]# 
+[root@localhost ~]# passwd user1
+Changing password for user user1.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# passwd user2
+Changing password for user user2.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# passwd user3
+Changing password for user user3.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+
+[root@localhost ~]# useradd deepak 
+[root@localhost ~]# passwd deepak
+Changing password for user deepak.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+
+[root@localhost ~]# groupadd  ibmteam 
+[root@localhost ~]# 
+[root@localhost ~]# grep ibmteam  /etc/group 
+ibmteam:x:1005:
+[root@localhost ~]# 
+[root@localhost ~]# useradd -G ibmteam  u1
+[root@localhost ~]# useradd -G ibmteam  u2
+[root@localhost ~]# 
+[root@localhost ~]# grep ibmteam  /etc/group 
+ibmteam:x:1005:u1,u2
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# passwd u1
+Changing password for user u1.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# passwd u2
+Changing password for user u2.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+===============================================================
+
+
+[root@localhost ~]# usermod -G wheel  deepak  
+[root@localhost ~]# 
+[root@localhost ~]# groups deepak 
+deepak : deepak wheel
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# grep deepak /etc/sudoers 
+[root@localhost ~]# 
+[root@localhost ~]# grep wheel  /etc/sudoers 
+## Allows people in group wheel to run all commands
+%wheel	ALL=(ALL)	ALL
+# %wheel	ALL=(ALL)	NOPASSWD: ALL
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# su - deepak 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ groups deepak
+deepak : deepak wheel
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+
+[deepak@localhost ~]$ ls
+[deepak@localhost ~]$ cd
+[deepak@localhost ~]$ pwd
+/home/deepak
+[deepak@localhost ~]$ date
+Thu Jul 31 09:40:05 AM IST 2025
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+
+[deepak@localhost ~]$ fdisk -l 
+fdisk: cannot open /dev/sda: Permission denied
+fdisk: cannot open /dev/sr0: Permission denied
+fdisk: cannot open /dev/mapper/rhel-root: Permission denied
+fdisk: cannot open /dev/mapper/rhel-swap: Permission denied
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+
+[deepak@localhost ~]$ sudo fdisk -l 
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for deepak: 
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+
+
+[deepak@localhost ~]$ sudo  useradd punit  
+[deepak@localhost ~]$ sudo passwd punit
+Changing password for user punit.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+
+===============================================================
+
+
+
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# su - punit
+[punit@localhost ~]$ 
+
+[punit@localhost ~]$ sudo fdisk -l 
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for punit: 
+punit is not in the sudoers file.  This incident will be reported.
+[punit@localhost ~]$ 
+[punit@localhost ~]$ 
+[punit@localhost ~]$ 
+[punit@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+===============================================================
+
+[root@localhost ~]# grep wheel /etc/group
+wheel:x:10:deepak
+[root@localhost ~]# 
+[root@localhost ~]# gpasswd -d deepak wheel 
+Removing user deepak from group wheel
+[root@localhost ~]# 
+[root@localhost ~]# grep wheel /etc/group
+wheel:x:10:
+[root@localhost ~]# 
+[root@localhost ~]# groups deepak  
+deepak : deepak
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+===============================================================
+
+How we can give SUDO Power to any particular user OR group ?
+
+[root@localhost ~]# which useradd 
+/usr/sbin/useradd
+[root@localhost ~]# which usermod
+/usr/sbin/usermod
+[root@localhost ~]# which userdel
+/usr/sbin/userdel
+[root@localhost ~]# which fdisk 
+/usr/sbin/fdisk
+[root@localhost ~]# 
+
+
+[root@localhost ~]# vim /etc/sudoers
+
+                   OR
+
+[root@localhost ~]# visudo 
+
+
+
+
+root    ALL=(ALL)       ALL
+user1   ALL=(ALL)       ALL
+user2   ALL=(ALL)       /usr/sbin/useradd,/usr/sbin/usermod,/usr/sbin/fdisk
+user3   ALL=(ALL)       ALL,!/usr/sbin/userdel,!/usr/sbin/fdisk
+
+
+
+## Allows people in group wheel to run all commands
+
+
+%wheel          ALL=(ALL)       ALL
+%ibmteam        ALL=(ALL)       NOPASSWD: /usr/sbin/fdisk
+
+
+:wq!
+
+
+===============================================================
+
+
+Testing 
+
+[root@localhost ~]# su - user1 
+[user1@localhost ~]$ 
+[user1@localhost ~]$ sudo useradd deep
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for user1: 
+[user1@localhost ~]$ 
+[user1@localhost ~]$ ls /home  
+deep  deepak  punit  student  u1  u2  user1  user2  user3
+[user1@localhost ~]$ 
+[user1@localhost ~]$ sudo userdel -rf   deep
+[user1@localhost ~]$ 
+[user1@localhost ~]$ sudo fdisk -l
+
+
+[user1@localhost ~]$ sudo -l 
+Matching Defaults entries for user1 on localhost:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin, env_reset, env_keep="COLORS DISPLAY HOSTNAME
+    HISTSIZE KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE", env_keep+="LC_COLLATE
+    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE",
+    env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY", secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+User user1 may run the following commands on localhost:
+    (ALL) ALL
+[user1@localhost ~]$ 
+[user1@localhost ~]$ exit
+
+[root@localhost ~]# su - user2  
+[user2@localhost ~]$ 
+[user2@localhost ~]$ sudo fdisk -l  
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for user2: 
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+[user2@localhost ~]$ sudo systemctl restart crond  
+Sorry, user user2 is not allowed to execute '/bin/systemctl restart crond' as root on localhost.localdomain.
+[user2@localhost ~]$ 
+
+[root@localhost ~]# su - user2  
+
+[user2@localhost ~]$ 
+[user2@localhost ~]$ sudo -l
+Matching Defaults entries for user2 on localhost:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin, env_reset, env_keep="COLORS DISPLAY HOSTNAME
+    HISTSIZE KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE", env_keep+="LC_COLLATE
+    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE",
+    env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY", secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+User user2 may run the following commands on localhost:
+    (ALL) /usr/sbin/useradd, /usr/sbin/usermod, /usr/sbin/fdisk
+[user2@localhost ~]$ 
+[user2@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# su - user3
+[user3@localhost ~]$ 
+[user3@localhost ~]$ sudo -l 
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for user3: 
+Matching Defaults entries for user3 on localhost:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin, env_reset, env_keep="COLORS DISPLAY HOSTNAME
+    HISTSIZE KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE", env_keep+="LC_COLLATE
+    LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE",
+    env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY", secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+User user3 may run the following commands on localhost:
+    (ALL) ALL, !/usr/sbin/userdel, !/usr/sbin/fdisk
+[user3@localhost ~]$ 
+[user3@localhost ~]$ sudo fdisk -l 
+Sorry, user user3 is not allowed to execute '/sbin/fdisk -l' as root on localhost.localdomain.
+[user3@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# su - u1  
+[u1@localhost ~]$ 
+[u1@localhost ~]$ groups u1  
+u1 : u1 ibmteam
+[u1@localhost ~]$ 
+[u1@localhost ~]$ sudo fdisk -l 
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+
+
+[u1@localhost ~]$ exit
+
+[u1@localhost ~]$ 
+[u1@localhost ~]$ exit
+logout
+[root@localhost ~]# ls /home 
+deepak  punit  student  u1  u2  user1  user2  user3
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls   /etc/sudoers.d
+[root@localhost ~]# 
+[root@localhost ~]# vim   /etc/sudoers.d/deepak  
+
+
+deepak  ALL=(ALL)       /usr/sbin/fdisk,/usr/sbin/useradd
+
+
+:wq!
+
+[root@localhost ~]# su - deepak  
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ sudo fdisk -l 
+[sudo] password for deepak: 
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+[deepak@localhost ~]$ sudo -l 
+Matching Defaults entries for deepak on localhost:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin, env_reset, env_keep="COLORS DISPLAY
+    HOSTNAME HISTSIZE KDEDIR LS_COLORS", env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE",
+    env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES", env_keep+="LC_MONETARY LC_NAME LC_NUMERIC
+    LC_PAPER LC_TELEPHONE", env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY",
+    secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+User deepak may run the following commands on localhost:
+    (ALL) /usr/sbin/fdisk, /usr/sbin/useradd
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+===============================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# rm -rf  /etc/sudoers.d/deepak 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+===============================================================
+Smart Concept 
+===============================================================
+How we can create command aliases with GROUP concept 
+                       OR
+We can attach number of commadns with any virtualized group 
+
+
+[root@localhost ~]# vim /etc/sudoers
+
+
+Cmnd_Alias  STORAGE = df df f df df d df df df df df
+Cmnd_Alias   NETWORKING = dsfdf sd fdsf sdf sdf sdf dsf sdf sdfsd fsdf dfdsfdf  
+Cmnd_Alias   SERVICE = dsfdf sd fdsf sdf sdf sdf dsf sdf sdfsd fsdf dfdsfdf  
+Cmnd_Alias   USERMANAGING = dsfdf sd fdsf sdf sdf sdf dsf sdf sdfsd fsdf dfdsfdf  
+
+
+
+
+deepak   ALL=(ALL)	STORAGE,NETWORKING
+soniya   ALL=(ALL)	SERVICE,USERMANAGING
+
+
+
+:wq!
+
+
+[root@localhost ~]# cat /var/log/secure 
+
+[root@localhost ~]# cat /var/log/secure  |  grep user1
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cat /var/log/secure  |  grep user1 |  grep fdisk
+Jul 31 09:58:29 localhost sudo[7176]:   user1 : TTY=pts/0 ; PWD=/home/user1 ; USER=root ; COMMAND=/sbin/fdisk -l
+[root@localhost ~]# 
+
+
+===============================================================
+Difference between SUDO [Super user DO] user and SUID [Set user ID] Concept ?
+===============================================================
+
+[root@localhost ~]# which fdisk 
+/usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# ls /home 
+deepak  punit  student  u1  u2  user1  user2  user3
+[root@localhost ~]# 
+[root@localhost ~]# ll  /usr/sbin/fdisk
+-rwxr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# chmod  u+s  /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# ll  /usr/sbin/fdisk
+-rwsr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chmod  u-s  /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# ll  /usr/sbin/fdisk
+-rwxr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# chmod  u+s  /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# ll  /usr/sbin/fdisk
+-rwsr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+
+===============================================================
+
+[root@localhost ~]# su - deepak 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ fdisk -l 
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# useradd soniya  
+[root@localhost ~]# 
+[root@localhost ~]# su - soniya  
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ fdisk -l
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+
+[soniya@localhost ~]$ exit
+[root@localhost ~]#
+[root@localhost ~]# 
+
+
+
+SUID Second Examples
+
+
+[root@localhost ~]# parted  /dev/sda print 
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 26.8GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs          boot
+ 2      1075MB  26.8GB  25.8GB  primary               lvm
+
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# 
+[root@localhost ~]# su - deepak  
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ parted  /dev/sda  print 
+WARNING: You are not superuser.  Watch out for permissions.
+Error: Error opening /dev/sda: Permission denied
+Retry/Cancel?                                                             
+Retry/Cancel? Cancel                                                      
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+Choice-1  either we can give command execution power using SUDO concept   # which parted  
+
+Choice-1  OR else we can set SUID on this command but after apply SUID all the current users and upcomming users can execute this commadns.
+
+[root@localhost ~]# which parted 
+/usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -l    /usr/sbin/parted
+-rwxr-xr-x. 1 root root 90848 Aug 10  2021 /usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# chmod  u+s  /usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# ls -l    /usr/sbin/parted
+-rwsr-xr-x. 1 root root 90848 Aug 10  2021 /usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# su - deepak 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ parted   /dev/sda print  
+WARNING: You are not superuser.  Watch out for permissions.
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 26.8GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs          boot
+ 2      1075MB  26.8GB  25.8GB  primary               lvm
+
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# su - soniya  
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ parted   /dev/sda print
+WARNING: You are not superuser.  Watch out for permissions.
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 26.8GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs          boot
+ 2      1075MB  26.8GB  25.8GB  primary               lvm
+
+[soniya@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+  
+=============================================================================
+
+[root@localhost ~]# ls -l    /usr/sbin/parted
+-rwsr-xr-x. 1 root root 90848 Aug 10  2021 /usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# ls -l    /usr/sbin/fdisk 
+-rwsr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+=============================================================================
+
+USING ACL Permissions
+
+
+[root@localhost ~]# setfacl  -m  u:deepak:---   /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# su - deepak 
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ fdisk -l
+-bash: /usr/sbin/fdisk: Permission denied
+[deepak@localhost ~]$ 
+[deepak@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# setfacl  --remove-all  /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# su - deepak 
+[deepak@localhost ~]$ fdisk -l
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+
+[deepak@localhost ~]$ exit
+[root@localhost ~]# ll  /usr/sbin/fdisk 
+-rwsr-xr-x. 1 root root 115424 Feb 24  2022 /usr/sbin/fdisk
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ll  /usr/sbin/parted 
+-rwsr-xr-x. 1 root root 90848 Aug 10  2021 /usr/sbin/parted
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# find  /  -perm  /u=s    ===> to find out all the SUID related commands
+
+[root@localhost ~]# chmod   u-s /usr/sbin/parted
+[root@localhost ~]# chmod   u-s /usr/sbin/fdisk
+
+=============================================================================
+
+[root@localhost ~]# find  /  -perm  /u=s  | wc -l  
+
+=============================================================================
+
+
+use case of SUDO ?
+use case of SUID ?
+
+=============================================================================
+
+<username> <hostname.example.com>=(<run_as_user>:<run_as_group>) <path/to/command>
+
+
+=============================================================================
+
+Where:
+
+<username> is the user that enters the command, for example, user1. If the value starts with %, it defines a group, for example, %group1.
+<hostname.example.com> is the name of the host on which the rule applies.
+The section (<run_as_user>:<run_as_group>) defines the user or group as which the command is executed. If you omit this section, <username> can execute the command as root.
+<path/to/command> is the complete absolute path to the command. You can also limit the user to only performing a command with specific options and arguments by adding those options after the command path. If you do not specify any options, the user can use the command with all options.
+You can apply the rule to all users, hosts, or commands by replacing any of these variables with ALL.
+
+
+
+=============================================================================
+
+
+
