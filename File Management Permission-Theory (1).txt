@@ -1,0 +1,513 @@
+========================================================================================================
+
+
+      Permissions Management
+
+=======================================================================================================
+
+machine <== OS <== User <== login
+
+1- Remote login
+2- local to Local login
+
+=======================================================================================================
+
+1- Activity using any xyz commands
+
+2- data creation   ===>  
+
+=======================================================================================================
+
+Types of permissions ?
+
+1- Command execution based rights  permissions
+
+2- File and directory based permissions
+
+======================================================================================================
+ 
+
+[root@localhost ~]# 
+[root@localhost ~]# touch /abc
+[root@localhost ~]# mkdir /data
+[root@localhost ~]# 
+
+[root@localhost ~]# ls -l /abc 
+
+-rw-r--r--. 1 root root 0 Dec 13 22:47 /abc
+
+[root@localhost ~]# ls -ld  /data
+
+drwxr-xr-x. 2 root root 6 Dec 13 22:47 /data
+
+
+Types of Permissions ?
+
+1- Default permissions OR automatic permissions 
+
+2- Custom Permissions 
+
+======================================================================================================
+
+Superuser   ===> ~ OR home directory [YES] + Out side of the home directory OR public Place [YES]
+
+Normaluser  ===> ~ OR home directory [YES] + Out side of the home directory [as per current permissions ] but yes it is customisable 
+
+======================================================================================================
+
+/  ====> private place +  public place
+
+======================================================================================================umask and chmod 
+
+What is the default permissions ? ===> umask value ===> pre set        ?  using umask value
+
+How we can change these permissions for any user or any group members  ?  using chmod command 
+
+======================================================================================================
+ 
+
+permissions  ==> Three Attributes
+
+Read         ==>   r              <==>  4
+
+Write        ==>   w              <==>  2
+ 
+Execute      ==>   x              <==>  1
+
+======================================================================================================
+  
+                symoblic code      Numeric Code
+
+======================================================================================================
+
+none         ==>   -                  0
+
+======================================================================================================
+r  ==> 4
+w  ==> 2
+x  ==> 1
+======================================================================================================
+
+read  write  execute  ==> r w x  ==> rwx
+                      ==> 4 2 1  ==> 7
+                      ==> r - -  ==> 4
+                      ==> r - x  ==> 5
+                      ==> - - -  ==> 0    
+====================================================================================================== 
+
+pair   ==>  r - -     OR  4+0+0  ==> 4   
+       ==>  r - x     OR  4+0+1  ==> 5  
+       ==>  r w -     OR  4+2+0  ==> 6  
+       ==>  r w x     OR  4+2+1  ==> 7   
+       ==>  - - -     OR  0+0+0  ==> 0   
+======================================================================================================
+ 
+
+======================================================================================================
+
+1- Default permissions OR automatic permission  ===> Current Using Umask Value 
+2- Custom permissions as per needs or use case  ===> Using chmod 
+======================================================================================================
+
+======================================================================================================
+
+#  touch  /abc     ==> default permissions
+#  mkdir  /data    ==> default permissions
+
+======================================================================================================
+
+
+# ls  -l  /abc   OR  #  ll  /abc  
+
+# ls  -ld  /data  
+======================================================================================================
+
+
+File OR  permission    ==> Three Blocks
+
+First Block   ==> r w x  OR 7
+Second Block  ==> r w x  OR 7
+Third Block   ==> r w x  OR 7
+
+
+======================================================================================================
+
+Permission ==> 10 Bits
+  
+ -      ---      ---      ---        
+       owner    group    others      
+ 
+
+-   ==> Blank  ==> File
+d   ==> Directory
+l   ==> Soft link or sort cut
+
+======================================================================================================
+
+File or directory  ==> Three Block  ==> 7 7 7  ==>  highest permissions ==>  rwx  rwx  rwx  
+                                    ==> 0 0 0  ==>  lowest permissions  ==>  ---  ---  ---
+
+======================================================================================================
+
+
+   
+
+=====================================================================================================
+
+Note:-
+
+Owner — the user who creates and owns a file or folder.
+Group — all users who are members of the same group.
+Others — all other users on the system who are neither the owner nor members of a group.
+
+======================================================================================================
+WHO AM I for this file or folder ?
+======================================================================================================
+# useradd soniya  
+
+# mkdir  /data 
+# ls -ld /data
+
+-rwxr-xr-x. 2 root  root  6  time  /data
+
+owner   ==> root      
+group   ==> root     
+
+others
+
+deepak 
+sumit
+tcs <== user1 user2 user3
+ibm <== i1 i2 i3 
+====================================================================================================
+
+Who am i for this file or directory  ?
+====================================================================================================
+
+
+==================================================================================================== 
+
+
+First-Bit     First Block    Second Block     Third Block 
+               Owner           Group         Other users/groups
+
+==================================================================================================== 
+
+# chmod  first second third   <file or directoryname>
+
+# ls -l OR # ls -ld  ==>  .  ====>  Final Answer ===> only Three rules 
+
+# ls -l OR # ls -ld ===>  +  ===> Total four rules match
+
+====================================================================================================
+
+WHO AM I for this file or this directory ?
+
+Rule-1   Owner 
+Rule-2   Group Owner and members
+Rule-3   Others user/group
+Rule-4   chmod + setfacl ===>  . OR +
+
+====================================================================================================
+
+
+================================================
+Permission apply ==> 
+
+1- chmod     ==> Owner group Others  ==> one short ==> overall ==> but you can not mentioned 
+                                                                   the particular user/groupname 
+
+2- setfacl   ==> name based permission  ==> particular user / Particular groups 
+
+====================================================================================================
+
+
+.    ==> there is no ACL on it
++    ==> we have applied advance permissions which is called ACL.   # setfacl and getfacl
+
+first second third .   ==> chmod 
+first second third +   ==> chmod + setfacl
+
+================================================ ====================================================
+
+
+# chmod     owner group others   <file or directory-name>  
+
+
+# setfacl  -m  u:username:r-x      /data 
+
+               g:groupname:rwx     /data
+
+
+
+# getfacl  /data  
+
+
+
+====================================================================================================
+
+Practical Session
+
+====================================================================================================
+ 
+Default permisisons ==> using umask value
+Custom permissions  ==> chmod + setfacl 
+====================================================================================================
+  
+Umask Value  ?
+
+Umask value always define the default permissions of any upcomming file and directory from any users account.
+
+===================================================================================================
+
+root ==> and Normal user ===> IN RHEL-9 & RHEL-10  
+
+Directory  ==>    7      5        5
+                Owner   group    Others
+                rwx     r-x      r-x
+
+
+File      ==>    6       4        4
+                owner   group    others
+                 rw-     r--      r--
+               
+
+================================================OLD Version Till RHEL-8
+deepak ==> 
+
+Directory  ==>    7      7        5
+                Owner   group    Others
+                rwx     rwx      r-x
+
+
+File      ==>    6       6       4
+                owner   group    others
+                 rw-     rw-      r--
+
+===============================================NEW Concept in rhel-9 + RHEL-10
+
+deepak ==> 
+
+Directory  ==>    7      5        5
+                Owner   group    Others
+                rwx     r-x      r-x
+
+
+File      ==>    6       4       4
+                owner   group    others
+                 rw-     r--      r--
+===============================================by RHEL-9 
+root  ==> directory ==>  755
+          file      ==>  644
+
+deepak  ==> directory  ==> 755
+        ==> file       ==> 644 
+===============================================
+In RHEL-9
+
+default umask value for super user account ==>  0 2 2
+"  "   "   "    "   "   normal user "  "   ==>  0 2 2
+
+===============================================TILL RHEL-8
+default umask value for super user account ==>  0 2 2
+"  "   "   "    "   "   normal user "  "   ==>  0 0 2
+=============================================== 
+
+
+===============================================
+root  ==> default permissions 
+
+directory  ==>   7 7 7
+              -  0 2 2
+                ======
+                 7 5 5
+                ======
+
+file       ==>   6 6 6
+              -  0 2 2
+                ======
+                 6 4 4
+                ======
+=====================================in RHEL-8 =========
+deepak 
+
+directory  ==>   7 7 7
+              -  0 0 2
+                ======
+                 7 7 5
+                ======
+
+
+file       ==>   6 6 6
+              -  0 0 2
+                ======
+                 6 6 4
+                ======
+=========================================================
+Why ?
+=========================================================
+IN RHEL-9 & RHEL-10
+
+Super user OR Normal user  ==> umask values is same for the both of them  
+
+directory  ==>   7 7 7
+              -  0 2 2
+                ======
+                 7 5 5
+                ======
+
+
+file       ==>   6 6 6
+              -  0 2 2
+                ======
+                 6 4 4
+                ======
+
+=========================================================
+How we can check the umask value or How we can change it ?
+=========================================================
+
+
+[root@localhost ~]# umask 
+0022
+[root@localhost ~]# mkdir  /redhat
+[root@localhost ~]# 
+[root@localhost ~]# touch  /ubuntu 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /redhat
+drwxr-xr-x. 2 root root 6 Jul  5 16:01 /redhat
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# expr 777  -  022
+755
+[root@localhost ~]# ls -l /ubuntu
+-rw-r--r--. 1 root root 0 Jul  5 16:01 /ubuntu
+[root@localhost ~]# 
+[root@localhost ~]# expr  666  - 022
+644
+[root@localhost ~]# 
+
+[root@localhost ~]# umask  222       [ to set TEMP Umask value ]
+[root@localhost ~]# 
+[root@localhost ~]# umask 
+0222
+[root@localhost ~]# 
+[root@localhost ~]# mkdir /gaurav
+[root@localhost ~]# 
+[root@localhost ~]# touch /krishna  
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /gaurav
+dr-xr-xr-x. 2 root root 6 Jul  5 16:03 /gaurav
+[root@localhost ~]# 
+[root@localhost ~]# ls -l  /krishna 
+-r--r--r--. 1 root root 0 Jul  5 16:03 /krishna
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# vim  .bashrc 
+
+go in bottom of this file  
+
+umask  222
+
+:wq!
+
+[root@localhost ~]# umask 
+0222
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /krishna
+-r--r--r--. 1 root root 0 Jul  5 16:03 /krishna
+[root@localhost ~]# ls -ld /gaurav
+dr-xr-xr-x. 2 root root 6 Jul  5 16:03 /gaurav
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# umask  022 
+[root@localhost ~]# 
+[root@localhost ~]# vim .bashrc 
+
+delete your entry 
+
+:wq!
+
+
+now you will  get your default umask value  
+
+[root@localhost ~]# cat  /etc/bashrc |  grep  umask 
+
+==========================================================
+umask      ==> default permission controlling 
+========================================================== Permission Add/Remove
+
+chmod      ==> Permissions apply or modify  ==> Overall or one short ==> owner group others
+setfacl    ==> with naming concept 
+
+========================================================== Optional 
+chown      ==> change owner
+chgrp      ==> change group owner 
+
+========================================================== /data ==> soniya  soniya 
+/data  ==> root root   ==> users and group 
+========================
+========================
+
+Ownership controlling Command ==>
+
+chown  ==> owner ship 
+chgrp  ==> group owner ship 
+
+
+Permissions cotrolling command 
+
+chmod + setfacl
+
+=======================
+ls -l  ls -ld  getfacl   ==> Permission read 
+=======================
+
+
+=======================
+
+======================================
+MIX Practical ==> chmod + setfacl + chown + chgrp + ls -l + ls -ld + getfacl
+======================================
+Syntax and use case
+
+Basic Permission
+
+Example of chmod ======> alternate  ===> ACL
+Example of chown
+Example of chgrp
+Example of ls -l and ls -ld 
+
+=====================================
+Basic permissions     ===> umask chmod chown chgrp
+Advance permission    ===> setfacl + getfacl
+
+Example of setfacl and getfacl command
+=====================================
+
+Use case ==> as per needs   ==> practically build ==>
+
+=====================================
+
+Rules
+
+1-
+
+2-
+
+3-
+
+====================================
+
+4-
+
+
+After reading these four rules we can declare the final action
+
+====================================
+
+
+
+
