@@ -827,4 +827,266 @@ bash-5.1# exit
 Permissions Management 
 
 
-=============================================================================================
+============
+=================================================================================
+
+==========================================================
+Permission notes
+==========================================================
+[root@localhost ~]# mkdir  /data 
+[root@localhost ~]# 
+[root@localhost ~]# touch  /abc  
+[root@localhost ~]# 
+[root@localhost ~]# ls -l  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# ll  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxr-xr-x. 2 root root 6 Aug  1 10:31 /data
+
+
+[root@localhost ~]# ls -ld /data
+drwxr-xr-x. 2 root root 6 Aug  1 10:31 /data
+[root@localhost ~]# 
+[root@localhost ~]# ll  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# chmod  750  /data
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxr-x---. 2 root root 6 Aug  1 10:31 /data
+[root@localhost ~]# 
+[root@localhost ~]# useradd soniya  
+[root@localhost ~]# 
+[root@localhost ~]# su - soniya 
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ ls -ld  /data
+drwxr-x---. 2 root root 6 Aug  1 10:31 /data
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ grops soniya 
+grops: can't open file 'soniya'
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ groups soniya 
+soniya : soniya
+[soniya@localhost ~]$ cd /data
+-bash: cd: /data: Permission denied
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ ls   /data
+ls: cannot open directory '/data': Permission denied
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+==========================================================
+
+How we can check umask value and how we change this if it is required  ?
+
+==========================================================
+
+
+
+[root@localhost ~]# umask 
+0022
+[root@localhost ~]# 
+[root@localhost ~]# expr 777 -  022
+755
+[root@localhost ~]# 
+[root@localhost ~]# expr 0777 -  0022
+755
+[root@localhost ~]# expr 666 -  022
+644
+[root@localhost ~]# 
+[root@localhost ~]# expr 0666 -  0022
+644
+[root@localhost ~]# 
+
+
+[root@localhost ~]# umask  222       [ to set TEMP Umask value ]
+[root@localhost ~]# 
+[root@localhost ~]# umask 
+0222
+[root@localhost ~]# 
+
+
+[root@localhost ~]# mkdir  /linux  
+[root@localhost ~]# 
+[root@localhost ~]# touch /xyz  
+[root@localhost ~]# 
+[root@localhost ~]# ls -l  /xyz 
+-r--r--r--. 1 root root 0 Aug  1 11:06 /xyz
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /linux  
+dr-xr-xr-x. 2 root root 6 Aug  1 11:06 /linux
+[root@localhost ~]# 
+[root@localhost ~]# umask 
+0222
+[root@localhost ~]# expr 777 - 222
+555
+[root@localhost ~]# expr 666 - 222
+444
+
+[root@localhost ~]# vim  .bashrc 
+
+go in bottom of this file  
+
+umask  222
+
+:wq!
+
+[root@localhost ~]# umask 
+0222
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -l  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /linux
+dr-xr-xr-x. 2 root root 6 Aug  1 11:06 /linux
+[root@localhost ~]# 
+[root@localhost ~]# chmod  644  /abc 
+[root@localhost ~]# 
+[root@localhost ~]# chmod  755  /linux
+[root@localhost ~]# 
+[root@localhost ~]# ls -l  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /linux  
+drwxr-xr-x. 2 root root 6 Aug  1 11:06 /linux
+[root@localhost ~]# 
+
+
+
+
+now you will  get your default umask value  
+
+[root@localhost ~]# cat  /etc/bashrc |  grep  umask 
+
+[root@localhost ~]# su - soniya  
+[soniya@localhost ~]$ umask 
+0022
+[soniya@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+
+
+=======================================================================
+Examples of umask
+=======================================================================
+Examples of ls -l  and  ls -ld and stat  
+=======================================================================
+Examples of chmod + chown + chgrp 
+=======================================================================
+Examples of chmod + setfacl 
+=======================================================================
+
+[root@localhost ~]# ls -l  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /abc 
+-rw-r--r--. 1 root root 0 Aug  1 10:31 /abc
+[root@localhost ~]# 
+[root@localhost ~]# stat /abc 
+  File: /abc
+  Size: 0         	Blocks: 0          IO Block: 4096   regular empty file
+Device: 802h/2050d	Inode: 2531960     Links: 1
+Access: (0644/-rw-r--r--)  Uid: (    0/    root)   Gid: (    0/    root)
+Context: unconfined_u:object_r:etc_runtime_t:s0
+Access: 2025-08-01 10:31:33.520712536 +0530
+Modify: 2025-08-01 10:31:33.520712536 +0530
+Change: 2025-08-01 11:09:31.180253775 +0530
+ Birth: 2025-08-01 10:31:33.520712536 +0530
+[root@localhost ~]# 
+
+=======================================================================
+
+[root@localhost ~]# ls -ld  /root 
+dr-xr-x---. 13 root root 4096 Aug  1 11:10 /root
+[root@localhost ~]# 
+[root@localhost ~]# ls /home  
+soniya  student
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+[root@localhost ~]# su - soniya 
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ cd /root
+-bash: cd: /root: Permission denied
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ ls  /root
+ls: cannot open directory '/root': Permission denied
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ exit
+logout
+
+=======================================================================
+Choice-1  using chmod 
+Choice-2  using setfcal
+=======================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# ll  /home  
+total 0
+drwx------. 4 soniya  soniya  113 Aug  1 10:43 soniya
+drwx------. 3 student student  78 Jul 13 17:04 student
+[root@localhost ~]# 
+[root@localhost ~]# su - soniya 
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ cd  /home/student
+-bash: cd: /home/student: Permission denied
+[soniya@localhost ~]$ 
+[soniya@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# su - student  
+[student@localhost ~]$ 
+[student@localhost ~]$ cd /home/soniya
+-bash: cd: /home/soniya: Permission denied
+[student@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+=======================================================================
+[root@localhost ~]# ls -ld /etc
+drwxr-xr-x. 132 root root 8192 Aug  1 10:40 /etc
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /home/soniya
+drwx------. 4 soniya soniya 113 Aug  1 10:43 /home/soniya
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /etc
+drwxr-xr-x. 132 root root 8192 Aug  1 10:40 /etc
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /home/soniya
+drwx------. 4 soniya soniya 113 Aug  1 10:43 /home/soniya
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /
+dr-xr-xr-x. 20 root root 282 Aug  1 11:06 /
+
+=======================================================================
+=======================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
