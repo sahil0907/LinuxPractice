@@ -252,4 +252,80 @@ drwxr-xr-x. 2 root root 42 Aug  4 10:04 /data
 [root@localhost ~]# 
 [root@localhost ~]# 
 [root@localhost ~]# 
+=====================================================================
 
+Permission Management ===> remove/add
+
+chmod
+setfacl
+
+ls -ld 
+ls -l       ===> Permission Read 
+getfacl
+=====================================================================
+
+[root@localhost ~]# ls -ld /data
+drwxr-xr-x. 2 root root 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# ll  /data
+total 0
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc1
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc2
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc3
+[root@localhost ~]# 
+[root@localhost ~]# chmod  777  /data 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxrwxrwx. 2 root root 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# chmod  -R  777  /data 
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxrwxrwx. 2 root root 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# ll  /data
+total 0
+-rwxrwxrwx. 1 root root 0 Aug  4 09:49 abc1
+-rwxrwxrwx. 1 root root 0 Aug  4 09:49 abc2
+-rwxrwxrwx. 1 root root 0 Aug  4 09:49 abc3
+[root@localhost ~]# 
+[root@localhost ~]# chmod  644  /data/* 
+[root@localhost ~]# 
+[root@localhost ~]# ll  /data
+total 0
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc1
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc2
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc3
+
+[root@localhost ~]# chmod 755   /data
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld    /data
+drwxr-xr-x. 2 root root 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# ll     /data
+total 0
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc1
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc2
+-rw-r--r--. 1 root root 0 Aug  4 09:49 abc3
+[root@localhost ~]# 
+
+
+=====================================================================
+
+
+
+[root@localhost ~]# ls -ld /data
+drwxr-xr-x. 2 root root 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# groupadd   krnetwork
+[root@localhost ~]# 
+[root@localhost ~]# grep  krnetwork  /etc/group  
+krnetwork:x:1019:
+[root@localhost ~]# 
+[root@localhost ~]# chgrp  krnetwork /data
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxr-xr-x. 2 root krnetwork 42 Aug  4 10:04 /data
