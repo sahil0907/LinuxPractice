@@ -329,3 +329,92 @@ krnetwork:x:1019:
 [root@localhost ~]# 
 [root@localhost ~]# ls -ld /data
 drwxr-xr-x. 2 root krnetwork 42 Aug  4 10:04 /data
+
+======================================================================
+
+[root@localhost ~]# useradd rajat
+[root@localhost ~]# 
+[root@localhost ~]# useradd -G  krnetwork alok  
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld  /data
+drwxr-x---. 2 root krnetwork 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# groups rajat
+rajat : rajat
+[root@localhost ~]# 
+[root@localhost ~]# groups alok  
+alok : alok krnetwork
+[root@localhost ~]# 
+[root@localhost ~]# su - rajat 
+[rajat@localhost ~]$ 
+[rajat@localhost ~]$ ls /data
+ls: cannot open directory '/data': Permission denied
+[rajat@localhost ~]$ cd  /data
+-bash: cd: /data: Permission denied
+[rajat@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+[root@localhost ~]# su - alok 
+[alok@localhost ~]$ groups alok  
+alok : alok krnetwork
+[alok@localhost ~]$ 
+[alok@localhost ~]$ ls -ld /data
+drwxr-x---. 2 root krnetwork 42 Aug  4 10:04 /data
+[alok@localhost ~]$ 
+[alok@localhost ~]$ ls /data
+abc1  abc2  abc3
+[alok@localhost ~]$ cd  /data
+[alok@localhost data]$ ls
+abc1  abc2  abc3
+[alok@localhost data]$ touch abc4
+touch: cannot touch 'abc4': Permission denied
+[alok@localhost data]$ exit
+logout
+
+
+[root@localhost ~]# 
+[root@localhost ~]# chmod  770  /data
+[root@localhost ~]# 
+[root@localhost ~]# ls -ld /data
+drwxrwx---. 2 root krnetwork 42 Aug  4 10:04 /data
+[root@localhost ~]# 
+[root@localhost ~]# su - alok 
+[alok@localhost ~]$ cd /data
+[alok@localhost data]$ ls
+abc1  abc2  abc3
+[alok@localhost data]$ touch abc4
+[alok@localhost data]$ rm -rf abc4
+[alok@localhost data]$ exit
+logout
+[root@localhost ~]# useradd -G  krnetwork  raju 
+[root@localhost ~]# 
+[root@localhost ~]# su - raju  
+[raju@localhost ~]$ groups raju 
+raju : raju krnetwork
+[raju@localhost ~]$ 
+[raju@localhost ~]$ ls -ld /data
+drwxrwx---. 2 root krnetwork 42 Aug  4 10:19 /data
+[raju@localhost ~]$ 
+[raju@localhost ~]$ cd /data
+[raju@localhost data]$ ls
+abc1  abc2  abc3
+[raju@localhost data]$ exit
+logout
+[root@localhost ~]# gpasswd  -d raju krnetwork
+Removing user raju from group krnetwork
+[root@localhost ~]# 
+[root@localhost ~]# su - raju 
+[raju@localhost ~]$ 
+[raju@localhost ~]$ groups raju 
+raju : raju
+[raju@localhost ~]$ 
+[raju@localhost ~]$ ls -ld /data
+drwxrwx---. 2 root krnetwork 42 Aug  4 10:19 /data
+[raju@localhost ~]$ 
+[raju@localhost ~]$ ls  /data
+ls: cannot open directory '/data': Permission denied
+[raju@localhost ~]$ cd   /data
+-bash: cd: /data: Permission denied
+[raju@localhost ~]$ exit
+logout
+[root@localhost ~]# 
