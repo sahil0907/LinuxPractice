@@ -1,0 +1,70 @@
+[root@192 tmp]# getfacl myscript.sh 
+# file: myscript.sh
+# owner: root
+# group: root
+user::rwx
+group::r--
+other::---
+
+[root@192 tmp]# setfacl -m postgres:x myscript.sh 
+[root@192 tmp]# getfacl myscript.sh 
+# file: myscript.sh
+# owner: root
+# group: root
+user::rwx
+user:postgres:--x
+group::r--
+mask::r-x
+other::---
+
+[root@192 tmp]# su postgres
+[postgres@192 tmp]$ ./myscript.sh 
+bash: ./myscript.sh: Permission denied
+[postgres@192 tmp]$ bash myscript.sh 
+bash: myscript.sh: Permission denied
+[postgres@192 tmp]$ exit
+exit
+[root@192 tmp]# setfacl -m postgres:rx myscript.sh 
+[root@192 tmp]# su postgres
+[postgres@192 tmp]$ bash myscript.sh 
+Script running
+[postgres@192 tmp]$ exit
+exit
+[root@192 tmp]# getfacl myscript.sh 
+# file: myscript.sh
+# owner: root
+# group: root
+user::rwx
+user:postgres:r-x
+group::r--
+mask::r-x
+other::---
+
+[root@192 tmp]# su postgres
+[postgres@192 tmp]$ bash myscript.sh 
+Script running
+[postgres@192 tmp]$ vim myscript.sh 
+[postgres@192 tmp]$ exit
+exit
+[root@192 tmp]# getfacl myscript.sh 
+# file: myscript.sh
+# owner: root
+# group: root
+user::rwx
+user:postgres:r-x
+group::r--
+mask::r-x
+other::---
+
+[root@192 tmp]# su devuser
+[devuser@192 tmp]$ bash myscript.sh 
+bash: myscript.sh: Permission denied
+[devuser@192 tmp]$ exit
+exit
+[root@192 tmp]# su oracle
+[oracle@192 tmp]$ bash myscript.sh 
+bash: myscript.sh: Permission denied
+[oracle@192 tmp]$ exit
+exit
+[root@192 tmp]# 
+
