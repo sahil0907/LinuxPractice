@@ -1,0 +1,44 @@
+[root@192 ~]# which fdisk
+/usr/sbin/fdisk
+[root@192 ~]# chmod u-s /usr/sbin/fdisk
+[root@192 ~]# ls -l /usr/sbin/fdisk
+-rwxr-xr-x. 1 root root 114912 Jan 16  2025 /usr/sbin/fdisk
+[root@192 ~]# su - oracle
+[oracle@192 ~]$ fdisk -l
+fdisk: cannot open /dev/nvme0n1: Permission denied
+fdisk: cannot open /dev/sr0: Permission denied
+fdisk: cannot open /dev/mapper/rhel_192-root: Permission denied
+fdisk: cannot open /dev/mapper/rhel_192-swap: Permission denied
+[oracle@192 ~]$ exit
+logout
+[root@192 ~]# which fdisk
+/usr/sbin/fdisk
+[root@192 ~]# chmod u+s /usr/sbin/fdisk
+[root@192 ~]# ls -l /usr/sbin/fdisk
+-rwsr-xr-x. 1 root root 114912 Jan 16  2025 /usr/sbin/fdisk
+[root@192 ~]# su - oracle
+[oracle@192 ~]$ fdisk -l
+Disk /dev/nvme0n1: 20 GiB, 21474836480 bytes, 41943040 sectors
+Disk model: VMware Virtual NVMe Disk
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x43bae303
+
+Device         Boot   Start      End  Sectors Size Id Type
+/dev/nvme0n1p1 *       2048  2099199  2097152   1G 83 Linux
+/dev/nvme0n1p2      2099200 41943039 39843840  19G 8e Linux LVM
+
+
+Disk /dev/mapper/rhel_192-root: 17 GiB, 18249416704 bytes, 35643392 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/mapper/rhel_192-swap: 2 GiB, 2147483648 bytes, 4194304 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
