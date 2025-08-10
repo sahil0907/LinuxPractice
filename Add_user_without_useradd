@@ -1,0 +1,125 @@
+===============================================================================
+
+       How we can add  user without using useradd command ?
+       
+                         OR
+
+How we can add user step by step manually without using useradd command ?
+
+
+================================================================================
+
+[root@localhost ~]# cd /home
+[root@localhost home]# 
+[root@localhost home]# ll 
+total 0
+drwx------. 4 sandeep sandeep 137 Aug  7 09:45 sandeep
+drwx------. 4 soniya  soniya  125 Aug  7 10:00 soniya
+drwx------. 3 student student  78 Jul 13 17:04 student
+drwx------. 4 user1   user1   113 Aug  7 11:14 user1
+drwx------. 4 user2   user2   113 Aug  7 11:15 user2
+[root@localhost home]# 
+[root@localhost home]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cd /home 
+[root@localhost home]# 
+[root@localhost home]# mkdir rajeev
+[root@localhost home]# 
+[root@localhost home]# ll
+total 0
+drwxr-xr-x. 2 root    root      6 Aug  7 11:34 rajeev
+drwx------. 4 sandeep sandeep 137 Aug  7 09:45 sandeep
+drwx------. 4 soniya  soniya  125 Aug  7 10:00 soniya
+drwx------. 3 student student  78 Jul 13 17:04 student
+drwx------. 4 user1   user1   113 Aug  7 11:14 user1
+drwx------. 4 user2   user2   113 Aug  7 11:15 user2
+
+[root@localhost home]# 
+[root@localhost home]# 
+[root@localhost home]# id rajeev 
+id: ‘rajeev’: no such user
+[root@localhost home]# 
+[root@localhost home]# id soniya 
+uid=1002(soniya) gid=1002(soniya) groups=1002(soniya)
+[root@localhost home]# 
+[root@localhost home]# vim  /etc/passwd
+
+rajeev:x:1010:1010::/home/rajeev:/bin/bash
+
+:wq!
+
+[root@localhost home]# vim  /etc/group  
+
+
+rajeev:x:1010:
+
+
+:wq!
+[root@localhost home]# 
+[root@localhost home]# chown  rajeev  /home/rajeev
+[root@localhost home]# chgrp  rajeev  /home/rajeev
+[root@localhost home]# 
+[root@localhost home]# ll
+total 0
+drwxr-xr-x. 2 rajeev  rajeev    6 Aug  7 11:34 rajeev
+drwx------. 4 sandeep sandeep 137 Aug  7 09:45 sandeep
+drwx------. 4 soniya  soniya  125 Aug  7 10:00 soniya
+drwx------. 3 student student  78 Jul 13 17:04 student
+drwx------. 4 user1   user1   113 Aug  7 11:14 user1
+drwx------. 4 user2   user2   113 Aug  7 11:15 user2
+[root@localhost home]# 
+
+[root@localhost home]# chmod   700  /home/rajeev
+[root@localhost home]# ll
+total 0
+drwx------. 2 rajeev  rajeev    6 Aug  7 11:34 rajeev
+drwx------. 4 sandeep sandeep 137 Aug  7 09:45 sandeep
+drwx------. 4 soniya  soniya  125 Aug  7 10:00 soniya
+drwx------. 3 student student  78 Jul 13 17:04 student
+drwx------. 4 user1   user1   113 Aug  7 11:14 user1
+drwx------. 4 user2   user2   113 Aug  7 11:15 user2
+[root@localhost home]# 
+
+[root@localhost home]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# cd /etc/skel
+[root@localhost skel]# ls -a 
+.  ..  .bash_logout  .bash_profile  .bashrc  .mozilla
+[root@localhost skel]# 
+[root@localhost skel]# cp -rf  .bash*   .mozilla   /home/rajeev
+[root@localhost skel]# cd
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# id rajeev 
+uid=1010(rajeev) gid=1010(rajeev) groups=1010(rajeev)
+[root@localhost ~]# 
+[root@localhost ~]# groups rajeev 
+rajeev : rajeev
+[root@localhost ~]# 
+[root@localhost ~]# passwd rajeev
+Changing password for user rajeev.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@localhost ~]# 
+[root@localhost ~]# su - rajeev  
+[rajeev@localhost ~]$ ls
+[rajeev@localhost ~]$ cd
+[rajeev@localhost ~]$ pwd
+/home/rajeev
+[rajeev@localhost ~]$ exit
+logout
+[root@localhost ~]# 
+===============================================================
+===============================================================
+
+
+
+
+
