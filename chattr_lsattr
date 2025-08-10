@@ -1,0 +1,103 @@
+[root@192 ~]# lsattr abc
+---------------------- abc
+[root@192 ~]# chattr +i abc
+[root@192 ~]# lsattr abc
+----i----------------- abc
+[root@192 ~]# cat abc
+[root@192 ~]# echo "helo" > abc
+bash: abc: Operation not permitted
+[root@192 ~]# cat abc
+[root@192 ~]# chattr -i abc
+[root@192 ~]# lsattr abc
+---------------------- abc
+[root@192 ~]# chattr +a abc
+[root@192 ~]# echo hello > abc
+bash: abc: Operation not permitted
+[root@192 ~]# cat abc
+[root@192 ~]# lsattr abc
+-----a---------------- abc
+[root@192 ~]# echo hello >>abc
+[root@192 ~]# cat abc
+hello
+[root@192 ~]# lsattr abc
+-----a---------------- abc
+[root@192 ~]# chattr -a abc
+[root@192 ~]# lsattr abc
+---------------------- abc
+[root@192 ~]# ls
+abc              Desktop    Downloads  Pictures  Templates
+anaconda-ks.cfg  Documents  Music      Public    Videos
+[root@192 ~]# cd Downloads
+[root@192 Downloads]# touch abc{1..4}
+[root@192 Downloads]# ls
+abc1  abc2  abc3  abc4  myfile
+[root@192 Downloads]# rm -rf myfile
+[root@192 Downloads]# ls
+abc1  abc2  abc3  abc4
+[root@192 Downloads]# cd ..
+[root@192 ~]# lsattr -R Downloads/
+---------------------- Downloads/abc1
+---------------------- Downloads/abc2
+---------------------- Downloads/abc3
+---------------------- Downloads/abc4
+[root@192 ~]# chattr -R +a Downloads/
+[root@192 ~]# lsattr -R Downloads/
+-----a---------------- Downloads/abc1
+-----a---------------- Downloads/abc2
+-----a---------------- Downloads/abc3
+-----a---------------- Downloads/abc4
+[root@192 ~]# cd Do
+bash: cd: Do: No such file or directory
+[root@192 ~]# cd Downloads/
+[root@192 Downloads]# ls
+abc1  abc2  abc3  abc4
+[root@192 Downloads]# lsattr
+-----a---------------- ./abc1
+-----a---------------- ./abc2
+-----a---------------- ./abc3
+-----a---------------- ./abc4
+[root@192 Downloads]# echo "hello1" >> abc1
+[root@192 Downloads]# echo "hello2" >> abc2
+[root@192 Downloads]# echo "hello3" >> abc3
+[root@192 Downloads]# echo "hello4" >> abc4
+[root@192 Downloads]# cat abc1
+hello1
+[root@192 Downloads]# cat abc2
+hello2
+[root@192 Downloads]# cat abc3
+hello3
+[root@192 Downloads]# cat abc4
+hello4
+[root@192 Downloads]# cd ..
+[root@192 ~]# chattr -d +i Downloads
+[root@192 ~]# lsattr Downloads/
+-----a---------------- Downloads/abc1
+-----a---------------- Downloads/abc2
+-----a---------------- Downloads/abc3
+-----a---------------- Downloads/abc4
+[root@192 ~]# cd Do
+bash: cd: Do: No such file or directory
+[root@192 ~]# cd Downloads/
+[root@192 Downloads]# touch abc5
+touch: setting times of 'abc5': No such file or directory
+[root@192 Downloads]# mkdir abc5
+mkdir: cannot create directory ‘abc5’: Operation not permitted
+[root@192 Downloads]# cd ..
+[root@192 ~]# chattr -i Downloads
+[root@192 ~]# cd Downloads/
+[root@192 Downloads]# touch abc5
+[root@192 Downloads]# echo "hello5" > abc5
+[root@192 Downloads]# cat abc5
+hello5
+[root@192 Downloads]# cd ..
+[root@192 ~]# chattr -R +a Downloads/
+[root@192 ~]# ls -R Downloads/
+Downloads/:
+abc1  abc2  abc3  abc4  abc5
+[root@192 ~]# lsattr -R Downloads/
+-----a---------------- Downloads/abc1
+-----a---------------- Downloads/abc2
+-----a---------------- Downloads/abc3
+-----a---------------- Downloads/abc4
+-----a---------------- Downloads/abc5
+
