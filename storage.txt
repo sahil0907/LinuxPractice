@@ -1,0 +1,459 @@
+============================================================================================================
+             
+         Storage Related Concept in Linux
+
+                  OR
+            
+           Storage Management
+
+============================================================================================================
+
+Objective:1 How data store in Windows/Linux ?
+
+Objective:2 What is the concept of mounting and unmounting devices in Linux ?
+
+Objective:3 How we can access USB drive in Linux using manual mountpoint concept and automatic mount point concept ?
+
+============================================================================================================
+
+Objective:4  How we can create Partition in linux During the OS installation as per our need ?
+
+
+Objective:5  How we can create Partition in linux After the OS installation as per our need to store data ?
+============================================================================================================
+
+              1- Standard partition
+              2- LVM based 
+              3- SWAP partition 
+
+============================================================================================================
+
+Computer ==> RAM + CPU + Motherboard + NIC + keyboard + mouse + monitor + DISK 
+
+============================================================================================================
+
+In windows/Linux
+
+1- During the OS installation ==> OS defined data OR OS managing Directory  ==> Mandatory Partition
+
+2- After the OS installation ==> available disk ==> free space ==> cut  ==> save ==> data store ==> start 
+
+============================================================================================================
+
+In Windows  ==> We always use the concept of C: D: E: F drive
+
+In Linux    ==> There is no concept of C: D: E: F:
+
+In Linux we have single parent directory to control complete Linux data ==> OS data + Custom data
+
+/  ==> parent directory or root partition or parent partition
+
+DISK  ==> partition ==> need to create mount point on any directory to start the data writing into any partition
+
+/dev   ==> control all h/W related devices
+
+/dev/sda       ===>  disk name
+
+/dev/sda1      ===> partition number-1  
+/dev/sda2      ===> partition number-2
+/dev/sda3      ===> partition number-3
+
+
+# cd /dev/sda  ==>NO
+# ls  /dev/sda ==> NO
+# cd /dev/sda1 ==> NO
+# ls   ==> NO
+
+cd ===> change directory
+ls ===> to check data listing of any directory
+
+===========================================================================================================
+===========================================================================================================
+
+# lsblk 
+
+
+Devicename                                 mountpoint 
+
+/dev/sda1   =====>        XYZ-SIZE             /            <=== complete directory will take the space from this directory
+
+/dev/sda2   =====>                           /boot
+
+==========================================================================================================
+
+
+# cd /dev/sda1
+# cd /dev/sda2
+
+# ls /            ===> exccept of  /boot   ===>  /dev/sda1
+# ls /boot        ===> /dev/sda2 
+
+# df -h 
+
+
+============================================================================================================
+Fresh Computer ==> Motherboard + RAM + DISK + CPU + Monitor + keyboard + mouse 
+============================================================================================================
+In DISK ==> Windows Installation ==> Mandatory partition
+
+We can control complete windows OS using  ==> only  ==> C:\  Drive  ==> OS related data + Custom data store
+
+but 
+
+for Recommended
+
+C:\                   ==> please use this drive only for os and application related data
+
+Remaining's  D:  E:   ==> use these drives to store your any personal data
+ 
+============================================================================================================
+Linux Installation
+
+During the OS installation 
+
+
+Choice-1  automatic partition creation  ==> space design + required partition automatic create  [Smart method] ===> 
+
+Choice-2  Custom partition OR manually  ==> we can define the size of the partition + we will decide how many partition we needed + Type
+                                            As a standard OR as a LVM + SWAP partition [you can not store the data]
+
+SWAP  ==> Choice-1  During the OS installation time
+
+      ==> Choice-2  After the OS installation using command line as per needs.
+
+SWAP  ==> optional Partition but recommended. 
+
+============================================================================================================
+
+/  ==> complete Linux controlling directory  ==> OS Defined data + Custom data
+
+============================================================================================================
+
+
+# du -sh  /     ==> around used 4 GB    ==> Server with GUI 
+
+                 [ less then 5GB ] ==> against of the pre installed application
+
+
+As a Standard Concept  ==> Fixed Size concept
+ 
+As a LVM based  ===> scalable concept 
+
+
+During the OS installation Partition Creation ?
+
+1- As a STANDARD  ===> Theory + Practical 
+
+2- As A LVM based setup ==> Theory + Practical   
+
+======================================================= Storage Planning ===> custom 
+
+Note:- Today we will install rhel OS with Standard partition concept  
+
+NEXT TIME ==> LVM theory + LVM practical  ===> LVM based installation  ===> Highly Recommended technology 
+
+
+=============================================================================================================
+/dev/sda  ==> DISK NAME ==> Cut ==>  /    ==> as per need space allocate  ==> Continue ==> OS installation
+
+# lsblk  
+
+/dev/sda     DISK
+
+/dev/sda1    PART    /
+
+
+/  ====> OS defined data  + Custom data
+
+but yes we can also create the new partitions per need and we can create the mount point every partitions as per needs.
+
+=============================================================================================================
+
+How many partition required to installation Linux ?
+
+1:-   /      ==> OS defined data + Custom data   ===> As a NORMAL partition OR As A LVM based ==> we have these two choices
+
+2:-   swap   ==> advance concept of secondary memory or additional memory ==> memory management ==> 
+
+
+=============================================================================================================
+
+Recommended ==> to store os booting files in seperate partition
+
+3:-   /boot                             ==> 1 GB   [ More then enough ]
+  
+=============================================================================================================   
+After the OS installation how we can create partition manually from any disk space and how we can use this ?
+
+=============================================================================================================
+
+=============================================================================================================
+Machine ==> fresh ==> partition ==> as a standard OR fixed size   ==> disk  ==> 30GB  ==>  /dev/sda 
+
+1-  /        ==> around  15GB  ==>  /dev/sda1
+2-  /boot    ==> around  1GB   ==>  /dev/sda2
+3-  swap     ==> around  2GB   ==>  /dev/sda3
+
+=============================================================================================================
+Remaining ==> optional ==> choices
+
+=============================================================================================================
+Free Space  ==> 12 GB  ==> we can use this space after the OS installation using command line
+=============================================================================================================
+DISK Type
+
+
+1- Primary disk OR main disk
+2- secondary OR additional OR Network based disk ==> can be attached with server machine if we required extra disk space
+
+============================================================================================================= 
+# lsblk  
+
+
+/dev/sda  ===> primary
+
+/dev/sdb  ===> additional disk-1
+
+/dev/sdc  ===> additional disk-2
+
+
+============================================================================================================
+============================================================================================================
+During the OS installation  ===> first disk  ===> disk label ==> automatically ===> select as per my current firmware
+After the OS installatiion  ===> There is no disk label ===> We can set this manually as per need  Choice-1  dos or msdos [MBR]  Choice-2 gpt 
+============================================================================================================
+
+How we can install rhel-9 with custom partition method wit standard Technology using BIOS Firmware ?
+How we can install rhel-9 with custom partition method wit standard Technology using UEFI Firmware ?
+
+
+# fdisk -l  /dev/sda  ===> Disk label  ===> dos or msdos  ===> MBR limits apply ===> firmware ===> BIOS
+
+# fdisk -l  /dev/sda  ===> Disk label  ===> gpt           ===> GPT limits apply ===> firmware ===> UEFI
+
+============================================================================================================
+
+MBR and GPT  ===> Terms and Conditions 
+
+============================================================================================================
+
+# fdisk -l  /dev/sda  ===> Disk label  ===> dos or msdos  ===> MBR limits apply ===> firmware ===> BIOS
+
+
+/boot
+/
+swap
+
+remainings are optional
+
+
+============================================================================================================
+
+# fdisk -l  /dev/sda  ===> Disk label  ===> gpt           ===> GPT limits apply ===> firmware ===> UEFI
+
+
+/boot
+/boot/efi
+/
+swap
+
+remainings are optional
+
+
+============================================================================================================
+/boot
+/boot/efi   ===> always will create with as a STANDARD Partition Method
+
+
+============================================================================================================
+============================================================================================================
+How we can install rhel-9 with custom partition method with standard Technology using BIOS Firmware ?
+How we can install rhel-9 with custom partition method with standard Technology using UEFI Firmware ?
+
+============================================================================================================
+
+1- MBR limits and terms & Conditions
+2- GPT limits and Terms & Conditions
+
+============================================================================================================
+
+After the OS installation  ==> disk  ==>  free space  ==> cut ==> data writting  
+
+MBR limits + GPT  limits  + TERMS & Conditions  ==> Final Decision
+
+============================================================================================================
+[root@localhost ~]# fdisk -l   /dev/sda
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos                                            ===> it means this hard desined with BIOS firmware  OR MBR limit applied
+Disk identifier: 0x7fad8a3b
+
+Device     Boot   Start      End  Sectors Size Id Type
+/dev/sda1  *       2048  2099199  2097152   1G 83 Linux
+/dev/sda2       2099200 52428799 50329600  24G 8e Linux LVM
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# fdisk -l   /dev/sda | grep -i Disklabel
+Disklabel type: dos
+[root@localhost ~]# 
+[root@localhost ~]# parted  /dev/sda print
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 26.8GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs          boot
+ 2      1075MB  26.8GB  25.8GB  primary               lvm
+
+
+
+
+======================================================================================
+
+with BIOS Firmware Machine  ===> 1 ==> /boot   2- /   3- SWAP  Remaining are optional
+
+
+======================================================================================
+
+with UEFI Firmware Machine  ===> 1 ==> /boot   2- /boot/efi   3- /     4- SWAp and Remaining are optional
+
+
+
+
+======================================================================================
+with BIOS Firmware Machine  ===> 1 ==> /boot   2- /   3- SWAP  Remaining are optional
+
+After the OS installation we can get this information
+
+[root@localhost ~]# ls
+anaconda-ks.cfg  Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# ls  /
+afs  bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@localhost ~]# 
+[root@localhost ~]# ls /root  
+anaconda-ks.cfg  Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lsblk 
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0   30G  0 disk 
+├─sda1   8:1    0    1G  0 part /boot
+├─sda2   8:2    0 14.6G  0 part /
+└─sda3   8:3    0    2G  0 part [SWAP]
+sr0     11:0    1 1024M  0 rom  
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# free -h 
+               total        used        free      shared  buff/cache   available
+Mem:           3.6Gi       1.1Gi       1.9Gi        25Mi       648Mi       2.2Gi
+Swap:          2.0Gi          0B       2.0Gi
+[root@localhost ~]# 
+[root@localhost ~]# swapon -s  
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+[root@localhost ~]# 
+[root@localhost ~]# du -sh /boot 
+217M	/boot
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# du -sh /
+du: cannot access '/proc/5457/task/5457/fd/4': No such file or directory
+du: cannot access '/proc/5457/task/5457/fdinfo/4': No such file or directory
+du: cannot access '/proc/5457/fd/3': No such file or directory
+du: cannot access '/proc/5457/fdinfo/3': No such file or directory
+
+3.9G	/
+[root@localhost ~]# 
+[root@localhost ~]# du -sh /usr 
+3.6G	/usr
+[root@localhost ~]# ls /
+afs  bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@localhost ~]# 
+[root@localhost ~]# df  -h 
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        1.8G     0  1.8G   0% /dev
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           740M  9.7M  730M   2% /run
+/dev/sda2        15G  3.9G   11G  27% /
+/dev/sda1      1014M  256M  759M  26% /boot
+tmpfs           370M  120K  370M   1% /run/user/0
+[root@localhost ~]# 
+[root@localhost ~]# lsblk 
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0   30G  0 disk 
+├─sda1   8:1    0    1G  0 part /boot
+├─sda2   8:2    0 14.6G  0 part /
+└─sda3   8:3    0    2G  0 part [SWAP]
+sr0     11:0    1 1024M  0 rom  
+
+
+[root@localhost ~]# fdisk -l 
+Disk /dev/sda: 30 GiB, 32212254720 bytes, 62914560 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xa17a9db9
+
+Device     Boot    Start      End  Sectors  Size Id Type
+/dev/sda1  *        2048  2099199  2097152    1G 83 Linux
+/dev/sda2        2099200 32819199 30720000 14.6G 83 Linux
+/dev/sda3       32819200 37013503  4194304    2G 82 Linux swap / Solaris
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+[root@localhost ~]# parted  /dev/sda print 
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 32.2GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system     Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs             boot
+ 2      1075MB  16.8GB  15.7GB  primary  xfs
+ 3      16.8GB  19.0GB  2147MB  primary  linux-swap(v1)
+
+[root@localhost ~]# 
+[root@localhost ~]# parted  /dev/sda print  free 
+Model: ATA VMware Virtual S (scsi)
+Disk /dev/sda: 32.2GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system     Flags
+        1024B   1049kB  1048kB           Free Space
+ 1      1049kB  1075MB  1074MB  primary  xfs             boot
+ 2      1075MB  16.8GB  15.7GB  primary  xfs
+ 3      16.8GB  19.0GB  2147MB  primary  linux-swap(v1)
+        19.0GB  32.2GB  13.3GB           Free Space
+
+
+===================================================================================
+
+BIOS and UEFI Firmware Difference ?
+
+MBR Limits + MBR Terms and Conditions
+
+GPT Limits + GPT Terms and Conditions
+
+How we can decide we shoud go with MBR OR GPT as per my use case ?
+
+===================================================================================
+
+
+After the OS installation how we can create any partition from any available disk space as per current label set using command line.
+
+
+===================================================================================
