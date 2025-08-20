@@ -1,0 +1,1320 @@
+LVM Configuration Part-2 Notes
+
+LVM Reduce Operations:-
+
+1- EXT2-3-4 based File systems can reduce only.
+2- LVM reduce operation suport in offline mode.
+3- LVM Reduce Operation Does not support on XFS based File systems.
+
+===================================================================================
+First Practical ===> on EXT-2-3-OR-EXT4
+
+
+[root@localhost ~]# df -Th  
+Filesystem              Type      Size  Used Avail Use% Mounted on
+devtmpfs                devtmpfs  2.6G     0  2.6G   0% /dev
+tmpfs                   tmpfs     2.6G     0  2.6G   0% /dev/shm
+tmpfs                   tmpfs     1.1G  9.7M  1.1G   1% /run
+/dev/sda2               xfs        15G  4.0G   11G  28% /
+/dev/sda1               xfs      1014M  256M  759M  26% /boot
+/dev/mapper/myvg1-mylv2 ext4      489M   49M  415M  11% /lvm-2
+/dev/mapper/myvg1-mylv1 xfs       2.0G  260M  1.7G  14% /lvm-1
+tmpfs                   tmpfs     530M  100K  530M   1% /run/user/0
+[root@localhost ~]# 
+[root@localhost ~]# touch /lvm-2/abc{1..3}
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-2
+abc1  abc2  abc3  etc  lost+found
+[root@localhost ~]# 
+
+
+[root@localhost ~]# lvresize -L  300M  -r   /dev/myvg1/mylv2       ===> Examples of LVM reduce 
+Do you want to unmount "/lvm-2" ? [Y|n] y
+fsck from util-linux 2.37.4
+/dev/mapper/myvg1-mylv2: 1801/123984 files (0.1% non-contiguous), 62014/512000 blocks
+resize2fs 1.46.5 (30-Dec-2021)
+Resizing the filesystem on /dev/mapper/myvg1-mylv2 to 307200 (1k) blocks.
+The filesystem on /dev/mapper/myvg1-mylv2 is now 307200 (1k) blocks long.
+
+  Size of logical volume myvg1/mylv2 changed from 500.00 MiB (125 extents) to 300.00 MiB (75 extents).
+  Logical volume myvg1/mylv2 successfully resized.
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao----   1.95g                                                    
+  mylv2 myvg1 -wi-ao---- 300.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# df -Th  
+Filesystem              Type      Size  Used Avail Use% Mounted on
+devtmpfs                devtmpfs  2.6G     0  2.6G   0% /dev
+tmpfs                   tmpfs     2.6G     0  2.6G   0% /dev/shm
+tmpfs                   tmpfs     1.1G  9.7M  1.1G   1% /run
+/dev/sda2               xfs        15G  4.0G   11G  28% /
+/dev/sda1               xfs      1014M  256M  759M  26% /boot
+/dev/mapper/myvg1-mylv1 xfs       2.0G  260M  1.7G  14% /lvm-1
+tmpfs                   tmpfs     530M  100K  530M   1% /run/user/0
+/dev/mapper/myvg1-mylv2 ext4      278M   26M  236M  10% /lvm-2
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-2
+abc1  abc2  abc3  etc  lost+found
+[root@localhost ~]# 
+
+
+[root@localhost ~]# 
+[root@localhost ~]# lvresize -L  400M  -r   /dev/myvg1/mylv2     ===> Examples of LVM extend
+
+  Size of logical volume myvg1/mylv2 changed from 300.00 MiB (75 extents) to 400.00 MiB (100 extents).
+  Logical volume myvg1/mylv2 successfully resized.
+resize2fs 1.46.5 (30-Dec-2021)
+Filesystem at /dev/mapper/myvg1-mylv2 is mounted on /lvm-2; on-line resizing required
+old_desc_blocks = 3, new_desc_blocks = 4
+The filesystem on /dev/mapper/myvg1-mylv2 is now 409600 (1k) blocks long.
+
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao----   1.95g                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+[root@localhost ~]# 
+
+===================================================================================
+
+LVM reduce operation on XFS based LVM
+
+[root@localhost ~]# df -Th 
+Filesystem              Type      Size  Used Avail Use% Mounted on
+devtmpfs                devtmpfs  2.6G     0  2.6G   0% /dev
+tmpfs                   tmpfs     2.6G     0  2.6G   0% /dev/shm
+tmpfs                   tmpfs     1.1G  9.7M  1.1G   1% /run
+/dev/sda2               xfs        15G  4.0G   11G  28% /
+/dev/sda1               xfs      1014M  256M  759M  26% /boot
+/dev/mapper/myvg1-mylv1 xfs       2.0G  260M  1.7G  14% /lvm-1
+tmpfs                   tmpfs     530M  100K  530M   1% /run/user/0
+/dev/mapper/myvg1-mylv2 ext4      372M   27M  326M   8% /lvm-2
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvresize -L 500M  -r  /dev/myvg1/mylv1  
+fsadm: Xfs filesystem shrinking is unsupported.
+  /usr/sbin/fsadm failed: 1
+  Filesystem resize failed.
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+===================================================================================
+If we want to reduce XFS based LVMs we need to run xfsdump and xfsrestore command?
+===================================================================================
+
+
+[root@localhost ~]# rpm -qa xfsdump
+xfsdump-3.1.10-1.el9.x86_64
+
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-1
+bin
+[root@localhost ~]# du -sh /lvm-1
+213M	/lvm-1
+[root@localhost ~]# xfsdump -f  /tmp/test.dump   /lvm-1 
+
+Blank ENTER
+Blank ENTER
+
+[root@localhost ~]#  ls  /tmp 
+[root@localhost ~]# du -sh /tmp/test.dump 
+213M	/tmp/test.dump
+[root@localhost ~]# 
+
+  205  du -sh /tmp/test.dump 
+  206  umount /lvm-1
+  207  lvs
+  208  lvreduce -L  500M /dev/myvg1/mylv1 
+  209  mkfs.xfs -f /dev/myvg1/mylv1 
+  210  mount  /dev/myvg1/mylv1 /lvm-1
+  211  lvs
+  212  ls /lvm-1
+  213  xfsrestore -f /tmp/test.dump  /lvm-1 
+  214  ls  /lvm-1
+  215  du -sh  /lvm-1
+
+===================================================================================
+https://www.ucartz.com/clients/knowledgebase/822/How-to-reduce-or-shrink-the-size-of-a-LVM-partition-formatted-with-XFS-Filesystem.html
+===================================================================================
+
+
+[root@localhost ~]# pvscan 
+  PV /dev/sdb1   VG myvg1           lvm2 [<1.91 GiB / 1.32 GiB free]
+  PV /dev/sdb2   VG myvg1           lvm2 [1020.00 MiB / 720.00 MiB free]
+  Total: 2 [2.90 GiB] / in use: 2 [2.90 GiB] / in no VG: 0 [0   ]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vgscan 
+  Found volume group "myvg1" using metadata type lvm2
+[root@localhost ~]# 
+[root@localhost ~]# lvscan 
+  ACTIVE            '/dev/myvg1/mylv1' [500.00 MiB] inherit
+  ACTIVE            '/dev/myvg1/mylv2' [400.00 MiB] inherit
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+
+===================================================================================
+
+How we can deactivate/Reactivate any Volumes if we want in any use cases ?
+
+pvchage       ===>    -ay  OR  -an 
+vgchange      ===>    -ay  OR  -an 
+lvchange      ===>    -ay  OR  -an 
+
+                     activate   Deactivate
+
+===================================================================================
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# umount  /lvm-2 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-a----- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/myvg1/mylv2  /lvm-2
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# umount /lvm-2
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-a----- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvchange -an  /dev/myvg1/mylv1 
+  Logical volume myvg1/mylv1 contains a filesystem in use.
+[root@localhost ~]# 
+[root@localhost ~]# lvchange -an  /dev/myvg1/mylv2
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi------- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvchange  -ay  /dev/myvg1/mylv2 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-a----- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/myvg1/mylv2  /lvm-2
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+[root@localhost ~]# 
+
+===================================================================================
+How  we can merge two Volume Group if we want  using vgmerge command ?
+
+first we will create new LVMs before start VG merge Operation 
+
+===================================================================================
+first we will create new LVMs before start VG merge Operation 
+
+
+
+[root@localhost ~]# fdisk -l  /dev/sdb
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+
+Device     Boot   Start     End Sectors  Size Id Type
+/dev/sdb1          2048 4001791 3999744  1.9G 8e Linux LVM
+/dev/sdb2       4001792 6098943 2097152    1G 8e Linux LVM
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# fdisk /dev/sdb
+
+Welcome to fdisk (util-linux 2.37.4).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+This disk is currently in use - repartitioning is probably a bad idea.
+It's recommended to umount all file systems, and swapoff all swap
+partitions on this disk.
+
+
+Command (m for help): n
+Partition type
+   p   primary (2 primary, 0 extended, 2 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (3,4, default 3): 3
+First sector (6098944-20971519, default 6098944): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (6098944-20971519, default 20971519): +1G
+
+Created a new partition 3 of type 'Linux' and of size 1 GiB.
+
+Command (m for help): p
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+
+Device     Boot   Start     End Sectors  Size Id Type
+/dev/sdb1          2048 4001791 3999744  1.9G 8e Linux LVM
+/dev/sdb2       4001792 6098943 2097152    1G 8e Linux LVM
+/dev/sdb3       6098944 8196095 2097152    1G 83 Linux
+
+Command (m for help): t
+Partition number (1-3, default 3): 3
+Hex code or alias (type L to list all): 8e
+
+Changed type of partition 'Linux' to 'Linux LVM'.
+
+Command (m for help): w
+The partition table has been altered.
+Syncing disks.
+
+[root@localhost ~]# partprobe  /dev/sdb
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# pvcreate   /dev/sdb3
+  Physical volume "/dev/sdb3" successfully created.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vgcreate  myvg2  /dev/sdb3 
+  Volume group "myvg2" successfully created
+[root@localhost ~]# 
+[root@localhost ~]# 
+v[root@localhost ~]# vgs
+  VG    #PV #LV #SN Attr   VSize    VFree   
+  myvg1   2   2   0 wz--n-    2.90g    2.02g
+  myvg2   1   0   0 wz--n- 1020.00m 1020.00m
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvcreate -L  +200M -n  mylv3  /dev/myvg2 
+  Logical volume "mylv3" created.
+[root@localhost ~]# 
+[root@localhost ~]# mkfs.xfs  /dev/myvg2/mylv3 
+meta-data=/dev/myvg2/mylv3       isize=512    agcount=4, agsize=12800 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1
+data     =                       bsize=4096   blocks=51200, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=1368, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+[root@localhost ~]# 
+[root@localhost ~]# mkdir  /lvm-3 
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/myvg2/mylv3  /lvm-3
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg2 -wi-ao---- 200.00m                                                    
+[root@localhost ~]# 
+
+[root@localhost ~]# 
+[root@localhost ~]# blkid  /dev/myvg2/mylv3 
+/dev/myvg2/mylv3: UUID="2e810925-927c-42fe-97a7-b25dc8b01097" BLOCK_SIZE="512" TYPE="xfs"
+
+
+[root@localhost ~]# vim /etc/fstab 
+
+UUID=2e810925-927c-42fe-97a7-b25dc8b01097        /lvm-3           xfs      defaults      0 0     
+
+:wq!
+
+[root@localhost ~]# systemctl daemon-reload 
+
+[root@localhost ~]# 
+[root@localhost ~]# df -Th
+Filesystem              Type      Size  Used Avail Use% Mounted on
+devtmpfs                devtmpfs  2.6G     0  2.6G   0% /dev
+tmpfs                   tmpfs     2.6G     0  2.6G   0% /dev/shm
+tmpfs                   tmpfs     1.1G  9.7M  1.1G   1% /run
+/dev/sda2               xfs        15G  4.3G   11G  29% /
+/dev/sda1               xfs      1014M  256M  759M  26% /boot
+tmpfs                   tmpfs     530M  100K  530M   1% /run/user/0
+/dev/mapper/myvg1-mylv1 xfs       495M  242M  253M  49% /lvm-1
+/dev/mapper/myvg1-mylv2 ext4      372M   27M  326M   8% /lvm-2
+/dev/mapper/myvg2-mylv3 xfs       195M   12M  184M   6% /lvm-3
+
+[root@localhost ~]# touch  /lvm-3/abc{1..5}
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-3
+abc1  abc2  abc3  abc4  abc5
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+=========================================================================
+How  we can merge two Volume Group if we want  using vgmerge command ?
+
+[root@localhost ~]# vgs
+  VG    #PV #LV #SN Attr   VSize    VFree  
+  myvg1   2   2   0 wz--n-    2.90g   2.02g
+  myvg2   1   1   0 wz--n- 1020.00m 820.00m
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg2 -wi-ao---- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# umount /lvm-3
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg2 -wi-a----- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvchange -an  /dev/myvg2/mylv3 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg2 -wi------- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# vgchange  -an  /dev/myvg2  
+  0 logical volume(s) in volume group "myvg2" now active
+[root@localhost ~]# 
+[root@localhost ~]# vgmerge  /dev/myvg1    /dev/myvg2  
+  WARNING: updating old metadata to 16 on /dev/sdb3 for VG myvg1.
+  Volume group "myvg2" successfully merged into "myvg1"
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG    #PV #LV #SN Attr   VSize  VFree
+  myvg1   3   3   0 wz--n- <3.90g 2.82g
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# pvs
+  PV         VG    Fmt  Attr PSize    PFree  
+  /dev/sdb1  myvg1 lvm2 a--    <1.91g   1.32g
+  /dev/sdb2  myvg1 lvm2 a--  1020.00m 720.00m
+  /dev/sdb3  myvg1 lvm2 a--  1020.00m 820.00m
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg1 -wi------- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvchange  -ay   /dev/myvg1/mylv3
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg1 -wi-a----- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/myvg1/mylv3  /lvm-3
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV    VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1 myvg1 -wi-ao---- 500.00m                                                    
+  mylv2 myvg1 -wi-ao---- 400.00m                                                    
+  mylv3 myvg1 -wi-ao---- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-3
+abc1  abc2  abc3  abc4  abc5
+[root@localhost ~]# 
+[root@localhost ~]# blkid   /dev/myvg1/mylv3
+/dev/myvg1/mylv3: UUID="2e810925-927c-42fe-97a7-b25dc8b01097" BLOCK_SIZE="512" TYPE="xfs"
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Mon Aug 11 05:16:46 2025
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+UUID=12bc3a63-9582-47fe-b7de-73a3b193cad1 /                       xfs     defaults        0 0
+UUID=9466b90c-5b63-4e3e-8e71-7d3b604bad7e /boot                   xfs     defaults        0 0
+UUID=6a76ca37-a02d-468d-961c-15433cbdbc72 none                    swap    defaults        0 0
+UUID=795863d4-f82e-4f63-81af-485056773539 /lvm-1                  xfs     defaults	 0 0 
+UUID=be502a9b-8c7d-472e-ac72-4a91a83ba11d /lvm-2                  ext4    defaults	 0 0
+UUID=2e810925-927c-42fe-97a7-b25dc8b01097	 /lvm-3           xfs      defaults	 0 0
+
+
+=========================================================================
+
+LVM Related  ===> Create LVM with these given details 
+
+VG  NAME            ===>  fedora
+LVM NAME            ===>  redhat
+1 PE                ===>  8MB 
+LVM Size            ===>  20LE
+File system Type    ===>  ext4
+Mount Point         ===>  /lvm-4  
+
+=========================================================================
+
+8MB * 20 LE  ===> 160 MB 
+
+160MB + 30 MB Extra Space ==> around 190MB
+ 
+=========================================================================
+[root@localhost ~]# fdisk -l  /dev/sdb
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+
+Device     Boot   Start     End Sectors  Size Id Type
+/dev/sdb1          2048 4001791 3999744  1.9G 8e Linux LVM
+/dev/sdb2       4001792 6098943 2097152    1G 8e Linux LVM
+/dev/sdb3       6098944 8196095 2097152    1G 8e Linux LVM
+[root@localhost ~]# 
+[root@localhost ~]# fdisk /dev/sdb 
+
+Welcome to fdisk (util-linux 2.37.4).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+This disk is currently in use - repartitioning is probably a bad idea.
+It's recommended to umount all file systems, and swapoff all swap
+partitions on this disk.
+
+
+Command (m for help): n
+Partition type
+   p   primary (3 primary, 0 extended, 1 free)
+   e   extended (container for logical partitions)
+Select (default e): e
+
+Selected partition 4
+First sector (8196096-20971519, default 8196096): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (8196096-20971519, default 20971519): 
+
+Created a new partition 4 of type 'Extended' and of size 6.1 GiB.
+
+Command (m for help): p
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+
+Device     Boot   Start      End  Sectors  Size Id Type
+/dev/sdb1          2048  4001791  3999744  1.9G 8e Linux LVM
+/dev/sdb2       4001792  6098943  2097152    1G 8e Linux LVM
+/dev/sdb3       6098944  8196095  2097152    1G 8e Linux LVM
+/dev/sdb4       8196096 20971519 12775424  6.1G  5 Extended
+
+Command (m for help): n
+All primary partitions are in use.
+Adding logical partition 5
+First sector (8198144-20971519, default 8198144): 
+Last sector, +/-sectors or +/-size{K,M,G,T,P} (8198144-20971519, default 20971519): +190M
+
+Created a new partition 5 of type 'Linux' and of size 190 MiB.
+
+Command (m for help): t
+Partition number (1-5, default 5): 5
+Hex code or alias (type L to list all): 8e
+
+Changed type of partition 'Linux' to 'Linux LVM'.
+
+Command (m for help): p
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+
+Device     Boot   Start      End  Sectors  Size Id Type
+/dev/sdb1          2048  4001791  3999744  1.9G 8e Linux LVM
+/dev/sdb2       4001792  6098943  2097152    1G 8e Linux LVM
+/dev/sdb3       6098944  8196095  2097152    1G 8e Linux LVM
+/dev/sdb4       8196096 20971519 12775424  6.1G  5 Extended
+/dev/sdb5       8198144  8587263   389120  190M 8e Linux LVM
+
+Command (m for help): w
+The partition table has been altered.
+Syncing disks.
+
+[root@localhost ~]# 
+[root@localhost ~]# partprobe  /dev/sdb 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# pvcreate  /dev/sdb5
+  Physical volume "/dev/sdb5" successfully created.
+[root@localhost ~]# 
+[root@localhost ~]# vgcreate -s 8M   fedora  /dev/sdb5
+  Volume group "fedora" successfully created
+[root@localhost ~]# 
+[root@localhost ~]# vgdisplay  /dev/fedora 
+  --- Volume group ---
+  VG Name               fedora
+  System ID             
+  Format                lvm2
+  Metadata Areas        1
+  Metadata Sequence No  1
+  VG Access             read/write
+  VG Status             resizable
+  MAX LV                0
+  Cur LV                0
+  Open LV               0
+  Max PV                0
+  Cur PV                1
+  Act PV                1
+  VG Size               184.00 MiB
+  PE Size               8.00 MiB
+  Total PE              23
+  Alloc PE / Size       0 / 0   
+  Free  PE / Size       23 / 184.00 MiB
+  VG UUID               K0tMht-dxRb-lXCe-Yrj0-Ta3e-WbPt-x2lJ14
+[root@localhost ~]# lvcreate  -l  20  -n  redhat  /dev/fedora 
+  Logical volume "redhat" created.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-a----- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+[root@localhost ~]# 
+
+[root@localhost ~]# lvdisplay  /dev/fedora/redhat 
+  --- Logical volume ---
+  LV Path                /dev/fedora/redhat
+  LV Name                redhat
+  VG Name                fedora
+  LV UUID                E1d418-nw0f-f3wy-61uS-3UtS-KfgS-ue2aiF
+  LV Write Access        read/write
+  LV Creation host, time localhost.localdomain, 2025-08-20 10:12:45 +0530
+  LV Status              available
+  # open                 0
+  LV Size                160.00 MiB
+  Current LE             20
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     256
+  Block device           253:3
+   
+[root@localhost ~]# mkfs.ext4   /dev/fedora/redhat 
+mke2fs 1.46.5 (30-Dec-2021)
+Creating filesystem with 163840 1k blocks and 40960 inodes
+Filesystem UUID: eee0ce51-a967-4d5b-9b0c-e55873d6b0a1
+Superblock backups stored on blocks: 
+	8193, 24577, 40961, 57345, 73729
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (4096 blocks): done
+Writing superblocks and filesystem accounting information: done 
+
+[root@localhost ~]# 
+[root@localhost ~]# mkdir /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/fedora/redhat  /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# blkid  /dev/fedora/redhat 
+/dev/fedora/redhat: UUID="eee0ce51-a967-4d5b-9b0c-e55873d6b0a1" BLOCK_SIZE="1024" TYPE="ext4"
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# vim /etc/fstab 
+
+
+UUID=eee0ce51-a967-4d5b-9b0c-e55873d6b0a1       /lvm-4             ext4   defaults        0 0     
+
+
+:wq!
+
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# 
+[root@localhost ~]# df -Th  
+Filesystem                Type      Size  Used Avail Use% Mounted on
+devtmpfs                  devtmpfs  2.6G     0  2.6G   0% /dev
+tmpfs                     tmpfs     2.6G     0  2.6G   0% /dev/shm
+tmpfs                     tmpfs     1.1G  9.8M  1.1G   1% /run
+/dev/sda2                 xfs        15G  4.3G   11G  29% /
+/dev/sda1                 xfs      1014M  256M  759M  26% /boot
+tmpfs                     tmpfs     530M  100K  530M   1% /run/user/0
+/dev/mapper/myvg1-mylv1   xfs       495M  242M  253M  49% /lvm-1
+/dev/mapper/myvg1-mylv2   ext4      372M   27M  326M   8% /lvm-2
+/dev/mapper/myvg1-mylv3   xfs       195M   12M  184M   6% /lvm-3
+/dev/mapper/fedora-redhat ext4      145M   14K  134M   1% /lvm-4
+[root@localhost ~]# 
+
+
+=========================================================================================
+How we can create SWAP using LVM concept ?
+
+
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree 
+  fedora   1   1   0 wz--n- 184.00m 24.00m
+  myvg1    3   3   0 wz--n-  <3.90g  2.82g
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvcreate  -L +512M  -n  myswap   /dev/myvg1  
+
+
+
+
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-a----- 512.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# mkswap   /dev/myvg1/myswap 
+Setting up swapspace version 1, size = 512 MiB (536866816 bytes)
+no label, UUID=89c77dcc-66f3-4815-abf6-4ad732db53a2
+[root@localhost ~]# 
+[root@localhost ~]# swapon  /dev/myvg1/myswap 
+[root@localhost ~]# 
+[root@localhost ~]# swapon -s  
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+/dev/dm-4                               partition	524284		0		-3
+[root@localhost ~]# 
+[root@localhost ~]# ll  /dev/mapper
+total 0
+crw-------. 1 root root 10, 236 Aug 20 08:53 control
+lrwxrwxrwx. 1 root root       7 Aug 20 10:13 fedora-redhat -> ../dm-3
+lrwxrwxrwx. 1 root root       7 Aug 20 09:37 myvg1-mylv1 -> ../dm-0
+lrwxrwxrwx. 1 root root       7 Aug 20 09:46 myvg1-mylv2 -> ../dm-1
+lrwxrwxrwx. 1 root root       7 Aug 20 09:57 myvg1-mylv3 -> ../dm-2
+lrwxrwxrwx. 1 root root       7 Aug 20 10:21 myvg1-myswap -> ../dm-4
+
+[root@localhost ~]# blkid  /dev/myvg1/myswap 
+/dev/myvg1/myswap: UUID="89c77dcc-66f3-4815-abf6-4ad732db53a2" TYPE="swap"
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vim /etc/fstab  
+
+UUID=89c77dcc-66f3-4815-abf6-4ad732db53a2       swap               swap   defaults        0 0
+
+
+:wq!
+
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# free -h  
+               total        used        free      shared  buff/cache   available
+Mem:           5.2Gi       1.4Gi       2.7Gi        25Mi       1.1Gi       3.6Gi
+Swap:          2.5Gi          0B       2.5Gi
+[root@localhost ~]# 
+[root@localhost ~]# lsblk 
+NAME              MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+sda                 8:0    0   30G  0 disk 
+├─sda1              8:1    0    1G  0 part /boot
+├─sda2              8:2    0 14.6G  0 part /
+└─sda3              8:3    0    2G  0 part [SWAP]
+sdb                 8:16   0   10G  0 disk 
+├─sdb1              8:17   0  1.9G  0 part 
+│ ├─myvg1-mylv1   253:0    0  500M  0 lvm  /lvm-1
+│ ├─myvg1-mylv2   253:1    0  400M  0 lvm  /lvm-2
+│ └─myvg1-myswap  253:4    0  512M  0 lvm  [SWAP]
+├─sdb2              8:18   0    1G  0 part 
+│ └─myvg1-mylv2   253:1    0  400M  0 lvm  /lvm-2
+├─sdb3              8:19   0    1G  0 part 
+│ └─myvg1-mylv3   253:2    0  200M  0 lvm  /lvm-3
+├─sdb4              8:20   0  512B  0 part 
+└─sdb5              8:21   0  190M  0 part 
+  └─fedora-redhat 253:3    0  160M  0 lvm  /lvm-4
+sr0                11:0    1    8G  0 rom  
+
+
+[root@localhost ~]# swapon -s 
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+/dev/dm-4                               partition	524284		0		-3
+[root@localhost ~]# 
+[root@localhost ~]# lsblk |  grep -i swap  
+└─sda3              8:3    0    2G  0 part [SWAP]
+│ └─myvg1-myswap  253:4    0  512M  0 lvm  [SWAP]
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+
+=========================================================================================
+How we can extend SWAP size if it is based on LVM ?
+
+Condition-1  we need to offline this
+
+Condition-2  if we don't want to offline current swap partition  then we will 
+
+          Choice-1 we can create fresh new Partition then activate this as a SWAP
+          Choice-2 we can create a new fresh LVM fron any existing Volume group then actvate this as a SWAP     
+          Choice-2 we can create dump file using dd OR fallocate command to activate this as a SWAP  
+=========================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao---- 512.00m                                                    
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree 
+  fedora   1   1   0 wz--n- 184.00m 24.00m
+  myvg1    3   4   0 wz--n-  <3.90g  2.32g
+[root@localhost ~]# 
+
+[root@localhost ~]# lvresize -L 1G  -r  /dev/myvg1/myswap 
+fsadm: Filesystem "swap" on device "/dev/mapper/myvg1-myswap" is not supported by this tool.
+  Filesystem check failed.
+
+
+[root@localhost ~]# swapoff  /dev/myvg1/myswap
+[root@localhost ~]# 
+[root@localhost ~]# swapon -s 
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+[root@localhost ~]# 
+[root@localhost ~]# lvresize -L 1G  /dev/myvg1/myswap 
+  Size of logical volume myvg1/myswap changed from 512.00 MiB (128 extents) to 1.00 GiB (256 extents).
+  Logical volume myvg1/myswap successfully resized.
+[root@localhost ~]# 
+[root@localhost ~]# mkswap  /dev/myvg1/myswap
+mkswap: /dev/myvg1/myswap: warning: wiping old swap signature.
+Setting up swapspace version 1, size = 1024 MiB (1073737728 bytes)
+no label, UUID=51d64211-3e88-41e9-9cd9-36b108fb1472
+[root@localhost ~]# 
+[root@localhost ~]# swapon  /dev/myvg1/myswap
+[root@localhost ~]# 
+[root@localhost ~]# swapon -s  
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+/dev/dm-4                               partition	1048572		0		-3
+[root@localhost ~]# 
+[root@localhost ~]# free -h 
+               total        used        free      shared  buff/cache   available
+Mem:           5.2Gi       1.4Gi       2.7Gi        26Mi       1.1Gi       3.5Gi
+Swap:          3.0Gi          0B       3.0Gi
+[root@localhost ~]# blkid /dev/myvg1/myswap 
+/dev/myvg1/myswap: UUID="51d64211-3e88-41e9-9cd9-36b108fb1472" TYPE="swap"
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Mon Aug 11 05:16:46 2025
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+UUID=12bc3a63-9582-47fe-b7de-73a3b193cad1 /                       xfs     defaults        0 0
+UUID=9466b90c-5b63-4e3e-8e71-7d3b604bad7e /boot                   xfs     defaults        0 0
+UUID=6a76ca37-a02d-468d-961c-15433cbdbc72 none                    swap    defaults        0 0
+UUID=795863d4-f82e-4f63-81af-485056773539 /lvm-1                  xfs     defaults	 0 0 
+UUID=be502a9b-8c7d-472e-ac72-4a91a83ba11d /lvm-2                  ext4    defaults	 0 0
+UUID=2e810925-927c-42fe-97a7-b25dc8b01097	 /lvm-3           xfs      defaults	 0 0
+UUID=eee0ce51-a967-4d5b-9b0c-e55873d6b0a1	/lvm-4             ext4   defaults	  0 0 
+UUID=89c77dcc-66f3-4815-abf6-4ad732db53a2       swap	           swap   defaults	  0 0
+[root@localhost ~]# 
+[root@localhost ~]# vim /etc/fstab 
+
+UUID=51d64211-3e88-41e9-9cd9-36b108fb1472       swap               swap   defaults        0 0
+
+
+:wq!
+
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# 
+[root@localhost ~]# free -h  
+               total        used        free      shared  buff/cache   available
+Mem:           5.2Gi       1.4Gi       2.7Gi        25Mi       1.1Gi       3.5Gi
+Swap:          3.0Gi          0B       3.0Gi
+[root@localhost ~]# 
+[root@localhost ~]# swapon -s 
+Filename				Type		Size		Used		Priority
+/dev/sda3                               partition	2097148		0		-2
+/dev/dm-4                               partition	1048572		0		-3
+[root@localhost ~]# reboot
+
+
+
+=========================================================================================
+
+if we are getting CTRL + D error during the system booting how we can resolve this  ?
+
+Give ROOT password:  redhat
+
+[root@localhost ~]# journal -xb |  grep failed 
+
+[root@localhost ~]# mount  -o remount rw  /
+
+[root@localhost ~]# vim  /etc/fstab
+ 
+comment line with respective the mounting error
+
+:wq!
+
+
+[root@localhost ~]# reboot -f  
+
+=========================================================================================
+[root@localhost ~]# blkid  /dev/myvg1/mylv1 
+/dev/myvg1/mylv1: UUID="56b1677b-b772-467f-a692-544c94b5ffd4" BLOCK_SIZE="512" TYPE="xfs"
+[root@localhost ~]# 
+[root@localhost ~]# grep    lvm-1   /etc/fstab 
+#UUID=795863d4-f82e-4f63-81af-485056773539 /lvm-1                  xfs     defaults	 0 0 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vim /etc/fstab 
+
+UUID=56b1677b-b772-467f-a692-544c94b5ffd4       /lvm-1                  xfs     defaults         0 0 
+
+Replace this UUID with Correct UUID
+
+:wq!
+
+[root@localhost ~]# vim /etc/fstab 
+[root@localhost ~]# 
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# findmnt  --verify  
+Success, no errors or warnings detected
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# reboot 
+
+=========================================================================================
+
+How we can restore LVM using restore point or index number if it is currupted due to any wrong activity performed  by linux admin ?
+
+[root@localhost ~]# ls /etc/lvm/archive
+fedora_00000-1025998484.vg  myvg1_00004-1871490709.vg  myvg1_00009-1603009733.vg  myvg1_00014-708208541.vg
+myvg1_00000-1771211373.vg   myvg1_00005-633093757.vg   myvg1_00010-1875505330.vg  myvg1_00015-432025255.vg
+myvg1_00001-1527768636.vg   myvg1_00006-1238305054.vg  myvg1_00011-1023705026.vg  myvg1_00016-1245985136.vg
+myvg1_00002-1322825262.vg   myvg1_00007-2062360476.vg  myvg1_00012-300114882.vg   myvg2_00000-1244793638.vg
+myvg1_00003-516547720.vg    myvg1_00008-1463401782.vg  myvg1_00013-1246688706.vg  myvg2_00001-163686827.vg
+
+[root@localhost ~]# ls -lrth /etc/lvm/archive
+
+
+[root@localhost ~]# df -TH 
+Filesystem                Type      Size  Used Avail Use% Mounted on
+devtmpfs                  devtmpfs  2.8G     0  2.8G   0% /dev
+tmpfs                     tmpfs     2.8G     0  2.8G   0% /dev/shm
+tmpfs                     tmpfs     1.2G   11M  1.2G   1% /run
+/dev/sda2                 xfs        16G  4.6G   12G  29% /
+/dev/sda1                 xfs       1.1G  269M  796M  26% /boot
+/dev/mapper/myvg1-mylv3   xfs       205M   13M  192M   6% /lvm-3
+/dev/mapper/fedora-redhat ext4      152M   15k  140M   1% /lvm-4
+/dev/mapper/myvg1-mylv2   ext4      390M   28M  342M   8% /lvm-2
+/dev/mapper/myvg1-mylv1   xfs       519M  254M  266M  49% /lvm-1
+tmpfs                     tmpfs     556M   99k  556M   1% /run/user/0
+[root@localhost ~]# touch /lvm-4/abc{1..5}
+[root@localhost ~]# 
+[root@localhost ~]# umount /lvm-4
+
+[root@localhost ~]# lvremove  /dev/fedora/redhat 
+
+Do you really want to remove active logical volume fedora/redhat? [y/n]: y
+  Logical volume "redhat" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1  myvg1 -wi-ao---- 500.00m                                                    
+  mylv2  myvg1 -wi-ao---- 400.00m                                                    
+  mylv3  myvg1 -wi-ao---- 200.00m                                                    
+  myswap myvg1 -wi-ao----   1.00g  
+[root@localhost ~]# ls /lvm-4
+[root@localhost ~]# lvs
+  LV     VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1  myvg1 -wi-ao---- 500.00m                                                    
+  mylv2  myvg1 -wi-ao---- 400.00m                                                    
+  mylv3  myvg1 -wi-ao---- 200.00m                                                    
+  myswap myvg1 -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree  
+  fedora   1   0   0 wz--n- 184.00m 184.00m
+  myvg1    3   4   0 wz--n-  <3.90g   1.82g
+[root@localhost ~]# 
+
+ [root@localhost ~]# ls /etc/lvm/archive
+fedora_00000-1025998484.vg  myvg1_00004-1871490709.vg  myvg1_00010-1875505330.vg  myvg1_00016-1245985136.vg
+fedora_00001-1458908077.vg  myvg1_00005-633093757.vg   myvg1_00011-1023705026.vg  myvg2_00000-1244793638.vg
+myvg1_00000-1771211373.vg   myvg1_00006-1238305054.vg  myvg1_00012-300114882.vg   myvg2_00001-163686827.vg
+myvg1_00001-1527768636.vg   myvg1_00007-2062360476.vg  myvg1_00013-1246688706.vg
+myvg1_00002-1322825262.vg   myvg1_00008-1463401782.vg  myvg1_00014-708208541.vg
+myvg1_00003-516547720.vg    myvg1_00009-1603009733.vg  myvg1_00015-432025255.vg
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# ls /etc/lvm/archive
+fedora_00000-1025998484.vg  myvg1_00004-1871490709.vg  myvg1_00010-1875505330.vg  myvg1_00016-1245985136.vg
+fedora_00001-1458908077.vg  myvg1_00005-633093757.vg   myvg1_00011-1023705026.vg  myvg2_00000-1244793638.vg
+myvg1_00000-1771211373.vg   myvg1_00006-1238305054.vg  myvg1_00012-300114882.vg   myvg2_00001-163686827.vg
+myvg1_00001-1527768636.vg   myvg1_00007-2062360476.vg  myvg1_00013-1246688706.vg
+myvg1_00002-1322825262.vg   myvg1_00008-1463401782.vg  myvg1_00014-708208541.vg
+myvg1_00003-516547720.vg    myvg1_00009-1603009733.vg  myvg1_00015-432025255.vg
+[root@localhost ~]# 
+[root@localhost ~]# ls -lrth  /etc/lvm/archive/fedora_0000*
+-rw-------. 1 root root  985 Aug 20 10:12 /etc/lvm/archive/fedora_00000-1025998484.vg
+-rw-------. 1 root root 1.4K Aug 20 10:58 /etc/lvm/archive/fedora_00001-1458908077.vg
+[root@localhost ~]# 
+[root@localhost ~]# vgcfgrestore  -l   fedora 
+   
+  File:		/etc/lvm/archive/fedora_00000-1025998484.vg/fedora_00000-1025998484.vg
+  VG name:    	fedora
+  Description:	Created *before* executing 'lvcreate -l 20 -n redhat /dev/fedora'
+  Backup Time:	Wed Aug 20 10:12:45 2025
+
+   
+  File:		/etc/lvm/archive/fedora_00001-1458908077.vg/fedora_00001-1458908077.vg
+  VG name:    	fedora
+  Description:	Created *before* executing 'lvremove /dev/fedora/redhat'
+  Backup Time:	Wed Aug 20 10:58:00 2025
+
+   
+  File:		/etc/lvm/backup/fedora/fedora
+  VG name:    	fedora
+  Description:	Created *after* executing 'lvremove /dev/fedora/redhat'
+  Backup Time:	Wed Aug 20 10:58:00 2025
+
+[root@localhost ~]# 
+[root@localhost ~]# vgcfgrestore  -f  /etc/lvm/archive/fedora_00001-1458908077.vg   fedora 
+  Restored volume group fedora.
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree 
+  fedora   1   1   0 wz--n- 184.00m 24.00m
+  myvg1    3   4   0 wz--n-  <3.90g  1.82g
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi------- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvchange  -ay  /dev/fedora/redhat 
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/fedora/redhat  /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# ls  /lvm-4
+abc1  abc2  abc3  abc4  abc5  lost+found
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+=========================================================================================
+
+if LVM and Volume group both are corrupted  ?
+
+[root@localhost ~]# ls  /lvm-4
+abc1  abc2  abc3  abc4  abc5  lost+found
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# umount /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# lvremove  /dev/fedora/redhat 
+Do you really want to remove active logical volume fedora/redhat? [y/n]: y
+  Logical volume "redhat" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# vgremove  /dev/fedora  
+  Volume group "fedora" successfully removed
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  mylv1  myvg1 -wi-ao---- 500.00m                                                    
+  mylv2  myvg1 -wi-ao---- 400.00m                                                    
+  mylv3  myvg1 -wi-ao---- 200.00m                                                    
+  myswap myvg1 -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG    #PV #LV #SN Attr   VSize  VFree
+  myvg1   3   4   0 wz--n- <3.90g 1.82g
+
+
+[root@localhost ~]# vgcfgrestore  -l   fedora 
+
+[root@localhost ~]# vgcfgrestore  -f  /etc/lvm/archive/fedora_00002-590352097.vg    fedora 
+  Restored volume group fedora.
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG     #PV #LV #SN Attr   VSize   VFree 
+  fedora   1   1   0 wz--n- 184.00m 24.00m
+  myvg1    3   4   0 wz--n-  <3.90g  1.82g
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi------- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# lvchange -ay  /dev/fedora/redhat 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-a----- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# mount  /dev/fedora/redhat  /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-ao---- 500.00m                                                    
+  mylv2  myvg1  -wi-ao---- 400.00m                                                    
+  mylv3  myvg1  -wi-ao---- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# ls /lvm-4
+abc1  abc2  abc3  abc4  abc5  lost+found
+
+=========================================================================================
+
+[root@localhost ~]# 
+[root@localhost ~]# man lvm 
+[root@localhost ~]# 
+[root@localhost ~]# man lvrename
+[root@localhost ~]# man vgrename
+[root@localhost ~]# 
+
+=========================================================================================
+
+How we can remove the LVM step  by step if it is not required ?
+
+[root@localhost ~]# 
+[root@localhost ~]# umount  /lvm-1
+[root@localhost ~]# umount  /lvm-2
+[root@localhost ~]# umount  /lvm-3
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-ao---- 160.00m                                                    
+  mylv1  myvg1  -wi-a----- 500.00m                                                    
+  mylv2  myvg1  -wi-a----- 400.00m                                                    
+  mylv3  myvg1  -wi-a----- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# umount  /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-a----- 160.00m                                                    
+  mylv1  myvg1  -wi-a----- 500.00m                                                    
+  mylv2  myvg1  -wi-a----- 400.00m                                                    
+  mylv3  myvg1  -wi-a----- 200.00m                                                    
+  myswap myvg1  -wi-ao----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# swapoff  /dev/myvg1/myswap  
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+  LV     VG     Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  redhat fedora -wi-a----- 160.00m                                                    
+  mylv1  myvg1  -wi-a----- 500.00m                                                    
+  mylv2  myvg1  -wi-a----- 400.00m                                                    
+  mylv3  myvg1  -wi-a----- 200.00m                                                    
+  myswap myvg1  -wi-a-----   1.00g                                                    
+[root@localhost ~]# 
+[root@localhost ~]# vim /etc/fstab 
+
+delete your lvms related entry
+
+:wq!
+
+
+[root@localhost ~]# systemctl daemon-reload 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# findmnt  --verify  
+Success, no errors or warnings detected
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+[root@localhost ~]# lvremove  /dev/fedora/redhat 
+Do you really want to remove active logical volume fedora/redhat? [y/n]: y
+  Logical volume "redhat" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# lvremove  /dev/myvg1/mylv3
+Do you really want to remove active logical volume myvg1/mylv3? [y/n]: y
+  Logical volume "mylv3" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# lvremove  /dev/myvg1/mylv2
+Do you really want to remove active logical volume myvg1/mylv2? [y/n]: y
+  Logical volume "mylv2" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# lvremove  /dev/myvg1/mylv1
+Do you really want to remove active logical volume myvg1/mylv1? [y/n]: y
+  Logical volume "mylv1" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# lvremove  /dev/myvg1/myswap
+Do you really want to remove active logical volume myvg1/myswap? [y/n]: y
+  Logical volume "myswap" successfully removed.
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+[root@localhost ~]# 
+[root@localhost ~]# vgremove   /dev/fedora
+  Volume group "fedora" successfully removed
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+  VG    #PV #LV #SN Attr   VSize  VFree 
+  myvg1   3   0   0 wz--n- <3.90g <3.90g
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# vgremove   /dev/myvg1  
+  Volume group "myvg1" successfully removed
+[root@localhost ~]# 
+[root@localhost ~]# lvs
+[root@localhost ~]# 
+[root@localhost ~]# vgs
+[root@localhost ~]# 
+[root@localhost ~]# pvs
+  PV         VG Fmt  Attr PSize   PFree  
+  /dev/sdb1     lvm2 ---   <1.91g  <1.91g
+  /dev/sdb2     lvm2 ---    1.00g   1.00g
+  /dev/sdb3     lvm2 ---    1.00g   1.00g
+  /dev/sdb5     lvm2 ---  190.00m 190.00m
+[root@localhost ~]# 
+[root@localhost ~]# pvremove   /dev/sdb{1,2,3,5}
+  Labels on physical volume "/dev/sdb1" successfully wiped.
+  Labels on physical volume "/dev/sdb2" successfully wiped.
+  Labels on physical volume "/dev/sdb3" successfully wiped.
+  Labels on physical volume "/dev/sdb5" successfully wiped.
+[root@localhost ~]# 
+[root@localhost ~]# pvs
+[root@localhost ~]# vgs
+[root@localhost ~]# lvs
+
+[root@localhost ~]# 
+[root@localhost ~]# fdisk  /dev/sdb
+
+Welcome to fdisk (util-linux 2.37.4).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+
+Command (m for help): d
+Partition number (1-5, default 5): 5
+
+Partition 5 has been deleted.
+
+Command (m for help): d
+Partition number (1-4, default 4): 4
+
+Partition 4 has been deleted.
+
+Command (m for help): d
+Partition number (1-3, default 3): 3
+
+Partition 3 has been deleted.
+
+Command (m for help): d
+Partition number (1,2, default 2): 2
+
+Partition 2 has been deleted.
+
+Command (m for help): d
+Selected partition 1
+Partition 1 has been deleted.
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+[root@localhost ~]# partprobe  /dev/sdb  
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# fdisk -l /dev/sdb 
+Disk /dev/sdb: 10 GiB, 10737418240 bytes, 20971520 sectors
+Disk model: VMware Virtual S
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0xe06a91fc
+[root@localhost ~]# 
+[root@localhost ~]# rm -rf  /lvm-1
+[root@localhost ~]# rm -rf  /lvm-2
+[root@localhost ~]# rm -rf  /lvm-3
+[root@localhost ~]# rm -rf  /lvm-4
+[root@localhost ~]# 
+[root@localhost ~]# ls /
+afs  bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@localhost ~]# 
+
+=========================================================================================
+
+LVM based OS installation 
+
+=========================================================================================
