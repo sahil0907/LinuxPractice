@@ -1,0 +1,262 @@
+==================================================================================================
+
+  
+Task-1  Explain about Architecture and Components of Linux Operating System  ?
+
+Task-2  How we can troubleshoot OS during boot time ?
+      
+Task-3  Booting Process OR Booting Sequence of Linux operating system ?
+
+==================================================================================================
+
+
+Machine[RAM+CPU+DISK] <== OS <== Application/Software/Service
+
+==================================================================================================
+
+
+Power on  =====> step by step ==> boot ==> Sequence ==> Login Screen ==> # ==> activity start
+
+==================================================================================================
+
+What is Computer  ?
+
+A computer is an electronic device that manipulates information, or data. It has the ability to store, retrieve, and process data.
+
+
+==================================================================================================
+
+What is Application/Software ?
+
+Software is a set of instructions, or programs, that tell a computer or other electronic device how to operate and perform specific tasks. 
+
+==================================================================================================
+Human Language 
+programming Langauge ==> C C++ python PHP java ...so on 
+
+==================================================================================================
+
+Types of software
+
+1- Application software
+2- system software 
+
+==================================================================================================
+
+Computer [H/W]  <==== Operating System  <====  Application  <=== Users
+
+An operating system (OS) is fundamental software that manages a computer's hardware and software resources, acting as an intermediary between the user and the computer. 
+
+Relation between Computer + Operating system + Application 
+
+==================================================================================================
+Terminal OR command prompt  ? ===> INPUT  ===> ACCEPT  ===> processing  ===> output   ===> overall process ===> IPO concept
+
+Relation between packages and commands [ Pre defined action code ]?
+
+==================================================================================================
+
+What is Linux architecture ?
+
+
+Linux is a free and open-source operating system (OS) known for its flexibility, security, and stability, and it's used in a wide range of devices, from servers and smartphones to supercomputers and embedded systems
+
+Linux is an open source operating system (OS) created by Linus Torvalds in 1991
+
+Yes, Linux is primarily known as a kernel, specifically the Linux kernel. It's the core component of the Linux operating system, acting as a bridge between the hardware and software.
+
+==================================================================================================
+==================================================================================================
+
+What is application ?
+
+What is User ?
+
+What is Hardware OR System ?
+
+==================================================================================================
+
+What is Shell ?
+
+What is "the Shell"? Simply put, the shell is a program that takes commands from the keyboard and gives them to the operating system to perform
+
+What is kernel ?
+
+==================================================================================================
+
+[root@localhost ~]# cat  /etc/redhat-release 
+Red Hat Enterprise Linux release 9.0 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# cat  /etc/system-release
+Red Hat Enterprise Linux release 9.0 (Plow)
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa bash
+bash-5.1.8-4.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa kernel
+kernel-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa tree
+tree-1.8.0-10.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa vim-enhanced
+vim-enhanced-8.2.2637-15.el9.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa | wc -l 
+1170
+[root@localhost ~]# rpm -qa | grep -E 'bash|kernel'
+bash-5.1.8-4.el9.x86_64
+kernel-tools-libs-5.14.0-70.13.1.el9_0.x86_64
+kernel-core-5.14.0-70.13.1.el9_0.x86_64
+kernel-modules-5.14.0-70.13.1.el9_0.x86_64
+kernel-5.14.0-70.13.1.el9_0.x86_64
+bash-completion-2.11-4.el9.noarch
+kernel-tools-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa | grep -E  -v  'bash|kernel'
+
+
+[root@localhost ~]# rpm -qa | grep -E  -v  'bash|kernel' | wc -l  
+1163
+[root@localhost ~]# rpm -qa | wc -l 
+1170
+[root@localhost ~]# 
+[root@localhost ~]# head -n 1 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+[root@localhost ~]# 
+[root@localhost ~]# cat /etc/default/useradd 
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+
+[root@localhost ~]# 
+[root@localhost ~]# useradd deepak 
+[root@localhost ~]# 
+[root@localhost ~]# grep deepak  /etc/passwd
+deepak:x:1001:1001::/home/deepak:/bin/bash
+
+==================================================================================================
+
+[root@localhost ~]# ls /boot 
+config-5.14.0-70.13.1.el9_0.x86_64
+efi
+grub2
+initramfs-0-rescue-654f8fe556a44a5696f21320e7ed2e7a.img
+initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+initramfs-5.14.0-70.13.1.el9_0.x86_64kdump.img
+loader
+symvers-5.14.0-70.13.1.el9_0.x86_64.gz
+System.map-5.14.0-70.13.1.el9_0.x86_64
+vmlinuz-0-rescue-654f8fe556a44a5696f21320e7ed2e7a
+vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# rpm -qa kernel 
+kernel-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+==================================================================================================
+The Linux kernel is the main component of a Linux operating system (OS) and is the core interface between a computer's hardware and its processes.
+
+
+What the kernel does
+The kernel has 4 jobs:
+
+Memory management: Keep track of how much memory is used to store what, and where
+Process management: Determine which processes can use the central processing unit (CPU), when, and for how long
+Device drivers: Act as mediator/interpreter between the hardware and processes
+System calls and security: Receive requests for service from the processes
+
+==================================================================================================
+The vmlinuz file in Linux is the compressed Linux kernel image. It is the executable file that contains the core components of the Linux operating system, including the process scheduler, memory management, device drivers, and file system handling.
+
+Location:
+
+You typically find vmlinuz files in the /boot directory on a Linux system
+
+
+
+==================================================================================================
+
+Power on  ===> What is the role of SMPS ?
+
+In a computer, SMPS stands for Switch Mode Power Supply. It's the component that converts the alternating current (AC) from a wall outlet into the various direct current (DC) voltages needed to power the computer's internal components like the motherboard, hard drives, and expansion cards
+==================================================================================================
+
+What is the difference between software and Firmware ?
+
+
+Firmare  ===> BIOS and UEFI are the examples of system firmware
+
+
+POST opeation  [power on self test]
+
+==================================================================================================
+
+What is the role of MBR ? master boot record
+
+==================================================================================================
+
+What is the role of Bootloader ? use to load the OS main booting  files
+
+LILO
+GRUB
+GRUB2
+
+# ls /boot  
+
+
+GRUB2 is the latest version of GNU GRUB, the GRand Unified Bootloader. A bootloader is the first software program that runs when a computer starts. It is responsible for loading and transferring control to the operating system kernel.
+==================================================================================================
+
+What is the role of Vmlinuz and Initramfs image file  ?
+
+
+The purpose of initramfs (initial RAM file system) is to provide a temporary root file system in the Linux boot process, allowing the kernel to load necessary drivers and modules before mounting the main root file system. It acts as a bridge, enabling the system to access hardware and prepare for the transition to the main operating system environment
+
+==================================================================================================
+[root@localhost ~]# ls /boot 
+config-5.14.0-70.13.1.el9_0.x86_64
+efi
+grub2
+initramfs-0-rescue-654f8fe556a44a5696f21320e7ed2e7a.img
+initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+initramfs-5.14.0-70.13.1.el9_0.x86_64kdump.img
+loader
+symvers-5.14.0-70.13.1.el9_0.x86_64.gz
+System.map-5.14.0-70.13.1.el9_0.x86_64
+vmlinuz-0-rescue-654f8fe556a44a5696f21320e7ed2e7a
+vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# lsinitrd   /boot/initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+
+
+[root@localhost ~]# du -sh   /boot/initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+51M	/boot/initramfs-5.14.0-70.13.1.el9_0.x86_64.img
+[root@localhost ~]# 
+[root@localhost ~]# du -sh /boot/vmlinuz-5.14.0-70.13.1.el9_0.x86_64 
+11M	/boot/vmlinuz-5.14.0-70.13.1.el9_0.x86_64
+[root@localhost ~]# 
+[root@localhost ~]# 
+
+
+==================================================================================================
+
+What is the role of init and systemd ?
+
+==================================================================================================
+
+What is the role of runlevel and targets  in linux  ?
+
+
+==================================================================================================
+
+
+
+
+
+
+
